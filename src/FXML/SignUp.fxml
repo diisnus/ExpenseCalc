@@ -23,12 +23,12 @@
       </PasswordField>
       <ImageView fitHeight="84.0" fitWidth="84.0" layoutX="144.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Res/icon-logo.png" />
+            <Image url="@../../Res/icon-logo.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="21.0" fitWidth="24.0" layoutX="185.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Res/SignUp-LogIn/person-icon.png" />
+            <Image url="@../../Res/SignUp-LogIn/person-icon.png" />
          </image>
       </ImageView>
       <Label layoutX="246.0" layoutY="71.0" prefHeight="39.0" prefWidth="198.0" style="-fx-background-color: #2D3447;" text="Expense Tracker" textFill="#2196f3" wrapText="true">
@@ -43,7 +43,7 @@
       </ImageView>
       <ImageView fitHeight="84.0" fitWidth="84.0" layoutX="453.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Res/icon-logo-flipped.png" />
+            <Image url="@../../Res/icon-logo-flipped.png" />
          </image>
       </ImageView>
       <PasswordField fx:id="enterpassword" layoutX="212.0" layoutY="199.0" prefHeight="30.0" prefWidth="257.0" promptText="Enter Your Password" style="-fx-background-color: #2D3447; -fx-border-color: #c9cbd0; -fx-border-radius: 8; -fx-text-fill: #d8e3db;">
@@ -53,12 +53,12 @@
       </PasswordField>
       <ImageView fitHeight="55.0" fitWidth="22.0" layoutX="185.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Res/SignUp-LogIn/lock-icon.png" />
+            <Image url="@../../Res/SignUp-LogIn/lock-icon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="185.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Res/SignUp-LogIn/email-icon.png" />
+            <Image url="@../../Res/SignUp-LogIn/email-icon.png" />
          </image>
       </ImageView>
       <Button fx:id="login" layoutX="595.0" layoutY="25.0" mnemonicParsing="false" onAction="#loginClick" prefHeight="39.0" prefWidth="84.0" style="-fx-background-color: #343a4d; -fx-border-color: #c9cbd0; -fx-border-radius: 6;" text="Log In" textFill="#c9cbd0">

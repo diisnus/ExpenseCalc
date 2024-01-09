@@ -27,7 +27,7 @@
 					<graphic>
 						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Res/MainPage/menu-top-left.png" />
+								<Image url="@../../Res/MainPage/menu-top-left.png" />
 							</image>
 						</ImageView>
 					</graphic>
@@ -39,7 +39,7 @@
 					<graphic>
 						<ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Res/MainPage/home-icon-light.png" />
+								<Image url="@../../Res/MainPage/home-icon-light.png" />
 							</image>
 						</ImageView>
 					</graphic>
@@ -51,7 +51,7 @@
 					<graphic>
 						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Res/MainPage/searchicon.png" />
+								<Image url="@../../Res/MainPage/searchicon.png" />
 							</image>
 						</ImageView>
 					</graphic>
@@ -63,7 +63,7 @@
 					<graphic>
 						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Res/MainPage/setings-icon.png" />
+								<Image url="@../../Res/MainPage/setings-icon.png" />
 							</image>
 						</ImageView>
 					</graphic>
@@ -72,7 +72,7 @@
 					<graphic>
 						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Res/MainPage/user-icon-light.png" />
+								<Image url="@../../Res/MainPage/user-icon-light.png" />
 							</image>
 						</ImageView>
 					</graphic>
@@ -121,7 +121,7 @@
 					<graphic>
 						<ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Res/MainPage/wordcloud-mostpopular2.png" />
+								<Image url="@../../Res/MainPage/wordcloud-mostpopular2.png" />
 							</image>
 						</ImageView>
 					</graphic>
@@ -134,7 +134,7 @@
 					<graphic>
 						<ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
 							<image>
-								<Image url="@../../../Res/MainPage/youritems(3).png" />
+								<Image url="@../../Res/MainPage/youritems(3).png" />
 							</image>
 						</ImageView>
 					</graphic>
