@@ -12,9 +12,11 @@ import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import DBConnection.DBHandler;
 import javafx.scene.control.Alert;
@@ -99,13 +101,29 @@ public class LogInController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
 			Parent root = loader.load();
-			Scene signUpScene = new Scene(root);
+			Scene signUpScene = new Scene(root,1200,800);
 			Stage currentStage = (Stage) signup.getScene().getWindow();
 			currentStage.setScene(signUpScene);
-			currentStage.setTitle("Main Page");
 			currentStage.setResizable(true);
+//			Screen screen = Screen.getPrimary();
+//	        Rectangle2D bounds = screen.getBounds();        
+//	        double screenWidth = bounds.getWidth();
+//	        double screenHeight = bounds.getHeight();	        
+//	        int sceneWidth = 0;
+//	        int sceneHeight = 0;
+//	        if (screenWidth <= 800 && screenHeight <= 600) {
+//	            sceneWidth = 600;
+//	            sceneHeight = 350;
+//	        } else if (screenWidth <= 1280 && screenHeight <= 768) {
+//	            sceneWidth = 800;
+//	            sceneHeight = 450;
+//	        } else if (screenWidth <= 1920 && screenHeight <= 1080) {
+//	            sceneWidth = 1000;
+//	            sceneHeight = 900;
+//	        }
+
 			currentStage.setMinWidth(1200);
-			currentStage.setMinHeight(900);
+			currentStage.setMinHeight(800);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

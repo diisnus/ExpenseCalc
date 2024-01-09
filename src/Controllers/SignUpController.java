@@ -38,13 +38,12 @@ public class SignUpController implements Initializable {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
 			Parent root = loader.load();
-			Scene signUpScene = new Scene(root);
+			Scene signUpScene = new Scene(root,1200,800);
 			Stage currentStage = (Stage) signup.getScene().getWindow();
 			currentStage.setScene(signUpScene);
-			currentStage.setTitle("Main Page");
 			currentStage.setResizable(true);
 			currentStage.setMinWidth(1200);
-			currentStage.setMinHeight(900);
+			currentStage.setMinHeight(800);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +55,7 @@ public class SignUpController implements Initializable {
 	    String email = enteremail.getText();
 	    String insert = "INSERT INTO users(username, password, email) VALUES (?,?,?)";
 	    String select = "SELECT * FROM users WHERE username = ?";
-	    String selectid = "SELECT LAST_INSERT_ID() AS user_id"; // Query to fetch last inserted ID
+	    String selectid = "SELECT LAST_INSERT_ID() AS user_id"; 
 
 	    connection = handler.getConnection();
 	    try {
