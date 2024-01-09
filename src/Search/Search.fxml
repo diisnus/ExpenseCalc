@@ -11,52 +11,72 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #161921;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Search.SearchController">
-   <center>
-      <TableView fx:id="productTableView" prefHeight="709.0" prefWidth="680.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="productNameTableColumn" prefWidth="135.0" text="Product's Name" />
-          <TableColumn fx:id="productBrandTableColumn" prefWidth="149.0" text="Product's Brand" />
-            <TableColumn fx:id="productDescriptionTableColumn" prefWidth="266.0" text="Product's Description" />
-            <TableColumn fx:id="productKcalTableColumn" prefWidth="148.0" text="Product's kCal/100g" />
-            <TableColumn fx:id="productProteinTableColum" minWidth="6.0" prefWidth="153.0" text="Product's protein/100g" />
-        </columns>
-         <BorderPane.margin>
-            <Insets top="60.0" />
-         </BorderPane.margin>
-      </TableView>
-   </center>
-   <right>
-      <HBox prefHeight="711.0" prefWidth="110.0" BorderPane.alignment="CENTER" />
-   </right>
-   <left>
-      <HBox prefHeight="711.0" prefWidth="118.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label prefHeight="18.0" prefWidth="164.0" style="-fx-background-color: red;" text="search by protein/brand..." textFill="#e1cfcf" />
-         </children>
-      </HBox>
-   </left>
-   <bottom>
-      <HBox prefHeight="65.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <top>
-      <VBox prefHeight="122.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="144.0" prefWidth="1080.0" spacing="30.0">
-               <children>
-                  <TextField fx:id="searchedKeyword" maxWidth="350.0" minWidth="200.0" prefHeight="40.0" prefWidth="230.0" style="-fx-border-width: 2; -fx-border-color: white;">
-                     <HBox.margin>
-                        <Insets top="50.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button">
-                     <HBox.margin>
-                        <Insets top="50.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0"
+	prefWidth="1080.0" style="-fx-background-color: #161921;"
+	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="Search.SearchController">
+	<center>
+		<TableView fx:id="productTableView" prefHeight="709.0"
+			prefWidth="680.0" BorderPane.alignment="CENTER">
+			<columns>
+				<TableColumn fx:id="productNameTableColumn"
+					prefWidth="135.0" text="Product's Name" />
+				<TableColumn fx:id="productBrandTableColumn"
+					prefWidth="149.0" text="Product's Brand" />
+				<TableColumn fx:id="productDescriptionTableColumn"
+					prefWidth="266.0" text="Product's Description" />
+				<TableColumn fx:id="productKcalTableColumn"
+					prefWidth="148.0" text="Product's kCal/100g" />
+				<TableColumn fx:id="productProteinTableColum"
+					minWidth="6.0" prefWidth="153.0" text="Product's protein/100g" />
+			</columns>
+			<BorderPane.margin>
+				<Insets top="60.0" />
+			</BorderPane.margin>
+		</TableView>
+	</center>
+	<right>
+		<HBox prefHeight="711.0" prefWidth="110.0"
+			BorderPane.alignment="CENTER" />
+	</right>
+	<left>
+		<HBox prefHeight="711.0" prefWidth="118.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<Label prefHeight="18.0" prefWidth="164.0"
+					style="-fx-background-color: red;"
+					text="search by protein/brand..." textFill="#e1cfcf" />
+			</children>
+		</HBox>
+	</left>
+	<bottom>
+		<HBox prefHeight="65.0" prefWidth="1080.0"
+			BorderPane.alignment="CENTER" />
+	</bottom>
+	<top>
+		<VBox prefHeight="122.0" prefWidth="1080.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<HBox alignment="CENTER" prefHeight="144.0" prefWidth="1080.0"
+					spacing="30.0">
+					<children>
+						<TextField fx:id="searchedKeyword" maxWidth="350.0"
+							minWidth="200.0" prefHeight="40.0" prefWidth="230.0"
+							style="-fx-border-width: 2; -fx-border-color: white;">
+							<HBox.margin>
+								<Insets top="50.0" />
+							</HBox.margin>
+						</TextField>
+						<Button mnemonicParsing="false" prefHeight="50.0"
+							prefWidth="50.0" text="Button">
+							<HBox.margin>
+								<Insets top="50.0" />
+							</HBox.margin>
+						</Button>
+					</children>
+				</HBox>
+			</children>
+		</VBox>
+	</top>
 </BorderPane>

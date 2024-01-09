@@ -35,10 +35,8 @@ public class SearchController implements Initializable {
 
     @FXML
     private TableView<?> productTableView;
-
     @FXML
     private TextField searchedKeyword;
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new DBHandler();
