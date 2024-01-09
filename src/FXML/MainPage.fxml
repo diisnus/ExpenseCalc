@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainPageController">
+	<left>
+		<VBox alignment="CENTER" prefHeight="835.0" prefWidth="128.0" style="-fx-background-color: #101218;" BorderPane.alignment="CENTER">
+			<children>
+				<Button fx:id="quickActions" mnemonicParsing="false" onAction="#quickActionsClicked" prefHeight="50.0" prefWidth="55.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
+					<VBox.margin>
+						<Insets bottom="200.0" />
+					</VBox.margin>
+					<padding>
+						<Insets bottom="20.0" />
+					</padding>
+					<graphic>
+						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../Res/MainPage/menu-top-left.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button fx:id="homeButton" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#homeButtonClicked" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
+					<VBox.margin>
+						<Insets bottom="30.0" />
+					</VBox.margin>
+					<graphic>
+						<ImageView fitHeight="55.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../Res/MainPage/home-icon-light.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button fx:id="searchButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #101218;">
+					<VBox.margin>
+						<Insets bottom="30.0" />
+					</VBox.margin>
+					<graphic>
+						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../Res/MainPage/searchicon.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button fx:id="settingsButton" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#settingsButtonClicked" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #101218;">
+					<VBox.margin>
+						<Insets bottom="30.0" />
+					</VBox.margin>
+					<graphic>
+						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../Res/MainPage/setings-icon.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #101218;">
+					<graphic>
+						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../Res/MainPage/user-icon-light.png" />
+							</image>
+						</ImageView>
+					</graphic>
+					<VBox.margin>
+						<Insets bottom="200.0" />
+					</VBox.margin>
+				</Button>
+			</children>
+		</VBox>
+	</left>
+	<center>
+		<GridPane fx:id="gridPaneHome" style="-fx-background-color: #161921;" BorderPane.alignment="CENTER">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Button fx:id="favouritesButton" mnemonicParsing="false" onAction="#favouritesButtonClick" prefHeight="350.0" prefWidth="400.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+					</GridPane.margin>
+					<graphic>
+						<AreaChart fx:id="favouritesButtonChart" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" prefHeight="330.0" prefWidth="425.0" stylesheets="@../CSS/MainPageCss.css" title="Favourite">
+							<xAxis>
+								<NumberAxis side="BOTTOM" />
+							</xAxis>
+							<yAxis>
+								<NumberAxis side="LEFT" />
+							</yAxis>
+							<styleClass>
+								<String fx:value="custom-area-chart" />
+								<String fx:value="title" />
+							</styleClass>
+						</AreaChart>
+
+					</graphic>
+				</Button>
+				<Button fx:id="mostPopularButton" mnemonicParsing="false" onAction="#mostPopularButtonClick" prefHeight="350.0" prefWidth="400.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css" text="Most Popular" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+					</GridPane.margin>
+					<graphic>
+						<ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../Res/MainPage/wordcloud-mostpopular2.png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+
+				<Button fx:id="yourItemsButton" mnemonicParsing="false" onAction="#yourItemsButtonClick" prefHeight="350.0" prefWidth="400.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css" text="Your items" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+					</GridPane.margin>
+					<graphic>
+						<ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../../Res/MainPage/youritems(3).png" />
+							</image>
+						</ImageView>
+					</graphic>
+				</Button>
+				<Button fx:id="priceComparisonsButton" mnemonicParsing="false" onAction="#priceComparisonsButtonClick" prefHeight="350.0" prefWidth="400.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+					<GridPane.margin>
+						<Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+					</GridPane.margin>
+					<graphic>
+						<AreaChart fx:id="compareButtonChart" prefHeight="330.0" prefWidth="425.0" styleClass="title" stylesheets="@../CSS/MainPageCss.css" title="Compare Prices" verticalGridLinesVisible="false">
+							<xAxis>
+								<NumberAxis side="BOTTOM" />
+							</xAxis>
+							<yAxis>
+								<NumberAxis side="LEFT" />
+							</yAxis>
+						</AreaChart>
+					</graphic>
+				</Button>
+			</children>
+		</GridPane>
+	</center>
+</BorderPane>

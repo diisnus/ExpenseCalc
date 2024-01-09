@@ -1,0 +1,68 @@
+
+ .chart-plot-background {
+	-fx-background-color: transparent;
+}
+
+.chart-title {
+	-fx-text-fill: lightblue;
+	-fx-font-weight: bold;
+	-fx-effect: dropshadow(gaussian, gray, 2.0, 0.5, 0.0, 0.0);
+	-fx-font-size: 40.0px;
+}
+.chart-series-line { 
+    -fx-stroke: red; /* Change 'red' to any color you want */
+}
+.chart-legend {
+	-fx-background-color: transparent;
+}
+.chart-area-symbol {
+	-fx-shape: "M -6,-6 L 6,-6 6,6 -6,6 Z M -4,-4 L 4,-4 4,4 -4,4 Z";
+	-fx-size: 10.0px;
+	-fx-stroke: transparent;
+}
+
+.custom-button {
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+	-fx-padding: 10.0px 20.0px;
+	
+}
+#mostPopularButton:hover{
+	-fx-background-color: #28242c;
+	-fx-cursor: hand;
+}
+#yourItemsButton:hover{
+	-fx-background-color: #28242c;
+	-fx-cursor: hand;
+}
+#mostPopularButton {
+    -fx-background-color: transparent;
+    -fx-content-display: bottom;
+    -fx-graphic-text-gap: 0.0em; 
+    -fx-text-alignment: center;
+    -fx-font-size: 3.0em; 
+    -fx-padding: 10.0 0.0 0.0 0.0; 
+    -fx-font-weight: bold;
+    -fx-text-fill: lightblue; 
+    -fx-padding: 10.0 0.0 0.0 0.0; 
+}
+
+#yourItemsButton {
+    -fx-background-color: transparent;
+    -fx-content-display: bottom;
+    -fx-graphic-text-gap: 0.0em; 
+    -fx-text-alignment: center;
+    -fx-font-size: 3.0em; 
+    -fx-padding: 10.0 0.0 0.0 0.0; 
+    -fx-font-weight: bold;
+    -fx-text-fill: lightblue; 
+    -fx-padding: 10.0 0.0 0.0 0.0; 
+}
+
+.custom-button:hover {
+	-fx-background-color: #28242c;
+	-fx-text-fill: transparent;
+	-fx-cursor: hand;
+}
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #161921;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="QuickActionsPack.QuickActionsController">
+	<children>
+		<Button fx:id="addItem" layoutX="297.0" layoutY="247.0" mnemonicParsing="false" onAction="#addItemClick" prefHeight="60.0" prefWidth="60.0" />
+		<Button layoutX="301.0" layoutY="640.0" mnemonicParsing="false" text="Button" />
+		<Button layoutX="220.0" layoutY="473.0" mnemonicParsing="false" text="Button" />
+	</children>
+</AnchorPane>
