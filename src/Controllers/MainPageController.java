@@ -86,7 +86,6 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	void favouritesButtonClick() {
-
 		loadFXML("/Favourites/Favourites.fxml");
 	}
 
@@ -246,9 +245,5 @@ public class MainPageController  implements Initializable  {
 
 	}
 
-	public void methodA() {
-		System.out.println("asdasd");
-
-	}
 
 }
