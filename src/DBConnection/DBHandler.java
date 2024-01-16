@@ -20,20 +20,4 @@ public class DBHandler extends Configs {
 	}
 	
 }
-//public class DBHandler extends Configs {
-//
-//	Connection dbconnection;
-//	
-//	public Connection getConnection() {
-//		String connectionString = this.url + this.user + this.password; 
-//		System.out.print("aaaaaaa");
-//		try {
-//			dbconnection = DriverManager.getConnection(connectionString);
-//		} catch (SQLException e) {
-//			System.out.print("aaa");
-//		}
-//		
-//		return dbconnection;
-//	}
-//	
-//}
+

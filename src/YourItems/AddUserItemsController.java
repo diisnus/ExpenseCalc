@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
@@ -21,6 +22,42 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddUserItemsController implements Initializable {
+
+	@FXML
+	private Label brandLabel;
+
+	@FXML
+	private Label calloriesLabel;
+
+	@FXML
+	private Label carbsLabel;
+
+	@FXML
+	private Label descriptionLabel;
+
+	@FXML
+	private Label fatsLabel;
+
+	@FXML
+	private Label fibersLabel;
+
+	@FXML
+	private Label nameLabel;
+
+	@FXML
+	private Label pricedByLabel;
+
+	@FXML
+	private Label proteinLabel;
+
+	@FXML
+	private Label saltLabel;
+
+	@FXML
+	private Label saturatedFatLabel;
+
+	@FXML
+	private Label sugarsLabel;
 
 	@FXML
 	private ChoiceBox<String> itemsPricePer;
@@ -68,11 +105,8 @@ public class AddUserItemsController implements Initializable {
 	@FXML
 	private TextField itemSugarsPer100;
 
-
-	
 	private Connection connection;
 	private DBHandler handler;
-	private PreparedStatement pst;
 
 	public int accessUserId() {
 		Container container = Container.getInstance();
@@ -80,8 +114,6 @@ public class AddUserItemsController implements Initializable {
 		return container.getId();
 	}
 
-
-	
 	@FXML
 	void addItemButtonClick(ActionEvent event) {
 		int userid = accessUserId();
@@ -118,8 +150,8 @@ public class AddUserItemsController implements Initializable {
 			insertStatement.setDouble(11, fats);
 			insertStatement.setDouble(12, satfats);
 			insertStatement.setDouble(13, salts);
-			insertStatement.setInt(14, 0);	//  whitelisted = 1
-			insertStatement.setInt(15, 1);  // created by user = 1
+			insertStatement.setInt(14, 0); // whitelisted = 1
+			insertStatement.setInt(15, 1); // created by user = 1
 
 			int rowsAffected = insertStatement.executeUpdate();
 			if (rowsAffected > 0) {

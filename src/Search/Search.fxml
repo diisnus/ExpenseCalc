@@ -47,7 +47,7 @@
                      <HBox.margin>
                         <Insets top="50.0" />
                      </HBox.margin></TextField>
-						<Button fx:id="button" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button">
+						<Button fx:id="searchButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button">
 							<HBox.margin>
 								<Insets top="50.0" />
 							</HBox.margin>

@@ -1,26 +1,21 @@
 package Controllers;
 
-import java.awt.event.ActionEvent;
-import java.io.IOException;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import DBConnection.DBHandler;
 import java.util.ResourceBundle;
-import javafx.animation.PauseTransition;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import DBConnection.DBHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class LogInController implements Initializable {
 	@FXML

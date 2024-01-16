@@ -1,0 +1,86 @@
+#gridPaneTop {
+    -fx-background-color: #1e262c;
+}
+
+#gridPaneCentre {
+    -fx-background-color: #202830;
+}
+
+#addItemButton {
+    -fx-text-fill: #101218;
+    -fx-background-color: gray;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: serif;
+    -fx-border-width: 2px;
+    -fx-border-color: lightblue;
+    -fx-border-radius:12px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+
+}
+
+
+
+#itemNameTextField,
+#ItemBrandTextField,
+#itemDescriptionTextField,
+#itemsPricePer {
+    -fx-text-fill: black;
+    -fx-font-family: arial;
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius:8px;
+    -fx-border-color: gray;
+    -fx-background-radius:10px;
+     -fx-background-insets: 0px 0px 0px 0px;
+
+}
+
+#itemCaloriesPer100,
+#itemProteinPer100,
+#itemCarbohydratesPer100,
+#itemSugarsPer100,
+#itemFibersPer100,
+#itemFatsPer100,
+#itemSaturatedFatsPer100,
+#itemSaltPer100 {
+    -fx-text-fill: black;
+    -fx-font-family: arial;
+    -fx-background-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius:8px;
+    -fx-border-color: gray;
+    -fx-background-radius:10px;
+
+}
+
+
+#nameLabel,
+#brandLabel,
+#descriptionLabel,
+#pricedByLabel {
+    -fx-text-fill: lightblue;
+    -fx-font-weight: bold;
+    -fx-text-shadow: aqua;
+    -fx-font-size: 16px;
+    -fx-font-family: serif;
+
+}
+
+#calloriesLabel,
+#proteinLabel,
+#carbsLabel,
+#sugarsLabel,
+#fibersLabel,
+#fatsLabel,
+#saturatedFatLabel,
+#saltLabel {
+
+    -fx-text-fill: lightblue;
+    -fx-font-weight: bold;
+    -fx-text-shadow: aqua;
+    -fx-font-size: 16px;
+    -fx-font-family: serif;
+
+}
