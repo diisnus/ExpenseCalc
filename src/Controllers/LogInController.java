@@ -28,8 +28,7 @@ public class LogInController implements Initializable {
 	private Button signup;
 	@FXML
 	private Button forgotpassword;
-	@FXML
-	private CheckBox remember;
+
 
 	private Connection connection;
 	private DBHandler handler;
@@ -139,7 +138,6 @@ public class LogInController implements Initializable {
 			Scene signUpScene = new Scene(root);
 			Stage currentStage = (Stage) signup.getScene().getWindow();
 			currentStage.setScene(signUpScene);
-			currentStage.setTitle("Sign Up");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

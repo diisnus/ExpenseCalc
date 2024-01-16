@@ -107,7 +107,6 @@ public class SignUpController implements Initializable {
 			Scene signUpScene = new Scene(signUpRoot);
 			Stage currentStage = (Stage) signup.getScene().getWindow();
 			currentStage.setScene(signUpScene);
-			currentStage.setTitle("Log In");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

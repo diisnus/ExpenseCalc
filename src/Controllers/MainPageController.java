@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import QuickActionsPack.QuickActionsController;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -17,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import Controllers.LogInController;
 
 public class MainPageController  implements Initializable  {
 
@@ -60,8 +58,6 @@ public class MainPageController  implements Initializable  {
 	@FXML
 	private LineChart<Number, Number> mostPopularButtonChart;
 	
-	private LogInController logincontroller;
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		bindButtonSizeToScene(favouritesButton);
@@ -73,7 +69,6 @@ public class MainPageController  implements Initializable  {
 		accessUserId();
 	}
 
-	public double i = 9;
 
 	public int accessUserId() {
 		Container container = Container.getInstance();
@@ -81,9 +76,6 @@ public class MainPageController  implements Initializable  {
 		return container.getId();
 	}
 	
-	public void addItemsClick(BorderPane borderPaneMain) {
-	}
-
 	@FXML
 	void favouritesButtonClick() {
 		loadFXML("/Favourites/Favourites.fxml");

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Controllers.Container;
+import Controllers.ErrorMessageLoginSignup;
 import DBConnection.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -110,7 +111,7 @@ public class AddUserItemsController implements Initializable {
 
 	public int accessUserId() {
 		Container container = Container.getInstance();
-		System.out.println(container.getId());
+		//System.out.println(container.getId());
 		return container.getId();
 	}
 
@@ -118,8 +119,15 @@ public class AddUserItemsController implements Initializable {
 	void addItemButtonClick(ActionEvent event) {
 		int userid = accessUserId();
 		String itemname = itemNameTextField.getText();
+
 		String itemdescr = itemDescriptionTextField.getText();
+		if (itemdescr.isBlank() || itemname.isEmpty()) {
+			itemdescr.equals("No description mentioned");
+		}
 		String itembrand = ItemBrandTextField.getText();
+		if (itembrand.isBlank() || itemname.isEmpty()) {
+			itembrand.equals("No brand specified");
+		}
 		String choiceper = itemsPricePer.getValue();
 		int caloriesValue = Integer.parseInt(itemCaloriesPer100.getText());
 		double proteinValue = Double.parseDouble(itemProteinPer100.getText());
@@ -130,41 +138,45 @@ public class AddUserItemsController implements Initializable {
 		double satfats = Double.parseDouble(itemSaturatedFatsPer100.getText());
 		double salts = Double.parseDouble(itemSaltPer100.getText());
 
-		System.out.println(proteinValue);
+		if (itemname.isBlank() || itemname.isEmpty() || choiceper == null) {
+            ErrorMessageLoginSignup.showCustomDialog("", "/FXML/AddItemsError.fxml");
+            
+		} else {
 
-		connection = handler.getConnection();
-		String insert = "INSERT INTO groceryproducts(user_id, product_name, product_brand, description, priced_by, calories_per_100g, protein, carbohydrates, sugar, fiber, fat, saturated_fat, salt, is_whitelisted, created_by_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			connection = handler.getConnection();
+			String insert = "INSERT INTO groceryproducts(user_id, product_name, product_brand, description, priced_by, calories_per_100g, protein, carbohydrates, sugar, fiber, fat, saturated_fat, salt, is_whitelisted, created_by_user) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try {
-			PreparedStatement insertStatement = connection.prepareStatement(insert);
-			insertStatement.setInt(1, userid);
-			insertStatement.setString(2, itemname);
-			insertStatement.setString(3, itembrand);
-			insertStatement.setString(4, itemdescr);
-			insertStatement.setString(5, choiceper);
-			insertStatement.setInt(6, caloriesValue);
-			insertStatement.setDouble(7, proteinValue);
-			insertStatement.setDouble(8, carbs);
-			insertStatement.setDouble(9, sugars);
-			insertStatement.setDouble(10, fibers);
-			insertStatement.setDouble(11, fats);
-			insertStatement.setDouble(12, satfats);
-			insertStatement.setDouble(13, salts);
-			insertStatement.setInt(14, 0); // whitelisted = 1
-			insertStatement.setInt(15, 1); // created by user = 1
+			try {
+				PreparedStatement insertStatement = connection.prepareStatement(insert);
+				insertStatement.setInt(1, userid);
+				insertStatement.setString(2, itemname);
+				insertStatement.setString(3, itembrand);
+				insertStatement.setString(4, itemdescr);
+				insertStatement.setString(5, choiceper);
+				insertStatement.setInt(6, caloriesValue);
+				insertStatement.setDouble(7, proteinValue);
+				insertStatement.setDouble(8, carbs);
+				insertStatement.setDouble(9, sugars);
+				insertStatement.setDouble(10, fibers);
+				insertStatement.setDouble(11, fats);
+				insertStatement.setDouble(12, satfats);
+				insertStatement.setDouble(13, salts);
+				insertStatement.setInt(14, 0); // whitelisted = 1
+				insertStatement.setInt(15, 1); // created by user = 1
 
-			int rowsAffected = insertStatement.executeUpdate();
-			if (rowsAffected > 0) {
-				System.out.println("Data inserted successfully");
-			} else {
-				System.out.println("Insertion failed");
+				int rowsAffected = insertStatement.executeUpdate();
+				if (rowsAffected > 0) {
+					System.out.println("Data inserted successfully");
+				} else {
+					System.out.println("Insertion failed");
+				}
+
+				insertStatement.close();
+				connection.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-
-			insertStatement.close();
-			connection.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 
