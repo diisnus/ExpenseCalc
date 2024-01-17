@@ -3,6 +3,8 @@ package ProductOverview;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Controllers.LoaderClass;
 import Controllers.PopUpWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +23,9 @@ public class ProductOverviewController implements Initializable {
 	@FXML
 	void addPriceClick(ActionEvent event) {
 		PopUpWindow.showCustomDialog("", "/ProductOverview/UpdatePrice.fxml");
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/ProductOverview/ProductOverview.fxml");
+		// ako se chupi e tuk pri reload
 	}
 
 	@Override

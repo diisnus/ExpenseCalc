@@ -82,8 +82,8 @@ public class MainPageController  implements Initializable  {
 	
 	@FXML
 	void favouritesButtonClick() {
-		//LoaderClass load = LoaderClass.getInstance();
-		//load.loadFXML("/Favourites/Favourites.fxml");
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/Favourites/Favourites.fxml");
 	}
 
 	@FXML
@@ -93,14 +93,13 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	void priceComparisonsButtonClick() {
-		//LoaderClass load = LoaderClass.getInstance();
-		//load.loadFXML("/YourItems/YourItems.fxml");
+
 	}
 
 	@FXML
 	void yourItemsButtonClick() {
-		//LoaderClass load = LoaderClass.getInstance();
-		//load.loadFXML("/YourItems/YourItems.fxml");
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/YourItems/YourItems.fxml");
 	}
 
 	@FXML

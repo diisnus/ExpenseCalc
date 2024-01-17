@@ -17,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 
 public class UpdatePriceController implements Initializable {
 	@FXML
@@ -67,6 +66,7 @@ public class UpdatePriceController implements Initializable {
 
 			int rowsAffected = insertStatement.executeUpdate();
 			if (rowsAffected > 0) {
+
 				System.out.println("Data inserted successfully");
 				try {
 					Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -74,6 +74,7 @@ public class UpdatePriceController implements Initializable {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+
 			} else {
 				System.out.println("Insertion failed");
 			}
@@ -113,7 +114,6 @@ public class UpdatePriceController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }
