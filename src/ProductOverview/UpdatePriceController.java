@@ -1,9 +1,13 @@
 package ProductOverview;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import Controllers.PopUpWindow;
+import DBConnection.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,10 +32,76 @@ public class UpdatePriceController implements Initializable {
 	@FXML
 	private TextField priceField;
 
+	private Connection connection;
+	private DBHandler handler;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setTextFieldFormatter(priceField);
+		handler = new DBHandler();
 
+	}
+
+	@FXML
+	void insertButtonClicked(ActionEvent event) {
+		if (dateCalendar.getValue() != null) {
+		} else {
+			PopUpWindow.showCustomDialog("", "/FXML/ErrorPriceAndDateInput.fxml");
+		}
+		if (!priceField.getText().isEmpty()) {
+			try {
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid price format");
+			}
+		} else {
+			PopUpWindow.showCustomDialog("", "/FXML/ErrorPriceAndDateInput.fxml");
+		}
+		IdContainer idcontainer = IdContainer.getInstance();
+		String insert = "INSERT INTO prices (product_id, price, purchase_date) VALUES (?, ?, ?);";
+		connection = handler.getConnection();
+		try {
+			PreparedStatement insertStatement = connection.prepareStatement(insert);
+			insertStatement.setInt(1, idcontainer.getId());
+			insertStatement.setDouble(2, Double.parseDouble(priceField.getText()));
+			insertStatement.setString(3, dateCalendar.getValue().toString());
+
+			int rowsAffected = insertStatement.executeUpdate();
+			if (rowsAffected > 0) {
+				System.out.println("Data inserted successfully");
+				try {
+					Stage stage = (Stage) closeButton.getScene().getWindow();
+					stage.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("Insertion failed");
+			}
+
+			insertStatement.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void setTextFieldFormatter(TextField textField) {
+		TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, change -> {
+			String newText = change.getControlNewText();
+			if (newText.matches("\\d*(\\.\\d{0,2})?")) {
+				try {
+					double newValue = Double.parseDouble(newText);
+					if (newValue <= 999.99) {
+						return change;
+					}
+				} catch (NumberFormatException ignored) {
+				}
+			}
+			return null;
+		});
+		textField.setTextFormatter(textFormatter);
 	}
 
 	@FXML
@@ -45,48 +115,5 @@ public class UpdatePriceController implements Initializable {
 		}
 
 	}
-
-	@FXML
-	void insertButtonClicked(ActionEvent event) {
-		if (dateCalendar.getValue() != null) {
-			String date = dateCalendar.getValue().toString();
-		} else {
-			PopUpWindow.showCustomDialog("", "/FXML/ErrorPriceAndDateInput.fxml");
-		}
-		
-		if (!priceField.getText().isEmpty()) {
-		    try {
-		        double price = Double.parseDouble(priceField.getText());
-		    } catch (NumberFormatException e) {
-		        System.out.println("Invalid price format");
-		    }
-		} else {
-			PopUpWindow.showCustomDialog("", "/FXML/ErrorPriceAndDateInput.fxml");
-		}
-		
-		//INSERT INTO prices (product_id, price, purchase_date) 
-		//VALUES (9, price, date);
-
-		
-		
-	}
-
-	private void setTextFieldFormatter(TextField textField) {
-	    TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, change -> {
-	        String newText = change.getControlNewText();
-	        if (newText.matches("\\d*(\\.\\d{0,2})?")) {
-	            try {
-	                double newValue = Double.parseDouble(newText);
-	                if (newValue <= 999.99) {
-	                    return change;
-	                }
-	            } catch (NumberFormatException ignored) {
-	            }
-	        }
-	        return null; 
-	    });
-	    textField.setTextFormatter(textFormatter);
-	}
-
 
 }
