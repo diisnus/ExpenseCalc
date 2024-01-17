@@ -1,6 +1,10 @@
 package Search;
 
 import java.util.logging.Logger;
+
+import Controllers.Container;
+import Controllers.LoaderClass;
+
 import java.sql.Statement;
 import java.io.IOException;
 import java.net.URL;
@@ -9,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import DBConnection.DBHandler;
+import ProductOverview.IdContainer;
+import ProductOverview.ProductOverviewController;
 
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -145,8 +151,12 @@ public class SearchController implements Initializable {
 		            if (event.getClickCount() == 2 && !row.isEmpty()) {
 		                productSearchModel rowData = row.getItem();
 		                int productId = rowData.getProduct_id();
-		                System.out.println("Double-clicked on product with ID: " + productId);
-		                //loadFXML2("/QuickActionsPack/QuickActions.fxml");
+		        		IdContainer idcontainer = IdContainer.getInstance();
+		        		idcontainer.setId(productId);
+		        		System.out.println("Double-clicked on product with ID from container: " + idcontainer.getId());
+		        		LoaderClass load = LoaderClass.getInstance();
+		        		load.loadFXML("/ProductOverview/ProductOverview.fxml");
+		                
 		            }
 		        });
 		        return row;
@@ -159,39 +169,4 @@ public class SearchController implements Initializable {
 
 	}
 	
-	
-	public void loadFXML2(String fxmlFile) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-			Pane newPane = loader.load();
-			if (newPane instanceof BorderPane) {
-				FXMLLoader borderPaneloader = new FXMLLoader(getClass().getResource(fxmlFile));
-				BorderPane newBorderPane = borderPaneloader.load();
-				borderPane.getChildren().setAll(newBorderPane);
-			} else if (newPane instanceof AnchorPane) {
-				FXMLLoader anchorPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-				AnchorPane newAnchorPane = anchorPaneLoader.load();
-
-				borderPane.getChildren().setAll(newAnchorPane);
-			}if (newPane instanceof GridPane) {
-				FXMLLoader gridPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-				GridPane newGridPane = gridPaneLoader.load();
-				//borderPaneMain.setCenter(newGridPane);
-			} else {
-				borderPane.getChildren().setAll(newPane);
-			}
-			Node centerNode1 = borderPane.getChildren().get(0);
-			if (centerNode1 != null) {
-				AnchorPane.setTopAnchor(centerNode1, 0.0);
-				AnchorPane.setRightAnchor(centerNode1, 0.0);
-				AnchorPane.setBottomAnchor(centerNode1, 0.0);
-				AnchorPane.setLeftAnchor(centerNode1, 0.0);
-			} else {
-				System.out.println("No valid node set for the AnchorPane.");
-			}
-
-		} catch (IOException e) {	
-			e.printStackTrace();
-		}
-	}
 }

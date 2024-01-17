@@ -64,7 +64,7 @@ public class SignUpController implements Initializable {
 	        ResultSet existingUsers = selectStatement.executeQuery();
 
 	        if (existingUsers.next()) {                
-	            ErrorMessageLoginSignup.showCustomDialog("", "/FXML/UsernameTakenError.fxml");
+	            PopUpWindow.showCustomDialog("", "/FXML/ErrorUsernameTaken.fxml");
 
 	        } else {
 	            try {
@@ -94,7 +94,7 @@ public class SignUpController implements Initializable {
 
 	public void signupClick() {
 		if (enterusername.getText().isEmpty() || enterpassword.getText().isEmpty() || enteremail.getText().isEmpty()) {
-			ErrorMessageLoginSignup.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
+			PopUpWindow.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
 		} else {
 			DataBaseSignupInput();
 		}

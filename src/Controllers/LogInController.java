@@ -74,7 +74,7 @@ public class LogInController implements Initializable {
 					MainPageLoading();
 				}
 			} else {
-				ErrorMessageLoginSignup.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
+				PopUpWindow.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -125,7 +125,7 @@ public class LogInController implements Initializable {
 
 	public void loginClick() {
 		if (username.getText().isEmpty() || password.getText().isEmpty()) {
-			ErrorMessageLoginSignup.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
+			PopUpWindow.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
 		} else {
 			DataBaseLoginGetInfo();
 		}

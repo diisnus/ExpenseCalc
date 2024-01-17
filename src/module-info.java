@@ -18,5 +18,7 @@ module ExpenseCalc {
 	exports QuickActionsPack; 
 	opens Search to javafx.fxml;
 	exports Search; 
+	opens ProductOverview to javafx.fxml;
+	exports ProductOverview; 
 	
 }

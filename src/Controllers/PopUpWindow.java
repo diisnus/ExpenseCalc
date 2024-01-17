@@ -10,21 +10,18 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 
-public class ErrorMessageLoginSignup{
+public class PopUpWindow{
 
 	public static void showCustomDialog(String title, String fxmlPath) {
         try {
-            FXMLLoader loader = new FXMLLoader(ErrorMessageLoginSignup.class.getResource(fxmlPath));
+            FXMLLoader loader = new FXMLLoader(PopUpWindow.class.getResource(fxmlPath));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UTILITY);
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
             stage.setTitle(title);
             stage.setScene(new Scene(root));
-
-            // Set the controller if needed
-            // CustomDialogController controller = loader.getController();
-
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();

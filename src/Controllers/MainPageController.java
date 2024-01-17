@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import ProductOverview.IdContainer;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -67,6 +69,8 @@ public class MainPageController  implements Initializable  {
 		loadFavChartData();
 		loadCompareChartData();
 		accessUserId();
+		LoaderClass load = LoaderClass.getInstance();
+		load.setBorderPaneMain(borderPaneMain);
 	}
 
 
@@ -78,7 +82,8 @@ public class MainPageController  implements Initializable  {
 	
 	@FXML
 	void favouritesButtonClick() {
-		loadFXML("/Favourites/Favourites.fxml");
+		//LoaderClass load = LoaderClass.getInstance();
+		//load.loadFXML("/Favourites/Favourites.fxml");
 	}
 
 	@FXML
@@ -88,12 +93,14 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	void priceComparisonsButtonClick() {
-		loadFXML("/YourItems/YourItems.fxml");
+		//LoaderClass load = LoaderClass.getInstance();
+		//load.loadFXML("/YourItems/YourItems.fxml");
 	}
 
 	@FXML
 	void yourItemsButtonClick() {
-		loadFXML("/YourItems/YourItems.fxml");
+		//LoaderClass load = LoaderClass.getInstance();
+		//load.loadFXML("/YourItems/YourItems.fxml");
 	}
 
 	@FXML
@@ -103,13 +110,15 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	void quickActionsClicked() {
-		loadFXML("/QuickActionsPack/QuickActions.fxml");
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/QuickActionsPack/QuickActions.fxml");
 
 	}
 	
 	@FXML
 	void searchButtonClicked() {
-		loadFXML("/Search/Search.fxml");
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/Search/Search.fxml");
 	}
 	
 	@FXML
@@ -117,52 +126,6 @@ public class MainPageController  implements Initializable  {
 		System.out.println("not set");
 	}
 
-	public void loadFXML(String fxmlFile) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-			Pane newPane = loader.load();
-
-			if (newPane instanceof GridPane) {
-				FXMLLoader gridPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-				GridPane newGridPane = gridPaneLoader.load();
-				borderPaneMain.setCenter(newGridPane);
-			} else if (newPane instanceof AnchorPane) {
-				FXMLLoader anchorPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-				AnchorPane newAnchorPane = anchorPaneLoader.load();
-				borderPaneMain.setCenter(newAnchorPane);
-			} else if (newPane instanceof BorderPane) {
-				FXMLLoader anchorPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-				BorderPane newAnchorPane = anchorPaneLoader.load();
-				borderPaneMain.setCenter(newAnchorPane);
-			} else {
-				borderPaneMain.setCenter(newPane);
-			}
-
-			borderPaneMain.setCenter(newPane);
-			Node centerNode = borderPaneMain.getCenter();
-
-			if (centerNode != null) {
-				double width = centerNode.getBoundsInParent().getWidth();
-				double height = centerNode.getBoundsInParent().getHeight();
-				BorderPane.setAlignment(newPane, javafx.geometry.Pos.CENTER); // Align content to the center
-
-				newPane.setMaxWidth(borderPaneMain.getWidth());
-				newPane.setMaxHeight(borderPaneMain.getHeight());
-
-				borderPaneMain.widthProperty()
-						.addListener((obs, oldVal, newVal) -> newPane.setMaxWidth(newVal.doubleValue()));
-				borderPaneMain.heightProperty()
-						.addListener((obs, oldVal, newVal) -> newPane.setMaxHeight(newVal.doubleValue()));
-
-				newPane.autosize();
-			} else {
-				System.out.println("No valid node set as the center in the BorderPane.");
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	private void loadCompareChartData() {
 		XYChart.Series first = new XYChart.Series<>();

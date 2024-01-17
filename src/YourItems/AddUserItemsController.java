@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Controllers.Container;
-import Controllers.ErrorMessageLoginSignup;
+import Controllers.PopUpWindow;
 import DBConnection.DBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -139,7 +139,7 @@ public class AddUserItemsController implements Initializable {
 		double salts = Double.parseDouble(itemSaltPer100.getText());
 
 		if (itemname.isBlank() || itemname.isEmpty() || choiceper == null) {
-            ErrorMessageLoginSignup.showCustomDialog("", "/FXML/AddItemsError.fxml");
+            PopUpWindow.showCustomDialog("", "/FXML/ErrorAddItems.fxml");
             
 		} else {
 
@@ -200,17 +200,17 @@ public class AddUserItemsController implements Initializable {
 		if (isInteger) {
 			TextFormatter<Integer> textFormatter = new TextFormatter<>(new IntegerStringConverter(), 0, change -> {
 				String newText = change.getControlNewText();
-				if (newText.matches("\\d*")) { // Allow only digits
+				if (newText.matches("\\d*")) { 
 					return change;
 				} else {
-					return null; // Reject the change
+					return null; 
 				}
 			});
 			textField.setTextFormatter(textFormatter);
 		} else {
 			TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, change -> {
 				String newText = change.getControlNewText();
-				if (newText.matches("\\d*(\\.\\d{0,1})?")) { // Allow up to 2 decimal places
+				if (newText.matches("\\d*(\\.\\d{0,1})?")) { 
 					try {
 						double newValue = Double.parseDouble(newText);
 						if (newValue <= 999.99) {
@@ -219,7 +219,7 @@ public class AddUserItemsController implements Initializable {
 					} catch (NumberFormatException ignored) {
 					}
 				}
-				return null; // Reject the change
+				return null;
 			});
 			textField.setTextFormatter(textFormatter);
 		}
