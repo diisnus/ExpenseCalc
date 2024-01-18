@@ -12,7 +12,7 @@
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #161921;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Search.SearchController">
 	<center>
-		<TableView fx:id="productTableView" prefHeight="709.0" prefWidth="680.0" BorderPane.alignment="CENTER">
+		<TableView fx:id="productTableView" maxHeight="709.0" maxWidth="1000.0" prefHeight="709.0" prefWidth="680.0" BorderPane.alignment="CENTER">
 			<columns>
 				<TableColumn fx:id="productNameTableColumn" prefWidth="135.0" text="Product's Name" />
 				<TableColumn fx:id="productBrandTableColumn" prefWidth="149.0" text="Product's Brand" />

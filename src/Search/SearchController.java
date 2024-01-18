@@ -39,9 +39,9 @@ import javafx.fxml.Initializable;
 
 public class SearchController implements Initializable {
 
-    @FXML
-    private BorderPane borderPane;
-	
+	@FXML
+	private BorderPane borderPane;
+
 	@FXML
 	private HBox hboxTop;
 
@@ -94,21 +94,31 @@ public class SearchController implements Initializable {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 
-		String productViewQuery = "SELECT product_id, product_name, product_brand, description, calories_per_100g, protein FROM groceryproducts WHERE is_whitelisted = 1";
+		String productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts WHERE is_whitelisted = 1";
+
 		productTableView.setEditable(false);
 		try {
 			Statement statement = connectDB.createStatement();
 			ResultSet queryOutput = statement.executeQuery(productViewQuery);
+
 			while (queryOutput.next()) {
 				int queryProductID = queryOutput.getInt("product_id");
 				String queryProductName = queryOutput.getString("product_name");
 				String queryProductBrand = queryOutput.getString("product_brand");
 				String queryProductDescription = queryOutput.getString("description");
-				int queryProductCalories_per_100 = queryOutput.getInt("calories_per_100g");
-				double queryProductProtein = queryOutput.getDouble("protein");
-
-				productSearchModelObservableList.add(new productSearchModel(queryProductID, queryProductBrand,
-						queryProductName, queryProductDescription, queryProductCalories_per_100, queryProductProtein));
+				
+				String productViewQueryMacros = "SELECT calories_per_100g, protein FROM macros WHERE product_id=?";
+				try (PreparedStatement pstMacros = connectDB.prepareStatement(productViewQueryMacros)) {
+					pstMacros.setInt(1, queryProductID);
+					ResultSet queryOutputMacros = pstMacros.executeQuery();
+					if (queryOutputMacros.next()) {
+						int queryProductCalories_per_100 = queryOutputMacros.getInt("calories_per_100g");
+						double queryProductProtein = queryOutputMacros.getDouble("protein");
+						productSearchModelObservableList
+								.add(new productSearchModel(queryProductID, queryProductBrand, queryProductName,
+										queryProductDescription, queryProductCalories_per_100, queryProductProtein));
+					}
+				}
 			}
 
 			productNameTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -123,44 +133,43 @@ public class SearchController implements Initializable {
 					b -> true);
 			searchKeyword.textProperty().addListener((observable, oldValue, newValue) -> {
 				filteredData.setPredicate(productSearchModel -> {
-					if(newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+					if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
 						return true;
 					}
 					String keywordSearch = newValue.toLowerCase();
-					
-					if(productSearchModel.getName().toLowerCase().indexOf(keywordSearch) > -1 ) {
+
+					if (productSearchModel.getName().toLowerCase().indexOf(keywordSearch) > -1) {
 						return true;
-					}else if(productSearchModel.getDescription().toLowerCase().indexOf(keywordSearch) > -1) {
+					} else if (productSearchModel.getDescription().toLowerCase().indexOf(keywordSearch) > -1) {
 						return true;
-					}else if(productSearchModel.getBrand().toLowerCase().indexOf(keywordSearch) > -1) {
+					} else if (productSearchModel.getBrand().toLowerCase().indexOf(keywordSearch) > -1) {
 						return true;
-					}else {
+					} else {
 						return false;
 					}
 				});
 			});
-			
-			
-			SortedList<productSearchModel> sortedData = new SortedList <>(filteredData);
+
+			SortedList<productSearchModel> sortedData = new SortedList<>(filteredData);
 			sortedData.comparatorProperty().bind(productTableView.comparatorProperty());
 			productTableView.setItems(sortedData);
-			
-		    productTableView.setRowFactory(tv -> {
-		        TableRow<productSearchModel> row = new TableRow<>();
-		        row.setOnMouseClicked(event -> {
-		            if (event.getClickCount() == 2 && !row.isEmpty()) {
-		                productSearchModel rowData = row.getItem();
-		                int productId = rowData.getProduct_id();
-		        		IdContainer idcontainer = IdContainer.getInstance();
-		        		idcontainer.setId(productId);
-		        		System.out.println("Double-clicked on product with ID from container: " + idcontainer.getId());
-		        		LoaderClass load = LoaderClass.getInstance();
-		        		load.loadFXML("/ProductOverview/ProductOverview.fxml");
-		                
-		            }
-		        });
-		        return row;
-		    });
+
+			productTableView.setRowFactory(tv -> {
+				TableRow<productSearchModel> row = new TableRow<>();
+				row.setOnMouseClicked(event -> {
+					if (event.getClickCount() == 2 && !row.isEmpty()) {
+						productSearchModel rowData = row.getItem();
+						int productId = rowData.getProduct_id();
+						IdContainer idcontainer = IdContainer.getInstance();
+						idcontainer.setId(productId);
+						System.out.println("Double-clicked on product with ID from container: " + idcontainer.getId());
+						LoaderClass load = LoaderClass.getInstance();
+						load.loadFXML("/ProductOverview/ProductOverview.fxml");
+
+					}
+				});
+				return row;
+			});
 
 		} catch (SQLException e) {
 			Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, e);
@@ -168,5 +177,5 @@ public class SearchController implements Initializable {
 		}
 
 	}
-	
+
 }

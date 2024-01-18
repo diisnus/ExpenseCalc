@@ -63,7 +63,7 @@ public class UpdatePriceController implements Initializable {
 			insertStatement.setInt(1, idcontainer.getId());
 			insertStatement.setDouble(2, Double.parseDouble(priceField.getText()));
 			insertStatement.setString(3, dateCalendar.getValue().toString());
-
+			
 			int rowsAffected = insertStatement.executeUpdate();
 			if (rowsAffected > 0) {
 
