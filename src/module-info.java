@@ -20,5 +20,6 @@ module ExpenseCalc {
 	exports Search; 
 	opens ProductOverview to javafx.fxml;
 	exports ProductOverview; 
-	
+	opens Settings to javafx.fxml;
+	exports Settings; 
 }

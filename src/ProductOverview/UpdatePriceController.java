@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
@@ -25,6 +26,11 @@ public class UpdatePriceController implements Initializable {
 	@FXML
 	private DatePicker dateCalendar;
 
+    @FXML
+    private ChoiceBox<String> currency;
+	
+    private String[] currencies = {"BGN", "EUR", "USD", "GBP", "CHF", "SEK", "NOK", "DKK", "PLN", "CZK", "HUF", "HRK", "RON"};
+    
 	@FXML
 	private Button insertButton;
 
@@ -36,6 +42,7 @@ public class UpdatePriceController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		currency.getItems().addAll(currencies);
 		setTextFieldFormatter(priceField);
 		handler = new DBHandler();
 
@@ -56,13 +63,14 @@ public class UpdatePriceController implements Initializable {
 			PopUpWindow.showCustomDialog("", "/FXML/ErrorPriceAndDateInput.fxml");
 		}
 		IdContainer idcontainer = IdContainer.getInstance();
-		String insert = "INSERT INTO prices (product_id, price, purchase_date) VALUES (?, ?, ?);";
+		String insert = "INSERT INTO prices (product_id, price, purchase_date, currency) VALUES (?, ?, ?, ?);";
 		connection = handler.getConnection();
 		try {
 			PreparedStatement insertStatement = connection.prepareStatement(insert);
 			insertStatement.setInt(1, idcontainer.getId());
 			insertStatement.setDouble(2, Double.parseDouble(priceField.getText()));
 			insertStatement.setString(3, dateCalendar.getValue().toString());
+			insertStatement.setString(4, currency.getValue().toString());
 			
 			int rowsAffected = insertStatement.executeUpdate();
 			if (rowsAffected > 0) {

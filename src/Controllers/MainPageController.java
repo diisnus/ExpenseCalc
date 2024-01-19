@@ -122,7 +122,8 @@ public class MainPageController  implements Initializable  {
 	
 	@FXML
 	void settingsButtonClicked() {
-		System.out.println("not set");
+		//to change
+		PopUpWindow.showCustomDialog("", "/Settings/CurrencyConverter.fxml");
 	}
 
 
