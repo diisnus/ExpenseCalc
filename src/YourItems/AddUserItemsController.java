@@ -142,7 +142,7 @@ public class AddUserItemsController implements Initializable {
 		double salts = Double.parseDouble(itemSaltPer100.getText());
 
 		if (itemname.isBlank() || itemname.isEmpty() || choiceper == null) {
-			PopUpWindow.showCustomDialog("", "/FXML/ErrorAddItems.fxml");
+			PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorAddItems.fxml");
 
 		} else {
 
@@ -187,7 +187,7 @@ public class AddUserItemsController implements Initializable {
 					}
 					generatedKeys.close();
 					System.out.println("Data inserted successfully");
-					PopUpWindow.showCustomDialog("", "/FXML/InsertedSuccessfully.fxml");
+					PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/InsertedSuccessfully.fxml");
 				} else {
 					System.out.println("Insertion failed");
 				}

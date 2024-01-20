@@ -1,17 +1,55 @@
 package Settings;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
+import Controllers.LoaderClass;
+import Controllers.PopUpWindow;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 
-public class SettingsController implements Initializable {
+public class SettingsController {
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
+	@FXML
+	private BorderPane borderPane;
+
+	@FXML
+	private Button currencyCalculator;
+
+	@FXML
+	private Button feedback;
+
+	@FXML
+	private Button profileCurrencyChange;
+
+	@FXML
+	private Button themeChange;
+
+	@FXML
+	private Button userAccountEdit;
+
+	@FXML
+	void profileCurrencyChangeClick(ActionEvent event) {
+
 	}
 
+	@FXML
+	void currencyCalculatorClick(ActionEvent event) {
+		PopUpWindow.showCustomDialog("", "/Settings/CurrencyConverter.fxml");
+	}
+
+	@FXML
+	void userAccountEditClick(ActionEvent event) {
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/AccountManagement/AccountChanges.fxml");
+	}
+
+	@FXML
+	void themeChangeClick(ActionEvent event) {
+
+	}
+
+	@FXML
+	void feedbackClick(ActionEvent event) {
+
+	}
 }

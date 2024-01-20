@@ -12,10 +12,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 
 public class LogInController implements Initializable {
 	@FXML
@@ -74,7 +77,7 @@ public class LogInController implements Initializable {
 					MainPageLoading();
 				}
 			} else {
-				PopUpWindow.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
+				PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorMessageLoginSignUp.fxml");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,12 +96,13 @@ public class LogInController implements Initializable {
 
 	public void MainPageLoading() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
-			Parent root = loader.load();
-			Scene signUpScene = new Scene(root,1200,800);
-			Stage currentStage = (Stage) signup.getScene().getWindow();
-			currentStage.setScene(signUpScene);
-			currentStage.setResizable(true);
+		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
+		    Parent root = loader.load();
+		    Scene signUpScene = new Scene(root, 1200, 800);
+		    Stage currentStage = (Stage) signup.getScene().getWindow();	    
+		    currentStage.setScene(signUpScene);
+		    currentStage.setResizable(true);
+// resizable for different screens, future reference
 //			Screen screen = Screen.getPrimary();
 //	        Rectangle2D bounds = screen.getBounds();        
 //	        double screenWidth = bounds.getWidth();
@@ -115,17 +119,20 @@ public class LogInController implements Initializable {
 //	            sceneWidth = 1000;
 //	            sceneHeight = 900;
 //	        }
-
-			currentStage.setMinWidth(1200);
-			currentStage.setMinHeight(800);
+		    
+		    currentStage.setMinWidth(1200);
+		    currentStage.setMinHeight(800);
+		    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+		    currentStage.setX((screenBounds.getWidth() - currentStage.getWidth()) / 2);
+		    currentStage.setY((screenBounds.getHeight() - currentStage.getHeight()) / 2);
 		} catch (Exception e) {
-			e.printStackTrace();
+		    e.printStackTrace();
 		}
 	}
 
 	public void loginClick() {
 		if (username.getText().isEmpty() || password.getText().isEmpty()) {
-			PopUpWindow.showCustomDialog("", "/FXML/ErrorMessageLoginSignUp.fxml");
+			PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorMessageLoginSignUp.fxml");
 		} else {
 			DataBaseLoginGetInfo();
 		}

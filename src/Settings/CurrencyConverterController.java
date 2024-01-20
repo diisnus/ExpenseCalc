@@ -13,6 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 
 public class CurrencyConverterController implements Initializable {
@@ -28,6 +29,9 @@ public class CurrencyConverterController implements Initializable {
 
     @FXML
     private Button convert;
+    
+    @FXML
+    private Button close;
 
     @FXML
     private Label resultAfterConvert;
@@ -88,6 +92,17 @@ public class CurrencyConverterController implements Initializable {
         conversionRates.put("HRK", 0.27); // Croatian Kuna
         conversionRates.put("RON", 0.41); // Romanian Leu
     }
+    
+   @FXML 
+    void closeClick(ActionEvent event) {
+		try {
+			Stage stage = (Stage) close.getScene().getWindow(); 
+			stage.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+    }
+    
     
     private void setTextFieldFormatter(TextField textField) {
 		TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, change -> {

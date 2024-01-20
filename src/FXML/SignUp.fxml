@@ -16,11 +16,6 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="enteremail" layoutX="212.0" layoutY="250.0" prefHeight="30.0" prefWidth="257.0" promptText="Enter Your Email" style="-fx-background-color: #2D3447; -fx-border-color: #c9cbd0; -fx-border-radius: 8; -fx-text-fill: #d8e3db;">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </PasswordField>
       <ImageView fitHeight="84.0" fitWidth="84.0" layoutX="144.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Res/icon-logo.png" />
@@ -71,5 +66,10 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <TextField fx:id="enteremail" layoutX="212.0" layoutY="250.0" prefHeight="30.0" prefWidth="257.0" promptText="Enter Your Email" style="-fx-background-color: #2D3447; -fx-border-color: #c9cbd0; -fx-border-radius: 8; -fx-text-fill: #d8e3db;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

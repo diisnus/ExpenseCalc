@@ -1,0 +1,16 @@
+#borderPane{
+	-fx-background-color:  #161921;
+	
+}
+
+#anchorPane {
+	-fx-background-color:  #161921;
+}
+
+
+.label {
+	
+    -fx-text-fill: lightblue; 
+}
+
+

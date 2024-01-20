@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" style="-fx-background-color: #1c2429; -fx-background-radius: 2; -fx-padding: 8; -fx-border-width: 0.5; -fx-border-radius: 6; -fx-border-color: #2196f3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ErrorMessageLoginSignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" style="-fx-background-color: #2D3447; -fx-background-radius: 2; -fx-padding: 8; -fx-border-width: 0.5; -fx-border-radius: 6; -fx-border-color: #2196f3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ErrorMessageLoginSignUpController">
    <children>
-      <Label layoutX="89.0" layoutY="50.0" prefHeight="25.0" prefWidth="323.0" style="-fx-text-alignment: center;" text="Item's name and price per must be filled!" textFill="#c9cbd0">
+      <Label layoutX="81.0" layoutY="50.0" prefHeight="25.0" prefWidth="339.0" style="-fx-text-alignment: center;" text="This email is invalid or is already registered." textFill="#c9cbd0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>

@@ -22,4 +22,6 @@ module ExpenseCalc {
 	exports ProductOverview; 
 	opens Settings to javafx.fxml;
 	exports Settings; 
+	opens AccountManagement to javafx.fxml;
+	exports AccountManagement; 
 }

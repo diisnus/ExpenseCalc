@@ -122,8 +122,10 @@ public class MainPageController  implements Initializable  {
 	
 	@FXML
 	void settingsButtonClicked() {
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/Settings/Settings.fxml");
 		//to change
-		PopUpWindow.showCustomDialog("", "/Settings/CurrencyConverter.fxml");
+		//PopUpWindow.showCustomDialog("", "/Settings/CurrencyConverter.fxml");
 	}
 
 

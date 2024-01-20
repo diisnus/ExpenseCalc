@@ -1,4 +1,4 @@
-package AccountManagement;
+package Settings;
 
 import javafx.fxml.FXML;
 

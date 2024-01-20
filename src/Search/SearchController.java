@@ -86,7 +86,6 @@ public class SearchController implements Initializable {
 
 	private Connection connectDB;
 	private DBHandler handler;
-	private PreparedStatement pst;
 
 	// productNameTableColumn.maxWidthProperty().bind(productTableView.widthProperty().divide(3));
 	@Override

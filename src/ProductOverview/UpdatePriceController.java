@@ -52,7 +52,7 @@ public class UpdatePriceController implements Initializable {
 	void insertButtonClicked(ActionEvent event) {
 		if (dateCalendar.getValue() != null) {
 		} else {
-			PopUpWindow.showCustomDialog("", "/FXML/ErrorPriceAndDateInput.fxml");
+			PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorPriceAndDateInput.fxml");
 		}
 		if (!priceField.getText().isEmpty()) {
 			try {
@@ -60,7 +60,7 @@ public class UpdatePriceController implements Initializable {
 				System.out.println("Invalid price format");
 			}
 		} else {
-			PopUpWindow.showCustomDialog("", "/FXML/ErrorPriceAndDateInput.fxml");
+			PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorPriceAndDateInput.fxml");
 		}
 		IdContainer idcontainer = IdContainer.getInstance();
 		String insert = "INSERT INTO prices (product_id, price, purchase_date, currency) VALUES (?, ?, ?, ?);";
