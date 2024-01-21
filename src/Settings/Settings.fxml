@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../CSS/Settings.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Settings.SettingsController">
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPane" prefHeight="590.0" prefWidth="931.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -22,18 +27,46 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="profileCurrencyChange" mnemonicParsing="false" onAction="#profileCurrencyChangeClick" text="Currency change" />
-            <Button fx:id="currencyCalculator" mnemonicParsing="false" onAction="#currencyCalculatorClick" text="Currency calculator" GridPane.rowIndex="1" />
-            <Button fx:id="userAccountEdit" mnemonicParsing="false" onAction="#userAccountEditClick" text="Account changes" GridPane.rowIndex="2" />
-            <Button fx:id="themeChange" mnemonicParsing="false" onAction="#themeChangeClick" text="Theme" GridPane.rowIndex="3" />
-            <Button fx:id="feedback" mnemonicParsing="false" onAction="#feedbackClick" text="Feedbadk" GridPane.rowIndex="4" />
+            <Button fx:id="profileCurrencyChange" mnemonicParsing="false" onAction="#profileCurrencyChangeClick" text="Currency change" GridPane.halignment="CENTER" />
+            <Button fx:id="currencyCalculator" mnemonicParsing="false" onAction="#currencyCalculatorClick" text="Currency calculator" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/calculator_png-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="userAccountEdit" mnemonicParsing="false" onAction="#userAccountEditClick" text="Account changes" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="themeChange" mnemonicParsing="false" onAction="#themeChangeClick" text="Theme" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <Button fx:id="feedback" mnemonicParsing="false" onAction="#feedbackClick" text="Feedbadk" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Label text="Click this button to change your global currency overview." GridPane.columnIndex="1" />
+            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="426.0" text="Click this button to access a built in currency calculator." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label ellipsisString="" maxWidth="-Infinity" prefHeight="18.0" prefWidth="320.0" text="Click this button to navigate to the account changes section." textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Click this button to change the theme of the app." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="403.0" text="Click this button to give direct feedback about the app " GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label maxWidth="-Infinity" prefWidth="350.0" text="There you can change your personal details." GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets top="35.0" />
+               </GridPane.margin>
+            </Label>
+            <Label maxWidth="-Infinity" prefWidth="320.0" text="and the app's core functionalities." GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets top="35.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </center>
    <left>
-      <VBox prefHeight="700.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="590.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="590.0" prefWidth="58.0" BorderPane.alignment="CENTER" />
    </right>
+   <top>
+      <HBox prefHeight="60.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <HBox prefHeight="50.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

@@ -2,3 +2,47 @@
 	-fx-background-color:  #161921;
 	
 }
+
+
+
+
+.button {
+    -fx-background-color: #1a1c1d;
+    -fx-font-weight: bold;
+    -fx-text-fill: #aca59a; 
+    -fx-font-family: serif;
+    -fx-font-size: 15px;
+    -fx-border-width: 1px;
+    -fx-border-color: #0d0f10;
+    -fx-border-radius:12px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+}
+
+.button:hover {
+    -fx-background-color: #2c2e2f; 
+    -fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+
+
+.image-view {
+    -fx-background-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: #333333; 
+}
+
+.label {
+
+    -fx-font-weight: bold;
+    -fx-text-fill: lightblue; /* Text color */
+    -fx-font-family: serif;
+    -fx-font-size: 17px;
+}
+.grid-pane {
+    -fx-border-color: white;
+    -fx-border-width: 0 0 1 1; /* Top, Right, Bottom, Left */
+    -fx-border-insets: 0 1 1 0; /* Top, Right, Bottom, Left */
+}
+
