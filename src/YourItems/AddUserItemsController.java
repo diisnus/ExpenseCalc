@@ -230,19 +230,23 @@ public class AddUserItemsController implements Initializable {
 			textField.setTextFormatter(textFormatter);
 		} else {
 			TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, change -> {
-				String newText = change.getControlNewText();
-				if (newText.matches("\\d*(\\.\\d{0,1})?")) {
-					try {
-						double newValue = Double.parseDouble(newText);
-						if (newValue <= 999.99) {
-							return change;
-						}
-					} catch (NumberFormatException ignored) {
-					}
-				}
-				return null;
-			});
-			textField.setTextFormatter(textFormatter);
-		}
+	            String newText = change.getControlNewText();
+	            if (newText.isEmpty() || newText.matches("\\d*(\\.\\d{0,2})?")) {
+	                if (textField.getPromptText() != null && !textField.getPromptText().isEmpty()) {
+	                    textField.setPromptText("");
+	                }
+	                try {
+	                    double newValue = newText.isEmpty() ? 0.0 : Double.parseDouble(newText);
+	                    if (newValue <= 999.99) {
+	                        return change;
+	                    }
+	                } catch (NumberFormatException ignored) {
+	                }
+	            }
+	            return null;
+	        });
+
+	        textField.setTextFormatter(textFormatter);
+	    }
 	}
 }

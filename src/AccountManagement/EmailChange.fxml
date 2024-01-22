@@ -11,5 +11,6 @@
       <Label fx:id="yourEmail" alignment="CENTER" contentDisplay="CENTER" layoutX="50.0" layoutY="78.0" prefWidth="400.0" text="Label" />
       <Button fx:id="emailChange" layoutX="299.0" layoutY="247.0" mnemonicParsing="false" onAction="#emailChangeClick" text="Done" />
       <Button fx:id="close" layoutX="150.0" layoutY="247.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
+      <Label layoutX="170.0" layoutY="129.0" text="Input your new email:" />
    </children>
 </AnchorPane>

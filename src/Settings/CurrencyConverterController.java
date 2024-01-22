@@ -13,6 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
 
@@ -24,6 +25,9 @@ public class CurrencyConverterController implements Initializable {
     @FXML
     private ChoiceBox<String> convertFrom;
 
+    @FXML
+    private AnchorPane anchorPane;
+    
     @FXML
     private ChoiceBox<String> convertTo;
 
@@ -105,19 +109,23 @@ public class CurrencyConverterController implements Initializable {
     
     
     private void setTextFieldFormatter(TextField textField) {
-		TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, change -> {
-			String newText = change.getControlNewText();
-			if (newText.matches("\\d*(\\.\\d{0,2})?")) {
-				try {
-					double newValue = Double.parseDouble(newText);
-					if (newValue <= 999.99) {
-						return change;
-					}
-				} catch (NumberFormatException ignored) {
-				}
-			}
-			return null;
-		});
-		textField.setTextFormatter(textFormatter);
-	}
+        TextFormatter<Double> textFormatter = new TextFormatter<>(new DoubleStringConverter(), 0.0, change -> {
+            String newText = change.getControlNewText();
+            if (newText.isEmpty() || newText.matches("\\d*(\\.\\d{0,2})?")) {
+                if (textField.getPromptText() != null && !textField.getPromptText().isEmpty()) {
+                    textField.setPromptText("");
+                }
+                try {
+                    double newValue = newText.isEmpty() ? 0.0 : Double.parseDouble(newText);
+                    if (newValue <= 999.99) {
+                        return change;
+                    }
+                } catch (NumberFormatException ignored) {
+                }
+            }
+            return null;
+        });
+
+        textField.setTextFormatter(textFormatter);
+    }
 }

@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../CSS/AccountChanges.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountManagement.AccountChangesController">
    <top>
@@ -22,9 +25,9 @@
       <HBox prefHeight="70.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPane" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -33,9 +36,45 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="usernameChange" mnemonicParsing="false" onAction="#usernameChangeClick" text="Username change" />
-            <Button fx:id="passwordChange" mnemonicParsing="false" onAction="#passwordChangeClick" text="Password change" GridPane.rowIndex="1" />
-            <Button fx:id="emailChange" mnemonicParsing="false" onAction="#emailChangeClick" text="Email change" GridPane.rowIndex="2" />
+            <Button fx:id="usernameChange" mnemonicParsing="false" onAction="#usernameChangeClick" text="Username change">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/username.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="passwordChange" mnemonicParsing="false" onAction="#passwordChangeClick" text="Password change" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/password.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="emailChange" mnemonicParsing="false" onAction="#emailChangeClick" text="Email change" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/email.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Label text="Click this button to change your username." GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Click this button to change your password." GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="Click this button to change your email." GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </center>

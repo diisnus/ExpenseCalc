@@ -11,6 +11,6 @@
       <Label fx:id="currentUsername" alignment="CENTER" layoutX="126.0" layoutY="90.0" prefWidth="300.0" text="Label" />
       <Button fx:id="updateUsername" layoutX="324.0" layoutY="272.0" mnemonicParsing="false" onAction="#updateUsernameClick" text="Done" />
       <Button fx:id="close" layoutX="184.0" layoutY="272.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
-      <Label alignment="CENTER" layoutX="209.0" layoutY="140.0" text="Input the new username:" />
+      <Label alignment="CENTER" layoutX="185.0" layoutY="142.0" text="Input the new username:" />
    </children>
 </AnchorPane>

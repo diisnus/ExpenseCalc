@@ -29,6 +29,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -74,24 +75,51 @@ public class SearchController implements Initializable {
 
 	ObservableList<productSearchModel> productSearchModelObservableList = FXCollections.observableArrayList();
 
-//    double columnPercentage = 100.0 / 6; // Assuming numberOfColumns is the total number of columns in your table
-//
-//    productNameTableColumn.setPrefWidth(productTableView.widthProperty().multiply(columnPercentage / 100).doubleValue());
-//    productBrandTableColumn.setPrefWidth(productTableView.widthProperty().multiply(columnPercentage / 100).doubleValue());
-//    productDescriptionTableColumn.setPrefWidth(productTableView.widthProperty().multiply(columnPercentage / 100).doubleValue());
-//    productKcalTableColumn.setPrefWidth(productTableView.widthProperty().multiply(columnPercentage / 100).doubleValue());
-//    productProteinTableColum.setPrefWidth(productTableView.widthProperty().multiply(columnPercentage / 100).doubleValue());
-
-//                towa trqbwa da e za razdelqne na kolonata proporcionalno sprqmo resize
 
 	private Connection connectDB;
 	private DBHandler handler;
 
-	// productNameTableColumn.maxWidthProperty().bind(productTableView.widthProperty().divide(3));
 	@Override
 	public void initialize(URL arg0, ResourceBundle resource) {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
+
+	    productTableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+	        double tableWidth = newWidth.doubleValue();
+	        double columnWidth = tableWidth / 6.0;
+
+	        productNameTableColumn.setPrefWidth(columnWidth);
+	        productBrandTableColumn.setPrefWidth(columnWidth);
+	        productDescriptionTableColumn.setPrefWidth(columnWidth * 2); 
+	        productKcalTableColumn.setPrefWidth(columnWidth);
+	        productProteinTableColum.setPrefWidth(columnWidth);
+	    });
+
+	    productDescriptionTableColumn.setCellFactory(tc -> {
+	        TableCell<productSearchModel, String> cell = new TableCell<>();
+	        Text text = new Text();
+	        cell.setGraphic(text);
+	        cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+	        text.setStyle("-fx-fill: rgb(215, 231, 234);"); 
+
+	        text.wrappingWidthProperty().bind(productDescriptionTableColumn.widthProperty());
+
+	        cell.setOnMouseEntered(event -> {
+	            String cellText = cell.getItem();
+	            if (cellText != null && !cellText.isEmpty()) {
+	                Tooltip tooltip = new Tooltip(cellText);
+	                Tooltip.install(text, tooltip);
+	               
+	            }
+	        });
+
+	        cell.setOnMouseExited(event -> Tooltip.uninstall(text, null));
+
+	        text.textProperty().bind(cell.itemProperty());
+
+	        return cell;
+	    });
+	    
 
 		String productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts WHERE is_whitelisted = 1";
 

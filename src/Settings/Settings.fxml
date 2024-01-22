@@ -27,7 +27,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="profileCurrencyChange" mnemonicParsing="false" onAction="#profileCurrencyChangeClick" text="Currency change" GridPane.halignment="CENTER" />
+            <Button fx:id="profileCurrencyChange" mnemonicParsing="false" onAction="#profileCurrencyChangeClick" text="Currency change" GridPane.halignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/currency_euro.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
             <Button fx:id="currencyCalculator" mnemonicParsing="false" onAction="#currencyCalculatorClick" text="Currency calculator" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -36,22 +43,61 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="userAccountEdit" mnemonicParsing="false" onAction="#userAccountEditClick" text="Account changes" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Button fx:id="themeChange" mnemonicParsing="false" onAction="#themeChangeClick" text="Theme" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <Button fx:id="feedback" mnemonicParsing="false" onAction="#feedbackClick" text="Feedbadk" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Label text="Click this button to change your global currency overview." GridPane.columnIndex="1" />
-            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="426.0" text="Click this button to access a built in currency calculator." GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label ellipsisString="" maxWidth="-Infinity" prefHeight="18.0" prefWidth="320.0" text="Click this button to navigate to the account changes section." textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Click this button to change the theme of the app." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="403.0" text="Click this button to give direct feedback about the app " GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="userAccountEdit" mnemonicParsing="false" onAction="#userAccountEditClick" text="Account changes" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/MainPage/user-icon-light.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="themeChange" mnemonicParsing="false" onAction="#themeChangeClick" text="Theme" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/theme.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="feedback" mnemonicParsing="false" onAction="#feedbackClick" text="Feedbadk" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/feedback.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Label text="Click this button to change your global currency overview." GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="426.0" text="Click this button to access a built in currency calculator." GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label ellipsisString="" maxWidth="-Infinity" prefHeight="18.0" prefWidth="320.0" text="Click this button to navigate to the account changes section." textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label text="Click this button to change the theme of the app." GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="403.0" text="Click this button to give direct feedback about the app " GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
             <Label maxWidth="-Infinity" prefWidth="350.0" text="There you can change your personal details." GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets top="35.0" />
+                  <Insets left="10.0" top="35.0" />
                </GridPane.margin>
             </Label>
             <Label maxWidth="-Infinity" prefWidth="320.0" text="and the app's core functionalities." GridPane.columnIndex="1" GridPane.rowIndex="4">
                <GridPane.margin>
-                  <Insets top="35.0" />
+                  <Insets left="10.0" top="35.0" />
                </GridPane.margin>
             </Label>
          </children>
