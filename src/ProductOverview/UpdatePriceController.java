@@ -14,10 +14,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import javafx.util.converter.DoubleStringConverter;
+
+
+
 
 public class UpdatePriceController implements Initializable {
 	@FXML
@@ -26,6 +30,15 @@ public class UpdatePriceController implements Initializable {
 	@FXML
 	private DatePicker dateCalendar;
 
+    @FXML
+    private Label label;
+
+    @FXML
+    private Label label2;
+
+    @FXML
+    private Label label3;
+	
     @FXML
     private ChoiceBox<String> currency;
 	

@@ -37,7 +37,7 @@ public class SettingsController implements Initializable{
 
 	@FXML
 	void profileCurrencyChangeClick(ActionEvent event) {
-
+		
 	}
 
 	@FXML
@@ -53,12 +53,12 @@ public class SettingsController implements Initializable{
 
 	@FXML
 	void themeChangeClick(ActionEvent event) {
-
+		
 	}
 
 	@FXML
 	void feedbackClick(ActionEvent event) {
-
+		
 	}
 
 	@Override
