@@ -76,16 +76,14 @@ public class UsernameChangeController implements Initializable {
 			updateUsernameStatement.setString(1, newusername);
 			updateUsernameStatement.setInt(2, userid);
 
-			updateUsernameStatement.executeUpdate();
+			int rowsAffected = updateUsernameStatement.executeUpdate();
+
+			if (rowsAffected > 0) {
+				Stage stage = (Stage) close.getScene().getWindow();
+				stage.close();
+			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			Stage stage = (Stage) newUsername.getScene().getWindow();
-			stage.close();
-		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

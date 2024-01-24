@@ -1,40 +1,42 @@
 .date-picker {
-    -fx-background-color: #aca59a; /* Set background color */
-    -fx-text-fill: #aca59a; /* Set text color */
-    -fx-font-size: 14px; /* Set font size */
-    -fx-border-color: #aca59a; /* Set border color */
-    -fx-border-width: 0px; /* Set border width */
-    -fx-border-radius: 5px; /* Set border radius */
+    -fx-background-color: #aca59a; 
+    -fx-text-fill: #aca59a; 
+    -fx-font-size: 14px; 
+    -fx-border-color: #aca59a; 
+    -fx-border-width: 0px; 
+    -fx-border-radius: 5px; 
     -fx-font-family: serif; 
 
 }
 
 .date-picker .text-field {
-    -fx-background-color: #161921; /* Set background color for the text field */
+    -fx-background-color: #161921; 
 }
 
 .date-picker .arrow-button {
-    -fx-background-color: lightblue; /* Set background color for the arrow button */
+    -fx-background-color: lightblue; 
 }
 
 .date-picker-popup {
-    -fx-background-color: white; /* Set background color for the popup */
+    -fx-background-color: white; 
 }
 
 .date-picker-popup .day-cell {
-    -fx-background-color: rgb(126, 118, 105); /* Set background color for the days */
-    -fx-text-fill: lightblue; /* Set text color for the days */
+    -fx-background-color: rgb(126, 118, 105); 
+    -fx-text-fill: lightblue; 
 }
 
 .date-picker-popup .day-cell:hover {
-    -fx-background-color: #2a2c2d; /* Set background color for the hovered days */
+    -fx-background-color: #2a2c2d;
+    -fx-cursor: hand;
+ 
 }
 
 
 .date-picker .month-year-pane {
     -fx-text-fill: black;
     -fx-font-family: serif; 
-    -fx-font-weight: bold; /* Set font weight to bold */
+    -fx-font-weight: bold; 
 }
 
 
@@ -101,6 +103,8 @@
 
 .choice-box .menu-item:hover {
     -fx-background-color: #2c2e2f; 
+    -fx-cursor: hand;
+
 }
 
 #insertButton,
@@ -121,6 +125,7 @@
     -fx-border-color: #171a1b; 
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
      -fx-border-width: 2px;
+     -fx-cursor: hand;
 }
 
 

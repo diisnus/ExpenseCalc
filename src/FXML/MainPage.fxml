@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainPageController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../CSS/MainPageCss.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainPageController">
 	<left>
 		<VBox alignment="CENTER" prefHeight="835.0" prefWidth="128.0" style="-fx-background-color: #101218;" BorderPane.alignment="CENTER">
 			<children>
@@ -44,7 +44,7 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button fx:id="searchButton" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #101218;">
+				<Button fx:id="searchButton" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#searchButtonClicked" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
 					<VBox.margin>
 						<Insets bottom="30.0" />
 					</VBox.margin>
@@ -56,7 +56,7 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button fx:id="settingsButton" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#settingsButtonClicked" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #101218;">
+				<Button fx:id="settingsButton" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#settingsButtonClicked" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
 					<VBox.margin>
 						<Insets bottom="30.0" />
 					</VBox.margin>

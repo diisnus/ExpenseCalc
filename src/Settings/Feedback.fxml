@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/Settings.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Settings.FeedbackController">
+   <children>
+      <Label alignment="CENTER" layoutX="200.0" layoutY="28.0" prefWidth="200.0" text="Select the type of feedback:" />
+      <TextField fx:id="specificReason" layoutX="189.0" layoutY="149.0" prefHeight="30.0" prefWidth="225.0" />
+      <ChoiceBox fx:id="typeOfFeedBack" layoutX="212.0" layoutY="65.0" prefWidth="180.0" />
+      <Label alignment="CENTER" layoutX="190.0" layoutY="116.0" prefWidth="225.0" text="Input the reason of feedback:" />
+      <Label alignment="CENTER" layoutX="200.0" layoutY="192.0" prefWidth="200.0" text="Describe it:" />
+      <TextArea fx:id="descriptionOfFeedback" layoutX="94.0" layoutY="221.0" prefHeight="92.0" prefWidth="414.0" />
+      <Button fx:id="sendFeedback" layoutX="390.0" layoutY="334.0" mnemonicParsing="false" onAction="#sendFeedbackClick" prefHeight="35.0" prefWidth="80.0" text="Send" />
+      <Button fx:id="close" layoutX="133.0" layoutY="334.0" mnemonicParsing="false" onAction="#closeClick" prefHeight="35.0" prefWidth="80.0" text="Close" />
+   </children>
+</AnchorPane>

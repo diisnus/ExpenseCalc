@@ -37,7 +37,8 @@ public class SettingsController implements Initializable{
 
 	@FXML
 	void profileCurrencyChangeClick(ActionEvent event) {
-		
+		PopUpWindow.showCustomDialog("", "/Settings/CurrencyChange.fxml");
+
 	}
 
 	@FXML
@@ -58,7 +59,8 @@ public class SettingsController implements Initializable{
 
 	@FXML
 	void feedbackClick(ActionEvent event) {
-		
+		PopUpWindow.showCustomDialog("", "/Settings/Feedback.fxml");
+
 	}
 
 	@Override

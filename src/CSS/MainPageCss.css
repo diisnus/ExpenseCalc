@@ -66,3 +66,9 @@
 }
 
 
+#searchButton:hover {
+	-fx-background-color: #28242c;
+	-fx-cursor: hand;
+}
+
+

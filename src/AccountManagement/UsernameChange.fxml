@@ -5,12 +5,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="550.0" stylesheets="@../CSS/AccountChanges.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountManagement.UsernameChangeController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="274.0" prefWidth="482.0" stylesheets="@../CSS/AccountChanges.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountManagement.UsernameChangeController">
    <children>
-      <TextField fx:id="newUsername" layoutX="201.0" layoutY="175.0" />
-      <Label fx:id="currentUsername" alignment="CENTER" layoutX="126.0" layoutY="90.0" prefWidth="300.0" text="Label" />
-      <Button fx:id="updateUsername" layoutX="324.0" layoutY="272.0" mnemonicParsing="false" onAction="#updateUsernameClick" text="Done" />
-      <Button fx:id="close" layoutX="184.0" layoutY="272.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
-      <Label alignment="CENTER" layoutX="185.0" layoutY="142.0" text="Input the new username:" />
+      <TextField fx:id="newUsername" layoutX="153.0" layoutY="137.0" />
+      <Label fx:id="currentUsername" alignment="CENTER" layoutX="91.0" layoutY="44.0" prefWidth="300.0" text="Label" />
+      <Button fx:id="updateUsername" layoutX="304.0" layoutY="194.0" mnemonicParsing="false" onAction="#updateUsernameClick" text="Done" />
+      <Button fx:id="close" layoutX="125.0" layoutY="194.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
+      <Label alignment="CENTER" layoutX="150.0" layoutY="94.0" text="Input the new username:" />
    </children>
 </AnchorPane>
