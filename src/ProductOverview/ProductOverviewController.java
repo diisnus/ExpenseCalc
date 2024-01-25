@@ -64,7 +64,8 @@ public class ProductOverviewController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tableView.setEditable(false);
-
+        macroColumn.setResizable(false);
+        valueColumn.setResizable(false);
 	    tableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 	        double tableWidth = newWidth.doubleValue();
 	        double columnWidth = tableWidth / 2.0;

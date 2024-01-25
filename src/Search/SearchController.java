@@ -84,7 +84,6 @@ public class SearchController implements Initializable {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 		productTableView.setEditable(false);
-
 	    productTableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 	        double tableWidth = newWidth.doubleValue();
 	        double columnWidth = tableWidth / 6.0;
