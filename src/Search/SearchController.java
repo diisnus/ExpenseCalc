@@ -83,6 +83,7 @@ public class SearchController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle resource) {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
+		productTableView.setEditable(false);
 
 	    productTableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 	        double tableWidth = newWidth.doubleValue();
@@ -123,7 +124,6 @@ public class SearchController implements Initializable {
 
 		String productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts WHERE is_whitelisted = 1";
 
-		productTableView.setEditable(false);
 		try {
 			Statement statement = connectDB.createStatement();
 			ResultSet queryOutput = statement.executeQuery(productViewQuery);
