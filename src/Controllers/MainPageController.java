@@ -50,6 +50,9 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	public Button yourItemsButton;
+	
+	@FXML
+	public Button profileButton;
 
 	@FXML
 	private AreaChart<?, ?> compareButtonChart;
@@ -124,8 +127,13 @@ public class MainPageController  implements Initializable  {
 	void settingsButtonClicked() {
 		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/Settings/Settings.fxml");
-		//to change
-		//PopUpWindow.showCustomDialog("", "/Settings/CurrencyConverter.fxml");
+
+	}
+	
+	@FXML
+	void profileButtonClick() {
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/AccountManagement/AccountChanges.fxml");
 	}
 
 

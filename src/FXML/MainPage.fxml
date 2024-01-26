@@ -68,7 +68,7 @@
 						</ImageView>
 					</graphic>
 				</Button>
-				<Button minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #101218;">
+				<Button fx:id="profileButton" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#profileButtonClick" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
 					<graphic>
 						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
 							<image>

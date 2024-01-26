@@ -17,7 +17,8 @@ public class PopUpWindow{
             FXMLLoader loader = new FXMLLoader(PopUpWindow.class.getResource(fxmlPath));
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.initStyle(StageStyle.UTILITY);
+            //stage.initStyle(StageStyle.UTILITY);
+            stage.initStyle(StageStyle.UNDECORATED);  
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setTitle(title);

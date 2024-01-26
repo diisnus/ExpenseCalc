@@ -5,6 +5,9 @@
 
 #anchorPane {
 	-fx-background-color:  #161921;
+	-fx-border-width: 1.5px;
+	-fx-border-color: #0d0f10;
+	
 }
 
 

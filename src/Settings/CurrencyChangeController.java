@@ -55,7 +55,6 @@ public class CurrencyChangeController implements Initializable {
 	        ResultSet rs = selectedCurrency.executeQuery();
 	        if (rs.next()) {
 	            String currency = rs.getString("pref_currency");
-	            System.out.println(currency);
 	            currentCurrency.setText("Your current currency is: " + currency + ".");
 	        }
 	    } catch (SQLException e) {

@@ -103,6 +103,7 @@ public class UsernameChangeController implements Initializable {
 	            String username = rs.getString("username");
 	            System.out.println(username);
 	            currentUsername.setText("Your current username is: " + username + ".");
+	            
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();

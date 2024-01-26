@@ -91,3 +91,16 @@
 .table-view .table-cell .table-cell .text {
     -fx-fill: rgb(215, 231, 234);
 }
+
+
+
+#name,
+#brand,
+#description,
+#currencyUsed,
+#pricedBy{
+	-fx-font-weight: bold;
+    -fx-text-fill: lightblue;
+    -fx-font-family: serif;
+    -fx-font-size: 17px;
+}
