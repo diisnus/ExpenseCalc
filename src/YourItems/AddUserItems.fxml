@@ -11,197 +11,124 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
-	prefWidth="1080.0" stylesheets="@../CSS/addUserItems.css"
-	xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="YourItems.AddUserItemsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1080.0" stylesheets="@../CSS/addUserItems.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="YourItems.AddUserItemsController">
 	<top>
-		<GridPane fx:id="gridPaneTop" alignment="CENTER"
-			prefHeight="363.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+		<GridPane fx:id="gridPaneTop" alignment="CENTER" prefHeight="363.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES"
-					maxWidth="265.0" minWidth="10.0" prefWidth="131.4666961669922" />
-				<ColumnConstraints hgrow="SOMETIMES"
-					maxWidth="396.0" minWidth="10.0" prefWidth="358.1332946777344" />
-				<ColumnConstraints hgrow="SOMETIMES"
-					maxWidth="379.0" minWidth="10.0" prefWidth="361.8667053222656" />
-				<ColumnConstraints hgrow="SOMETIMES"
-					maxWidth="230.66668701171875" minWidth="10.0"
-					prefWidth="229.59991455078125" />
+				<ColumnConstraints hgrow="SOMETIMES" />
+				<ColumnConstraints hgrow="SOMETIMES" />
+				<ColumnConstraints hgrow="SOMETIMES" />
+				<ColumnConstraints hgrow="SOMETIMES" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="112.86665191650391"
-					minHeight="10.0" prefHeight="56.000005340576166" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="151.59999465942383"
-					minHeight="10.0" prefHeight="90.1333465576172" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="108.26665344238279"
-					minHeight="10.0" prefHeight="79.9999969482422" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="71.20000305175779"
-					minHeight="10.0" prefHeight="47.4666748046875" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="64.99997558593748"
-					minHeight="10.0" prefHeight="63.93332519531248" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="112.86665191650391" minHeight="10.0" prefHeight="56.000005340576166" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="151.59999465942383" minHeight="10.0" prefHeight="90.1333465576172" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="108.26665344238279" minHeight="10.0" prefHeight="79.9999969482422" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="71.20000305175779" minHeight="10.0" prefHeight="47.4666748046875" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="64.99997558593748" minHeight="10.0" prefHeight="63.93332519531248" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<AnchorPane prefHeight="84.0" prefWidth="187.0"
-					GridPane.columnIndex="3" GridPane.rowIndex="2">
+				<AnchorPane prefHeight="84.0" prefWidth="187.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
 					<children>
-						<Button fx:id="addItemButton" layoutX="45.0" layoutY="20.0"
-							mnemonicParsing="false" onAction="#addItemButtonClick"
-							prefHeight="60.0" prefWidth="130.0" text="Add" />
+						<Button fx:id="addItemButton" layoutX="45.0" layoutY="20.0" mnemonicParsing="false" onAction="#addItemButtonClick" prefHeight="60.0" prefWidth="130.0" text="Add" />
 					</children>
 				</AnchorPane>
-				<Label fx:id="pricedByLabel" prefHeight="17.0"
-					prefWidth="187.0" text="Item is usually priced by:"
-					GridPane.columnIndex="1" GridPane.halignment="CENTER"
-					GridPane.rowIndex="4" />
-				<Label fx:id="descriptionLabel" prefHeight="17.0"
-					prefWidth="187.0" text="Description:" GridPane.columnIndex="1"
-					GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-				<Label fx:id="brandLabel" prefHeight="17.0" prefWidth="187.0"
-					text="Item's brand:" GridPane.columnIndex="1"
-					GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-				<Label fx:id="nameLabel" prefHeight="17.0" prefWidth="187.0"
-					text="Item's name:" GridPane.columnIndex="1"
-					GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-				<TextField fx:id="itemNameTextField"
-					GridPane.columnIndex="2" GridPane.halignment="CENTER"
-					GridPane.rowIndex="1" GridPane.valignment="CENTER">
+				<Label fx:id="pricedByLabel" prefHeight="17.0" prefWidth="187.0" text="Item is usually priced by:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+				<Label fx:id="descriptionLabel" prefHeight="17.0" prefWidth="187.0" text="Description:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+				<Label fx:id="brandLabel" prefHeight="17.0" prefWidth="187.0" text="Item's brand:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+				<Label fx:id="nameLabel" prefHeight="17.0" prefWidth="187.0" text="Item's name:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+				<TextField fx:id="itemNameTextField" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets right="10.0" />
 					</GridPane.margin>
 				</TextField>
-				<TextField fx:id="ItemBrandTextField" prefHeight="25.0"
-					prefWidth="145.0" GridPane.columnIndex="2"
-					GridPane.halignment="CENTER" GridPane.rowIndex="2"
-					GridPane.valignment="CENTER">
+				<TextField fx:id="ItemBrandTextField" prefHeight="25.0" prefWidth="145.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets right="10.0" />
 					</GridPane.margin>
 				</TextField>
-				<TextArea fx:id="itemDescriptionTextField"
-					prefHeight="43.0" prefWidth="159.0" GridPane.columnIndex="2"
-					GridPane.halignment="CENTER" GridPane.rowIndex="3"
-					GridPane.valignment="CENTER">
+				<TextArea fx:id="itemDescriptionTextField" prefHeight="43.0" prefWidth="159.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets right="10.0" />
 					</GridPane.margin>
 				</TextArea>
-				<ChoiceBox fx:id="itemsPricePer" prefWidth="150.0"
-					GridPane.columnIndex="2" GridPane.halignment="CENTER"
-					GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+				<ChoiceBox fx:id="itemsPricePer" prefWidth="150.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
 			</children>
 		</GridPane>
 	</top>
 	<center>
-		<GridPane fx:id="gridPaneCentre"
-			BorderPane.alignment="CENTER">
+		<GridPane fx:id="gridPaneCentre" BorderPane.alignment="CENTER">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES"
-					minWidth="10.0" prefWidth="100.0" />
-				<ColumnConstraints hgrow="SOMETIMES"
-					minWidth="10.0" prefWidth="100.0" />
-				<ColumnConstraints hgrow="SOMETIMES"
-					minWidth="10.0" prefWidth="100.0" />
-				<ColumnConstraints hgrow="SOMETIMES"
-					minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" />
+				<ColumnConstraints hgrow="SOMETIMES" />
+				<ColumnConstraints hgrow="SOMETIMES" />
+				<ColumnConstraints hgrow="SOMETIMES" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="113.6" minHeight="10.0"
-					prefHeight="97.6" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="128.53327026367188"
-					minHeight="10.0" prefHeight="105.59998779296873" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="126.73335876464847"
-					minHeight="10.0" prefHeight="88.80001220703127" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="148.20004882812498"
-					minHeight="10.0" prefHeight="95.46664123535152" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="80.99991455078123"
-					minHeight="10.0" prefHeight="26.599951171874977" vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
+				<RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Label fx:id="calloriesLabel" text="Callories per 100g:"
-					GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-				<TextField fx:id="itemCaloriesPer100" maxHeight="25.0"
-					maxWidth="200.0" GridPane.columnIndex="1"
-					GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+				<Label fx:id="calloriesLabel" text="Callories per 100g:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></Label>
+				<TextField fx:id="itemCaloriesPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
 				</TextField>
-				<Label fx:id="proteinLabel" text="Protein per 100g:"
-					GridPane.halignment="CENTER" GridPane.rowIndex="1"
-					GridPane.valignment="CENTER" />
-				<TextField fx:id="itemProteinPer100" maxHeight="25.0"
-					maxWidth="200.0" GridPane.columnIndex="1"
-					GridPane.halignment="CENTER" GridPane.rowIndex="1"
-					GridPane.valignment="CENTER">
+				<Label fx:id="proteinLabel" text="Protein per 100g:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></Label>
+				<TextField fx:id="itemProteinPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
 				</TextField>
-				<Label fx:id="carbsLabel" text="Carbohydrates per 100g:"
-					GridPane.halignment="CENTER" GridPane.rowIndex="2"
-					GridPane.valignment="CENTER" />
-				<TextField fx:id="itemCarbohydratesPer100"
-					maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="1"
-					GridPane.halignment="CENTER" GridPane.rowIndex="2"
-					GridPane.valignment="CENTER">
+				<Label fx:id="carbsLabel" text="Carbohydrates per 100g:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></Label>
+				<TextField fx:id="itemCarbohydratesPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
 				</TextField>
-				<Label fx:id="sugarsLabel" text="From which sugars per 100g:"
-					GridPane.halignment="CENTER" GridPane.rowIndex="3"
-					GridPane.valignment="CENTER" />
-				<TextField fx:id="itemSugarsPer100" maxHeight="25.0"
-					maxWidth="200.0" GridPane.columnIndex="1"
-					GridPane.halignment="CENTER" GridPane.rowIndex="3"
-					GridPane.valignment="CENTER">
+				<Label fx:id="sugarsLabel" text="From which sugars per 100g:" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin></Label>
+				<TextField fx:id="itemSugarsPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
 				</TextField>
-				<Label fx:id="fibersLabel" text="Fibers per 100g:"
-					GridPane.columnIndex="2" GridPane.halignment="CENTER"
-					GridPane.valignment="CENTER" />
-				<TextField fx:id="itemFibersPer100" maxHeight="25.0"
-					maxWidth="200.0" GridPane.columnIndex="3"
-					GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+				<Label fx:id="fibersLabel" text="Fibers per 100g:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+				<TextField fx:id="itemFibersPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
 				</TextField>
-				<Label fx:id="fatsLabel" text="Fat per 100g:"
-					GridPane.columnIndex="2" GridPane.halignment="CENTER"
-					GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-				<TextField fx:id="itemFatsPer100" maxHeight="25.0"
-					maxWidth="200.0" GridPane.columnIndex="3"
-					GridPane.halignment="CENTER" GridPane.rowIndex="1"
-					GridPane.valignment="CENTER">
+				<Label fx:id="fatsLabel" text="Fat per 100g:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+				<TextField fx:id="itemFatsPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
 				</TextField>
-				<Label fx:id="saturatedFatLabel"
-					text="Saturated fat per 100g:" GridPane.columnIndex="2"
-					GridPane.halignment="CENTER" GridPane.rowIndex="2"
-					GridPane.valignment="CENTER" />
-				<TextField fx:id="itemSaturatedFatsPer100"
-					maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="3"
-					GridPane.halignment="CENTER" GridPane.rowIndex="2"
-					GridPane.valignment="CENTER">
+				<Label fx:id="saturatedFatLabel" text="Saturated fat per 100g:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+				<TextField fx:id="itemSaturatedFatsPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
 				</TextField>
-				<Label fx:id="saltLabel" text="Salt per 100g:"
-					GridPane.columnIndex="2" GridPane.halignment="CENTER"
-					GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-				<TextField fx:id="itemSaltPer100" maxHeight="25.0"
-					maxWidth="200.0" GridPane.columnIndex="3"
-					GridPane.halignment="CENTER" GridPane.rowIndex="3"
-					GridPane.valignment="CENTER">
+				<Label fx:id="saltLabel" text="Salt per 100g:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+				<TextField fx:id="itemSaltPer100" maxHeight="25.0" maxWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
 					<GridPane.margin>
 						<Insets left="50.0" right="50.0" />
 					</GridPane.margin>
@@ -209,4 +136,7 @@
 			</children>
 		</GridPane>
 	</center>
+   <bottom>
+      <VBox fx:id="vbox" prefHeight="50.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

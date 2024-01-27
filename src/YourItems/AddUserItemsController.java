@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import java.sql.Connection;
@@ -26,6 +27,9 @@ import java.sql.SQLException;
 
 public class AddUserItemsController implements Initializable {
 
+    @FXML
+    private VBox vbox;
+	
 	@FXML
 	private Label brandLabel;
 
@@ -214,6 +218,9 @@ public class AddUserItemsController implements Initializable {
 		setTextFieldFormatter(itemSaltPer100, false);
 		setTextFieldFormatter(itemSaturatedFatsPer100, false);
 		setTextFieldFormatter(itemSugarsPer100, false);
+		//gridPaneCentre.setGridLinesVisible(true);	
+		//gridPaneTop.setGridLinesVisible(true);	
+
 
 	}
 

@@ -1,39 +1,55 @@
+#vbox{
+	    -fx-background-color: #1a1d29;
+	     -fx-border-width: 0.2px;
+    -fx-border-color: #aca59a;
+}
+
+
 #gridPaneTop {
-    -fx-background-color: #1e262c;
+    -fx-background-color: #161921;
+     -fx-border-width: 0.2px;
+    -fx-border-color: #aca59a;
 }
 
 #gridPaneCentre {
-    -fx-background-color: #202830;
+    -fx-background-color: #1a1d29;
+     -fx-border-width: 0.2px;
+    -fx-border-color: #aca59a;
 }
 
 #addItemButton {
-    -fx-text-fill: #101218;
-    -fx-background-color: gray;
+ -fx-background-color: #1a1c1d;
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
+    -fx-text-fill: #aca59a; 
     -fx-font-family: serif;
+    -fx-font-size: 15px;
     -fx-border-width: 2px;
-    -fx-border-color: lightblue;
+    -fx-border-color: #242838;
     -fx-border-radius:12px;
     -fx-background-radius: 15px;
     -fx-background-insets: 0px 0px 0px 0px;
 	
 }
-
+.button:hover {
+    -fx-background-color: #2c2e2f; 
+    -fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    -fx-cursor: hand;
+    
+}
 
 
 #itemNameTextField,
 #ItemBrandTextField,
 #itemDescriptionTextField,
 #itemsPricePer {
-    -fx-text-fill: black;
-    -fx-font-family: arial;
-    -fx-background-color: white;
-    -fx-border-width: 2px;
-    -fx-border-radius:8px;
-    -fx-border-color: gray;
-    -fx-background-radius:10px;
-     -fx-background-insets: 0px 0px 0px 0px;
+	-fx-background-color: transparent; 
+    -fx-text-fill: #ffffff; 
+    -fx-font-family: serif; 
+    -fx-font-size: 14px; 
+    -fx-border-color: #aca59a;
+    -fx-border-width: 1px; 
+    -fx-border-radius:12px;
 
 }
 
@@ -45,13 +61,13 @@
 #itemFatsPer100,
 #itemSaturatedFatsPer100,
 #itemSaltPer100 {
-    -fx-text-fill: black;
-    -fx-font-family: arial;
-    -fx-background-color: white;
-    -fx-border-width: 2px;
-    -fx-border-radius:8px;
-    -fx-border-color: gray;
-    -fx-background-radius:10px;
+	-fx-background-color: transparent; 
+    -fx-text-fill: #ffffff; 
+    -fx-font-family: serif; 
+    -fx-font-size: 14px; 
+    -fx-border-color: #aca59a;
+    -fx-border-width: 1px; 
+    -fx-border-radius:12px;
 
 }
 
@@ -83,4 +99,72 @@
     -fx-font-size: 16px;
     -fx-font-family: serif;
 
+}
+
+.choice-box {
+    -fx-background-color: #1a1c1d; 
+    -fx-text-fill: #ffffff; 
+    -fx-font-family: serif; 
+    -fx-font-size: 14px; 
+    -fx-border-width: 1px;
+    -fx-border-color: #0d0f10;
+    -fx-border-radius:12px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+    
+}
+
+
+.choice-box .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: serif;
+    -fx-font-size: 14px; 
+}
+
+
+.choice-box .arrow {
+    -fx-background-color: #aca59a;
+}
+
+
+.choice-box .menu-item {
+    -fx-background-color: #1a1c1d;
+    -fx-text-fill: #ffffff; 
+    -fx-font-family: serif; 
+    -fx-font-size: 14px; 
+}
+
+.choice-box .menu-item:hover {
+    -fx-background-color: #2c2e2f; 
+   	-fx-cursor: hand;
+    
+}
+
+.text-field {
+    -fx-background-color: transparent; 
+    -fx-text-fill: #ffffff; 
+    -fx-font-family: serif; 
+    -fx-font-size: 14px; 
+    -fx-border-color: #aca59a;
+    -fx-border-width: 1px; 
+    -fx-border-radius:12px;
+}
+
+.text-field:focused {
+    -fx-border-color: lightblue; 
+}
+
+
+.text-area {
+	-fx-control-inner-background: #161921;
+    -fx-background-color: transparent; 
+    -fx-text-fill: #ffffff; 
+    -fx-font-family: serif; 
+    -fx-font-size: 14px; 
+    -fx-border-color: #aca59a;
+    -fx-border-width: 1px; 
+    -fx-border-radius:12px;
+    -fx-inner-border-color: #aca59a;
+    -fx-inner-border-width: 1px; 
+    -fx-inner-border-radius:12px;
 }
