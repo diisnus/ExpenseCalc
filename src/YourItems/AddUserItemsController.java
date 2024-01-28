@@ -124,6 +124,7 @@ public class AddUserItemsController implements Initializable {
 
 	@FXML
 	void addItemButtonClick(ActionEvent event) {
+		int currentProduct_id = 0;
 		int userid = accessUserId();
 		String itemname = itemNameTextField.getText();
 
@@ -156,21 +157,21 @@ public class AddUserItemsController implements Initializable {
 			try {
 
 				PreparedStatement insertStatement = connection.prepareStatement(insert,
-						PreparedStatement.RETURN_GENERATED_KEYS);
+				PreparedStatement.RETURN_GENERATED_KEYS);
 				PreparedStatement insertStatementMacros = connection.prepareStatement(insertMacros);
 				insertStatement.setInt(1, userid);
 				insertStatement.setString(2, itemname);
 				insertStatement.setString(3, itembrand);
 				insertStatement.setString(4, itemdescr);
 				insertStatement.setString(5, choiceper);
-				insertStatement.setInt(6, 0); // whitelisted = 1
-				insertStatement.setInt(7, 1); // created by user = 1
+				insertStatement.setInt(6, 1); // whitelisted = 1
+				insertStatement.setInt(7, 0); // created by user = 1
 
 				int rowsAffected = insertStatement.executeUpdate();
 				if (rowsAffected > 0) {
 					ResultSet generatedKeys = insertStatement.getGeneratedKeys();
 					if (generatedKeys.next()) {
-						int currentProduct_id = generatedKeys.getInt(1);
+						currentProduct_id = generatedKeys.getInt(1);
 						System.out.println(currentProduct_id);
 
 						insertStatementMacros.setInt(1, currentProduct_id);
@@ -197,11 +198,32 @@ public class AddUserItemsController implements Initializable {
 				}
 
 				insertStatement.close();
-				connection.close();
+				
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
+			try {		
+				Container container = Container.getInstance();
+				int currentUserID = container.getId();
+				System.out.println(currentProduct_id);
+				String insertStarred = "INSERT INTO starred(user_id, product_id, is_starred) VALUES (?, ?, ?)";
+				PreparedStatement insertStarredStatement = connection.prepareStatement(insertStarred);
+				insertStarredStatement.setInt(1, currentUserID);
+				insertStarredStatement.setInt(2, currentProduct_id);
+				insertStarredStatement.setInt(3, 0);
+				int starredRowsAffected = insertStarredStatement.executeUpdate();
+				if (starredRowsAffected > 0) {
+					System.out.println("Data inserted successfully");
+				} else {
+				}
+				connection.close();
+			}catch(SQLException e) {
+				
+			}
+			
+			
 		}
 	}
 

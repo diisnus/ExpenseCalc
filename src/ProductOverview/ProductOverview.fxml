@@ -9,6 +9,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,12 +19,12 @@
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1080.0" stylesheets="@../CSS/ProductOverview.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProductOverview.ProductOverviewController">
    <top>
-      <GridPane prefHeight="41.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="79.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -31,8 +33,23 @@
          <children>
             <Button fx:id="addPrice" mnemonicParsing="false" onAction="#addPriceClick" text="Add a new price" GridPane.columnIndex="4" GridPane.halignment="CENTER">
                <GridPane.margin>
-                  <Insets />
-               </GridPane.margin></Button>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/plus-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <Button fx:id="isStarredButton" mnemonicParsing="false" onAction="#isStarredClick" prefHeight="35.0" prefWidth="35.0" GridPane.columnIndex="3">
+               <graphic>
+                  <ImageView fx:id="imageViewStarred" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
    </top>
@@ -59,6 +76,9 @@
               <yAxis>
                 <NumberAxis side="LEFT" />
               </yAxis>
+               <GridPane.margin>
+                  <Insets bottom="20.0" right="20.0" />
+               </GridPane.margin>
             </AreaChart>
             <TableView fx:id="tableView" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
               <columns>

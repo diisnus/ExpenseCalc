@@ -27,37 +27,44 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import java.text.SimpleDateFormat;
 
 import java.text.ParseException;
-
-
 
 public class ProductOverviewController implements Initializable {
 
 	@FXML
 	private Button addPrice;
 
-    @FXML
-    private Label name;
-	
-    @FXML
-    private Label brand;
+	@FXML
+	private ImageView imageViewStarred;
 
-    @FXML
-    private Label currencyUsed;
+	@FXML
+	private Button isStarredButton;
 
-    @FXML
-    private Label description;
-    
-    @FXML
-    private Label pricedBy;
-	
+	@FXML
+	private Label name;
+
+	@FXML
+	private Label brand;
+
+	@FXML
+	private Label currencyUsed;
+
+	@FXML
+	private Label description;
+
+	@FXML
+	private Label pricedBy;
+
 	@FXML
 	private AreaChart<String, Number> areaChartPrices;
 
@@ -81,12 +88,12 @@ public class ProductOverviewController implements Initializable {
 		PopUpWindow.showCustomDialog("", "/ProductOverview/UpdatePrice.fxml");
 		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/ProductOverview/ProductOverview.fxml");
-		
+
 	}
 
 	private Connection connectDB;
 	private DBHandler handler;
-
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tableView.setEditable(false);
@@ -143,9 +150,9 @@ public class ProductOverviewController implements Initializable {
 				macroDataList.add(new MacroData("Salt", salt));
 
 			}
-			tableView.setFixedCellSize(40);
+			tableView.setFixedCellSize(35);
 			tableView.prefHeightProperty()
-					.bind(Bindings.size(tableView.getItems()).multiply(tableView.getFixedCellSize()).add(30));
+					.bind(Bindings.size(tableView.getItems()).multiply(tableView.getFixedCellSize()).add(35));
 
 			tableView.setMaxHeight(8 * tableView.getFixedCellSize() + 30);
 
@@ -158,8 +165,6 @@ public class ProductOverviewController implements Initializable {
 
 		}
 
-
-
 		Container userIdContainer = Container.getInstance();
 		int userid = userIdContainer.getId();
 		String userPrefCurrency = null;
@@ -168,45 +173,45 @@ public class ProductOverviewController implements Initializable {
 		String selectPrices = "SELECT price_id, price, purchase_date, currency FROM prices WHERE product_id = ?";
 		try {
 
-			//user pref select
+			// user pref select
 			PreparedStatement selectUserPrefStatement = connectDB.prepareStatement(selectPrefferedCurrency);
 			selectUserPrefStatement.setInt(1, userid);
 			ResultSet queryOutputInfoPref = selectUserPrefStatement.executeQuery();
 			while (queryOutputInfoPref.next()) {
 				userPrefCurrency = queryOutputInfoPref.getString("pref_currency");
 			}
-			
-			//prices select
+
+			// prices select
 			PreparedStatement selectPriceStatement = connectDB.prepareStatement(selectPrices);
 			selectPriceStatement.setInt(1, productid);
 			ResultSet queryOutputInfo = selectPriceStatement.executeQuery();
-						
-			//inserts in areachart
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		    XYChart.Series<String, Number> series = new XYChart.Series<>();
-            TreeMap<Date, Double> chronologicalData = new TreeMap<>();
 
-            while (queryOutputInfo.next()) {
-                String purchase_date = queryOutputInfo.getString("purchase_date");
-                String currency = queryOutputInfo.getString("currency");
-                double price = queryOutputInfo.getDouble("price");
+			// inserts in areachart
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			XYChart.Series<String, Number> series = new XYChart.Series<>();
+			TreeMap<Date, Double> chronologicalData = new TreeMap<>();
 
-                Date purchaseDate = dateFormat.parse(purchase_date);
-                double convertedAmount = convertCurrency(currency, userPrefCurrency, price);
-            
-                chronologicalData.put(purchaseDate, convertedAmount);
-            }
+			while (queryOutputInfo.next()) {
+				String purchase_date = queryOutputInfo.getString("purchase_date");
+				String currency = queryOutputInfo.getString("currency");
+				double price = queryOutputInfo.getDouble("price");
 
-            for (var entry : chronologicalData.entrySet()) {
-                String formattedDate = dateFormat.format(entry.getKey());
-                series.getData().add(new XYChart.Data<>(formattedDate, entry.getValue()));
-            }
-            areaChartPrices.getData().add(series);
+				Date purchaseDate = dateFormat.parse(purchase_date);
+				double convertedAmount = convertCurrency(currency, userPrefCurrency, price);
+
+				chronologicalData.put(purchaseDate, convertedAmount);
+			}
+
+			for (var entry : chronologicalData.entrySet()) {
+				String formattedDate = dateFormat.format(entry.getKey());
+				series.getData().add(new XYChart.Data<>(formattedDate, entry.getValue()));
+			}
+			areaChartPrices.getData().add(series);
 		} catch (SQLException | ParseException e) {
 
 		}
-		
-		//product info statement
+
+		// product info statement
 		String selectInformation = "SELECT product_name, product_brand, description, priced_by, created_by_user FROM groceryproducts WHERE product_id = ?";
 		try {
 			PreparedStatement selectInfoStatement = connectDB.prepareStatement(selectInformation);
@@ -218,12 +223,38 @@ public class ProductOverviewController implements Initializable {
 				String pr_descr = queryOutputInfo.getString("description");
 				String pr_pricedby = queryOutputInfo.getString("priced_by");
 				int createdbyuser = queryOutputInfo.getInt("created_by_user");
-	            name.setText("The name of the item you are currently looking at is: " + pr_name + ".");
-	            brand.setText("It's brand is: " + pr_brand + ".");
-	            description.setText("The product is described as: "+pr_descr+".");
-	            description.setWrapText(true);
-	            currencyUsed.setText("The currency for the product displayed is: "+userPrefCurrency +".");
-	            pricedBy.setText("The product is priced "+pr_pricedby + ".");;
+				name.setText("The name of the item you are currently looking at is: " + pr_name + ".");
+				brand.setText("It's brand is: " + pr_brand + ".");
+				description.setText("The product is described as: " + pr_descr + ".");
+				description.setWrapText(true);
+				currencyUsed.setText("The currency for the product displayed is: " + userPrefCurrency + ".");
+				pricedBy.setText("The product is priced " + pr_pricedby + ".");
+				;
+
+			}
+
+		} catch (SQLException e) {
+
+		}
+
+		// checkbox starred
+		int isStarred = 0;
+		String selectStarred = "SELECT is_starred FROM starred WHERE product_id = ? AND user_id = ?";
+		try {
+			Container container = Container.getInstance();
+			int currentUserID = container.getId();
+			PreparedStatement selectStarredStatement = connectDB.prepareStatement(selectStarred);
+			selectStarredStatement.setInt(1, productid);
+			selectStarredStatement.setInt(2, currentUserID);
+			ResultSet queryOutputInfo3 = selectStarredStatement.executeQuery();
+			while (queryOutputInfo3.next()) {
+				isStarred = queryOutputInfo3.getInt("is_starred");
+
+				if (isStarred == 1) {
+					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
+				} else {
+					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
+				}
 
 			}
 
@@ -233,37 +264,90 @@ public class ProductOverviewController implements Initializable {
 
 	}
 
+	@FXML
+	void isStarredClick(ActionEvent event) {
+		String updateUnstarredToStarred = "UPDATE starred SET is_starred = 1 WHERE product_id = ? AND user_id = ?";
+		String updateStarredToUnstarred = "UPDATE starred SET is_starred = 0 WHERE product_id = ? AND user_id = ?";
+		IdContainer productIdContainer = IdContainer.getInstance();
+		int productid = productIdContainer.getId();
+		Container container = Container.getInstance();
+		int currentUserID = container.getId();
+		int isStarred = 0;
+		String selectStarred = "SELECT is_starred FROM starred WHERE product_id = ? AND user_id = ?";
+		try {
+			PreparedStatement selectStarredStatement = connectDB.prepareStatement(selectStarred);
+			selectStarredStatement.setInt(1, productid);
+			selectStarredStatement.setInt(2, currentUserID);
+			ResultSet queryOutputInfo3 = selectStarredStatement.executeQuery();
+			while (queryOutputInfo3.next()) {
+				isStarred = queryOutputInfo3.getInt("is_starred");
+
+				if (isStarred == 1) {
+					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
+				} else {
+					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
+				}
+
+			}
+
+		} catch (SQLException e) {
+
+		}
+
+		if (isStarred == 1) {
+			imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
+			try {
+				PreparedStatement selectStarredToUnstarredStatement = connectDB.prepareStatement(updateStarredToUnstarred);
+				selectStarredToUnstarredStatement.setInt(1, productid);
+				selectStarredToUnstarredStatement.setInt(2, currentUserID);
+				selectStarredToUnstarredStatement.executeUpdate();;
+			}catch(SQLException e) {
+				
+			}
+		} else {
+			imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
+			try {
+				PreparedStatement selectUnstarredToStarredStatement = connectDB.prepareStatement(updateUnstarredToStarred);
+				selectUnstarredToStarredStatement.setInt(1, productid);
+				selectUnstarredToStarredStatement.setInt(2, currentUserID);
+				selectUnstarredToStarredStatement.executeUpdate();;
+			}catch(SQLException e) {
+				
+			}
+		}
+	}
+
 	private static final Map<String, Double> conversionRates;
 
 	static {
 
 		conversionRates = new HashMap<>();
-        conversionRates.put("BGN", 1.0);
-        conversionRates.put("EUR", 1.96);
-        conversionRates.put("USD", 1.80);
-        conversionRates.put("GBP", 2.20); // British Pound
-        conversionRates.put("CHF", 1.22); // Swiss Franc
-        conversionRates.put("SEK", 0.19); // Swedish Krona
-        conversionRates.put("NOK", 0.18); // Norwegian Krone
-        conversionRates.put("DKK", 0.26); // Danish Krone
-        conversionRates.put("PLN", 0.43); // Polish Złoty
-        conversionRates.put("CZK", 0.08); // Czech Koruna
-        conversionRates.put("HUF", 0.006);// Hungarian Forint
-        conversionRates.put("HRK", 0.27); // Croatian Kuna
-        conversionRates.put("RON", 0.41); // Romanian Leu
+		conversionRates.put("BGN", 1.0);
+		conversionRates.put("EUR", 1.96);
+		conversionRates.put("USD", 1.80);
+		conversionRates.put("GBP", 2.20); // British Pound
+		conversionRates.put("CHF", 1.22); // Swiss Franc
+		conversionRates.put("SEK", 0.19); // Swedish Krona
+		conversionRates.put("NOK", 0.18); // Norwegian Krone
+		conversionRates.put("DKK", 0.26); // Danish Krone
+		conversionRates.put("PLN", 0.43); // Polish Złoty
+		conversionRates.put("CZK", 0.08); // Czech Koruna
+		conversionRates.put("HUF", 0.006);// Hungarian Forint
+		conversionRates.put("HRK", 0.27); // Croatian Kuna
+		conversionRates.put("RON", 0.41); // Romanian Leu
 	}
 
 	public static double convertCurrency(String sourceCurrency, String targetCurrency, double amount) {
-	    if (!conversionRates.containsKey(sourceCurrency) || !conversionRates.containsKey(targetCurrency)) {
-	        throw new IllegalArgumentException("Invalid currency");
-	    }
-	    double sourceRate = conversionRates.get(sourceCurrency);
-	    double targetRate = conversionRates.get(targetCurrency);
+		if (!conversionRates.containsKey(sourceCurrency) || !conversionRates.containsKey(targetCurrency)) {
+			throw new IllegalArgumentException("Invalid currency");
+		}
+		double sourceRate = conversionRates.get(sourceCurrency);
+		double targetRate = conversionRates.get(targetCurrency);
 
-	    double convertedAmount = amount * (sourceRate / targetRate);
+		double convertedAmount = amount * (sourceRate / targetRate);
 
-	    DecimalFormat decimalFormat = new DecimalFormat("#.##");
-	    return Double.parseDouble(decimalFormat.format(convertedAmount));
+		DecimalFormat decimalFormat = new DecimalFormat("#.##");
+		return Double.parseDouble(decimalFormat.format(convertedAmount));
 	}
 
 }

@@ -104,3 +104,37 @@
     -fx-font-family: serif;
     -fx-font-size: 17px;
 }
+
+#addPrice{
+	 -fx-background-color: #1a1c1d;
+    -fx-font-weight: bold;
+    -fx-text-fill: #aca59a; 
+    -fx-font-family: serif;
+    -fx-font-size: 15px;
+    -fx-border-width: 2px;
+    -fx-border-color: #242838;
+    -fx-border-radius:12px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+}
+
+#isStarredButton{
+		 -fx-background-color: #1a1c1d;
+    -fx-font-weight: bold;
+    -fx-text-fill: #aca59a; 
+    -fx-font-family: serif;
+    -fx-font-size: 15px;
+    -fx-border-width: 2px;
+    -fx-border-color: #242838;
+    -fx-border-radius:12px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+    
+}
+.button:hover {
+    -fx-background-color: #2c2e2f; 
+    -fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    -fx-cursor: hand;
+    
+}
