@@ -93,7 +93,7 @@ public class ProductOverviewController implements Initializable {
 
 	private Connection connectDB;
 	private DBHandler handler;
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tableView.setEditable(false);
@@ -237,29 +237,57 @@ public class ProductOverviewController implements Initializable {
 
 		}
 
-		// checkbox starred
-		int isStarred = 0;
-		String selectStarred = "SELECT is_starred FROM starred WHERE product_id = ? AND user_id = ?";
+		Container container = Container.getInstance();
+		int currentUserID = container.getId();
+		imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
+		// check for present rows
 		try {
-			Container container = Container.getInstance();
-			int currentUserID = container.getId();
-			PreparedStatement selectStarredStatement = connectDB.prepareStatement(selectStarred);
-			selectStarredStatement.setInt(1, productid);
-			selectStarredStatement.setInt(2, currentUserID);
-			ResultSet queryOutputInfo3 = selectStarredStatement.executeQuery();
-			while (queryOutputInfo3.next()) {
-				isStarred = queryOutputInfo3.getInt("is_starred");
+			String selectQuery = "SELECT * FROM starred WHERE user_id = ? AND product_id = ?";
+			PreparedStatement selectStatement = connectDB.prepareStatement(selectQuery);
+			selectStatement.setInt(1, currentUserID);
+			selectStatement.setInt(2, productid);
 
-				if (isStarred == 1) {
-					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
-				} else {
-					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
+			ResultSet resultSet = selectStatement.executeQuery();
+
+			if (resultSet.next()) {
+				// checkbox starred default select check if row present
+				String selectStarred = "SELECT is_starred FROM starred WHERE product_id = ? AND user_id = ?";
+				try {
+
+					PreparedStatement selectStarredStatement = connectDB.prepareStatement(selectStarred);
+					selectStarredStatement.setInt(1, productid);
+					selectStarredStatement.setInt(2, currentUserID);
+					ResultSet queryOutputInfo3 = selectStarredStatement.executeQuery();
+					int isStarred = 0;
+					while (queryOutputInfo3.next()) {
+						isStarred = queryOutputInfo3.getInt("is_starred");
+
+					}
+					if (isStarred == 1) {
+						imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
+					} else {
+						imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
+					}
+				} catch (SQLException e) {
+
 				}
-
+			} else {
+				// insert if row is empty
+				String insertStarred = "INSERT INTO starred (user_id, product_id, is_starred) VALUES (?, ?, 0)";
+				try {
+					PreparedStatement insertStatement = connectDB.prepareStatement(insertStarred);
+					insertStatement.setInt(1, currentUserID);
+					insertStatement.setInt(2, productid);
+					insertStatement.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 
+			resultSet.close();
+			selectStatement.close();
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 
 	}
@@ -282,14 +310,12 @@ public class ProductOverviewController implements Initializable {
 			while (queryOutputInfo3.next()) {
 				isStarred = queryOutputInfo3.getInt("is_starred");
 
-				if (isStarred == 1) {
-					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
-				} else {
-					imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
-				}
-
 			}
-
+			if (isStarred == 1) {
+				imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
+			} else {
+				imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
+			}
 		} catch (SQLException e) {
 
 		}
@@ -297,22 +323,26 @@ public class ProductOverviewController implements Initializable {
 		if (isStarred == 1) {
 			imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
 			try {
-				PreparedStatement selectStarredToUnstarredStatement = connectDB.prepareStatement(updateStarredToUnstarred);
+				PreparedStatement selectStarredToUnstarredStatement = connectDB
+						.prepareStatement(updateStarredToUnstarred);
 				selectStarredToUnstarredStatement.setInt(1, productid);
 				selectStarredToUnstarredStatement.setInt(2, currentUserID);
-				selectStarredToUnstarredStatement.executeUpdate();;
-			}catch(SQLException e) {
-				
+				selectStarredToUnstarredStatement.executeUpdate();
+				;
+			} catch (SQLException e) {
+
 			}
 		} else {
 			imageViewStarred.setImage(new Image(getClass().getResourceAsStream("starred.png")));
 			try {
-				PreparedStatement selectUnstarredToStarredStatement = connectDB.prepareStatement(updateUnstarredToStarred);
+				PreparedStatement selectUnstarredToStarredStatement = connectDB
+						.prepareStatement(updateUnstarredToStarred);
 				selectUnstarredToStarredStatement.setInt(1, productid);
 				selectUnstarredToStarredStatement.setInt(2, currentUserID);
-				selectUnstarredToStarredStatement.executeUpdate();;
-			}catch(SQLException e) {
-				
+				selectUnstarredToStarredStatement.executeUpdate();
+				;
+			} catch (SQLException e) {
+
 			}
 		}
 	}
