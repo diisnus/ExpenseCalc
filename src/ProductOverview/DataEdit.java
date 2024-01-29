@@ -2,9 +2,9 @@ package ProductOverview;
 
 public class DataEdit {
     private String macroName;
-    private double macroValue;
+    private String macroValue;
 
-    public DataEdit(String macroName, double macroValue) {
+    public DataEdit(String macroName, String macroValue) {
         this.macroName = macroName;
         this.macroValue = macroValue;
     }
@@ -13,7 +13,7 @@ public class DataEdit {
         return macroName;
     }
 
-    public double getMacroValue() {
+    public String getMacroValue() {
         return macroValue;
     }
     

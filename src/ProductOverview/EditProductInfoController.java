@@ -33,7 +33,7 @@ public class EditProductInfoController implements Initializable {
 
 	@FXML
 	private TableView<DataEdit> editTable;
-	
+
 	@FXML
 	private TableColumn<DataEdit, String> nameColumn;
 
@@ -52,59 +52,81 @@ public class EditProductInfoController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	  
 
+		IdContainer productIdContainer = IdContainer.getInstance();
+		int productid = productIdContainer.getId();
 
-	    IdContainer productIdContainer = IdContainer.getInstance();
-	    int productid = productIdContainer.getId();
-	    
-	    handler = new DBHandler();
-	    connectDB = handler.getConnection();
+		handler = new DBHandler();
+		connectDB = handler.getConnection();
+		String selectInformation = "SELECT product_name, product_brand, description, priced_by, created_by_user FROM groceryproducts WHERE product_id = ?";
 
-	    String selectMacros = "SELECT * FROM macros WHERE product_id = ?";
-	    // PieChart and macro table inputs
-	    try {
-	        PreparedStatement selectMacrosStatement = connectDB.prepareStatement(selectMacros);
-	        selectMacrosStatement.setInt(1, productid);
-	        ResultSet queryOutputMacros = selectMacrosStatement.executeQuery();
-	        ArrayList<DataEdit> dataEditList = new ArrayList<>();
-	        while (queryOutputMacros.next()) {
-	            int calories = queryOutputMacros.getInt("calories_per_100g");
-	            double protein = queryOutputMacros.getDouble("protein");
-	            double carbs = queryOutputMacros.getDouble("carbohydrates");
-	            double sugar = queryOutputMacros.getDouble("sugar");
-	            double fiber = queryOutputMacros.getDouble("fiber");
-	            double fat = queryOutputMacros.getDouble("fat");
-	            double sat_fat = queryOutputMacros.getDouble("saturated_fat");
-	            double salt = queryOutputMacros.getDouble("salt");
-	            
-	            nameColumn.setCellValueFactory(new PropertyValueFactory<>("macroName"));
-				valueColumn.setCellValueFactory(new PropertyValueFactory<>("macroValue"));
-	            dataEditList.add(new DataEdit("Calories", calories));
-	            dataEditList.add(new DataEdit("Protein", protein));
-	            dataEditList.add(new DataEdit("Carbs", carbs));
-	            dataEditList.add(new DataEdit("Sugar", sugar));
-	            dataEditList.add(new DataEdit("Fiber", fiber));
-	            dataEditList.add(new DataEdit("Fat", fat));
-	            dataEditList.add(new DataEdit("Saturated Fat", sat_fat));
-	            dataEditList.add(new DataEdit("Salt", salt));
-	        }
-	        editTable.setFixedCellSize(35);
-			editTable.prefHeightProperty()
-					.bind(Bindings.size(editTable.getItems()).multiply(editTable.getFixedCellSize()).add(35));
+		String selectMacros = "SELECT * FROM macros WHERE product_id = ?";
+		// PieChart and macro table inputs
+		try {
+		    PreparedStatement selectCombinedStatement = connectDB.prepareStatement(selectMacros);
+		    selectCombinedStatement.setInt(1, productid);
+		    ResultSet queryOutputCombined = selectCombinedStatement.executeQuery();
+		    ArrayList<DataEdit> dataEditList = new ArrayList<>();
+		    while (queryOutputCombined.next()) {
+		        String calories = String.valueOf(queryOutputCombined.getInt("calories_per_100g"));
+		        String protein = String.valueOf(queryOutputCombined.getDouble("protein"));
+		        String carbs = String.valueOf(queryOutputCombined.getDouble("carbohydrates"));
+		        String sugar = String.valueOf(queryOutputCombined.getDouble("sugar"));
+		        String fiber = String.valueOf(queryOutputCombined.getDouble("fiber"));
+		        String fat = String.valueOf(queryOutputCombined.getDouble("fat"));
+		        String sat_fat = String.valueOf(queryOutputCombined.getDouble("saturated_fat"));
+		        String salt = String.valueOf(queryOutputCombined.getDouble("salt"));
 
-			editTable.setMaxHeight(8 * editTable.getFixedCellSize() + 30);	        
+		        dataEditList.add(new DataEdit("Calories", calories));
+		        dataEditList.add(new DataEdit("Protein", protein));
+		        dataEditList.add(new DataEdit("Carbs", carbs));
+		        dataEditList.add(new DataEdit("Sugar", sugar));
+		        dataEditList.add(new DataEdit("Fiber", fiber));
+		        dataEditList.add(new DataEdit("Fat", fat));
+		        dataEditList.add(new DataEdit("Saturated Fat", sat_fat));
+		        dataEditList.add(new DataEdit("Salt", salt));
+		    }
 
-	        int maxRows = 8;
-	        int numRows = Math.min(dataEditList.size(), maxRows);
-	        ObservableList<DataEdit> list = FXCollections.observableArrayList(dataEditList.subList(0, numRows));
-	        System.out.println(list.size());
-	        editTable.setItems(list);
+		    try {
+		        PreparedStatement selectInfoStatement = connectDB.prepareStatement(selectInformation);
+		        selectInfoStatement.setInt(1, productid);
+		        ResultSet queryOutputInfo = selectInfoStatement.executeQuery();
+		        while (queryOutputInfo.next()) {
+		            String pr_name = queryOutputInfo.getString("product_name");
+		            String pr_brand = queryOutputInfo.getString("product_brand");
+		            String pr_descr = queryOutputInfo.getString("description");
+		            String pr_pricedby = queryOutputInfo.getString("priced_by");
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		            dataEditList.add(new DataEdit("Name", pr_name));
+		            dataEditList.add(new DataEdit("Brand", pr_brand));
+		            dataEditList.add(new DataEdit("Description", pr_descr));
+		            dataEditList.add(new DataEdit("Priced By", pr_pricedby));
+		        }
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    // Set the cell value factories only once
+		    nameColumn.setCellValueFactory(new PropertyValueFactory<>("macroName"));
+		    valueColumn.setCellValueFactory(new PropertyValueFactory<>("macroValue"));
+
+		    editTable.setFixedCellSize(35);
+		    int maxRows = 8;
+		    int numRows = Math.min(dataEditList.size(), maxRows);
+
+		    double preferredHeight = 12 * 35 + 25; // Assuming each row has a fixed height of 35 and adding some
+		                                            // extra space
+
+		    // Set the preferred height of the TableView
+		    editTable.setPrefHeight(preferredHeight);
+		    ObservableList<DataEdit> list = FXCollections.observableArrayList(dataEditList.subList(0, numRows));
+		    System.out.println(list.size());
+		    editTable.setItems(list);
+
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
 	}
-
 
 }
