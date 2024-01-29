@@ -4,6 +4,11 @@
     -fx-border-color: #aca59a;
 }
 
+#anchorPane {
+	-fx-background-color:  #161921;
+		-fx-border-width: 1.5px;
+	-fx-border-color: #0d0f10;
+}
 
 #gridPaneTop {
     -fx-background-color: #161921;

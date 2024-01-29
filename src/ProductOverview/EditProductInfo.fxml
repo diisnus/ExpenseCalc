@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="550.0" stylesheets="@../CSS/addUserItems.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProductOverview.EditProductInfoController">
+   <children>
+      <Button fx:id="close" layoutX="249.0" layoutY="528.0" mnemonicParsing="false" onAction="#closeClick" text="Button" />
+      <TableView fx:id="editTable" layoutX="65.0" layoutY="80.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="210.0" text="C1" />
+          <TableColumn fx:id="valueColumn" prefWidth="210.0" text="C2" />
+        </columns>
+      </TableView>
+      <Label layoutX="261.0" layoutY="36.0" text="Label" />
+   </children>
+</AnchorPane>

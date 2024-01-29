@@ -50,6 +50,18 @@
                   <Insets top="15.0" />
                </GridPane.margin>
             </Button>
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#editButtonClick" text="Edit" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="80.0" top="15.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/edit-pencil.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </GridPane>
    </top>

@@ -50,6 +50,9 @@ public class ProductOverviewController implements Initializable {
 	@FXML
 	private Button isStarredButton;
 
+    @FXML
+    private Button editButton;
+	
 	@FXML
 	private Label name;
 
@@ -347,6 +350,13 @@ public class ProductOverviewController implements Initializable {
 		}
 	}
 
+    @FXML
+    void editButtonClick(ActionEvent event) {
+    	
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditProductInfo.fxml");
+
+    }
+	
 	private static final Map<String, Double> conversionRates;
 
 	static {
