@@ -6,15 +6,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="550.0" stylesheets="@../CSS/addUserItems.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProductOverview.EditProductInfoController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="550.0" stylesheets="@../CSS/Search.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProductOverview.EditProductInfoController">
    <children>
-      <Button fx:id="close" layoutX="249.0" layoutY="528.0" mnemonicParsing="false" onAction="#closeClick" text="Button" />
+      <Button fx:id="close" layoutX="240.0" layoutY="536.0" mnemonicParsing="false" onAction="#closeClick" prefHeight="35.0" prefWidth="70.0" text="Close" />
       <TableView fx:id="editTable" layoutX="65.0" layoutY="80.0">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="210.0" text="C1" />
-          <TableColumn fx:id="valueColumn" prefWidth="210.0" text="C2" />
+          <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
+          <TableColumn fx:id="valueColumn" prefWidth="270.0" text="Value" />
         </columns>
       </TableView>
-      <Label layoutX="261.0" layoutY="36.0" text="Label" />
+      <Label fx:id="labelEdit" layoutX="151.0" layoutY="34.0" text="Double click on anything to edit it:" />
    </children>
 </AnchorPane>

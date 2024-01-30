@@ -18,9 +18,5 @@ public class DataEdit {
     }
     
     
-    @Override
-    public String toString() {
-        return "MacroName: " + macroName + ", MacroValue: " + macroValue;
-    }
 
 }
