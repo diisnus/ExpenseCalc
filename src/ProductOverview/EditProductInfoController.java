@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Controllers.LoaderClass;
 import DBConnection.DBHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -156,6 +157,19 @@ public class EditProductInfoController implements Initializable {
 		    System.out.println(list.size());
 		    editTable.setItems(list);
 
+		    editTable.setOnMouseClicked(event -> {
+		        if (event.getClickCount() == 2) { 
+		            
+		            DataEdit selectedItem = editTable.getSelectionModel().getSelectedItem();
+		            
+		            if (selectedItem != null) {
+		                System.out.println("Double-clicked on: " + selectedItem.getMacroName() + " - " + selectedItem.getMacroValue());
+		                //LoaderClass load = LoaderClass.getInstance();
+						//load.loadFXML("/Search/Search.fxml");
+		            }
+		        }
+		    });
+		    
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		}

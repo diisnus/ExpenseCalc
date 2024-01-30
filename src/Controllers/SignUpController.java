@@ -49,7 +49,6 @@ public class SignUpController implements Initializable {
 		    Parent root = loader.load();
 		    Scene signUpScene = new Scene(root, 1200, 800);
 		    Stage currentStage = (Stage) signup.getScene().getWindow();
-
 		    currentStage.setScene(signUpScene);
 		    currentStage.setResizable(true);
 		    currentStage.setMinWidth(1200);

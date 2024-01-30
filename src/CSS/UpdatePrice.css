@@ -126,10 +126,11 @@
 }
 .button:hover {
     -fx-background-color: #2c2e2f; 
+    -fx-border-width: 2px;
     -fx-border-color: #171a1b; 
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
-     -fx-border-width: 2px;
-     -fx-cursor: hand;
+    -fx-cursor: hand;
+    
 }
 
 
