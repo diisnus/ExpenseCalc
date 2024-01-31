@@ -75,7 +75,6 @@ public class SearchController implements Initializable {
 
 	ObservableList<productSearchModel> productSearchModelObservableList = FXCollections.observableArrayList();
 
-
 	private Connection connectDB;
 	private DBHandler handler;
 
@@ -84,42 +83,41 @@ public class SearchController implements Initializable {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 		productTableView.setEditable(false);
-	    productTableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
-	        double tableWidth = newWidth.doubleValue();
-	        double columnWidth = tableWidth / 6.0;
+		productTableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+			double tableWidth = newWidth.doubleValue();
+			double columnWidth = tableWidth / 6.0;
 
-	        productNameTableColumn.setPrefWidth(columnWidth);
-	        productBrandTableColumn.setPrefWidth(columnWidth);
-	        productDescriptionTableColumn.setPrefWidth(columnWidth * 2); 
-	        productKcalTableColumn.setPrefWidth(columnWidth);
-	        productProteinTableColum.setPrefWidth(columnWidth);
-	    });
+			productNameTableColumn.setPrefWidth(columnWidth);
+			productBrandTableColumn.setPrefWidth(columnWidth);
+			productDescriptionTableColumn.setPrefWidth(columnWidth * 2);
+			productKcalTableColumn.setPrefWidth(columnWidth);
+			productProteinTableColum.setPrefWidth(columnWidth);
+		});
 
-	    productDescriptionTableColumn.setCellFactory(tc -> {
-	        TableCell<productSearchModel, String> cell = new TableCell<>();
-	        Text text = new Text();
-	        cell.setGraphic(text);
-	        cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
-	        text.setStyle("-fx-fill: rgb(215, 231, 234);"); 
+		productDescriptionTableColumn.setCellFactory(tc -> {
+			TableCell<productSearchModel, String> cell = new TableCell<>();
+			Text text = new Text();
+			cell.setGraphic(text);
+			cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+			text.setStyle("-fx-fill: rgb(215, 231, 234);");
 
-	        text.wrappingWidthProperty().bind(productDescriptionTableColumn.widthProperty());
+			text.wrappingWidthProperty().bind(productDescriptionTableColumn.widthProperty());
 
-	        cell.setOnMouseEntered(event -> {
-	            String cellText = cell.getItem();
-	            if (cellText != null && !cellText.isEmpty()) {
-	                Tooltip tooltip = new Tooltip(cellText);
-	                Tooltip.install(text, tooltip);
-	               
-	            }
-	        });
+			cell.setOnMouseEntered(event -> {
+				String cellText = cell.getItem();
+				if (cellText != null && !cellText.isEmpty()) {
+					Tooltip tooltip = new Tooltip(cellText);
+					Tooltip.install(text, tooltip);
 
-	        cell.setOnMouseExited(event -> Tooltip.uninstall(text, null));
+				}
+			});
 
-	        text.textProperty().bind(cell.itemProperty());
+			cell.setOnMouseExited(event -> Tooltip.uninstall(text, null));
 
-	        return cell;
-	    });
-	    
+			text.textProperty().bind(cell.itemProperty());
+
+			return cell;
+		});
 
 		String productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts WHERE is_whitelisted = 1";
 
@@ -132,7 +130,7 @@ public class SearchController implements Initializable {
 				String queryProductName = queryOutput.getString("product_name");
 				String queryProductBrand = queryOutput.getString("product_brand");
 				String queryProductDescription = queryOutput.getString("description");
-				
+
 				String productViewQueryMacros = "SELECT calories_per_100g, protein FROM macros WHERE product_id=?";
 				try (PreparedStatement pstMacros = connectDB.prepareStatement(productViewQueryMacros)) {
 					pstMacros.setInt(1, queryProductID);
@@ -189,9 +187,17 @@ public class SearchController implements Initializable {
 						IdContainer idcontainer = IdContainer.getInstance();
 						idcontainer.setId(productId);
 						System.out.println("Double-clicked on product with ID from container: " + idcontainer.getId());
+						String updatePopularity = "UPDATE groceryproducts SET popularity = popularity + 1 WHERE product_id = ?";
+						try {
+							PreparedStatement updatePopularityStatement = connectDB.prepareStatement(updatePopularity);
+							updatePopularityStatement.setInt(1, productId);
+							updatePopularityStatement.executeUpdate();
+
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
 						LoaderClass load = LoaderClass.getInstance();
 						load.loadFXML("/ProductOverview/ProductOverview.fxml");
-
 					}
 				});
 				return row;
