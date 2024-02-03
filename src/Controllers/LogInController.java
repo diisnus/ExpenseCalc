@@ -92,35 +92,36 @@ public class LogInController implements Initializable {
 	
 	
 	
-
+	// resizable for different screens, future reference
+//	Screen screen = Screen.getPrimary();
+//    Rectangle2D bounds = screen.getBounds();        
+//    double screenWidth = bounds.getWidth();
+//    double screenHeight = bounds.getHeight();	        
+//    int sceneWidth = 0;
+//    int sceneHeight = 0;
+//    if (screenWidth <= 800 && screenHeight <= 600) {
+//        sceneWidth = 600;
+//        sceneHeight = 350;
+//    } else if (screenWidth <= 1280 && screenHeight <= 768) {
+//        sceneWidth = 800;
+//        sceneHeight = 450;
+//    } else if (screenWidth <= 1920 && screenHeight <= 1080) {
+//        sceneWidth = 1000;
+//        sceneHeight = 900;
+//    }
 
 	public void MainPageLoading() {
 		try {
 		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
 		    Parent root = loader.load();
-		    Scene signUpScene = new Scene(root, 1200, 800);
-		    Stage currentStage = (Stage) signup.getScene().getWindow();	    
+		    Scene signUpScene = new Scene(root, 1220, 800);
+		    Stage currentStage = (Stage) signup.getScene().getWindow();	
+
 		    currentStage.setScene(signUpScene);
 		    currentStage.setResizable(true);
-// resizable for different screens, future reference
-//			Screen screen = Screen.getPrimary();
-//	        Rectangle2D bounds = screen.getBounds();        
-//	        double screenWidth = bounds.getWidth();
-//	        double screenHeight = bounds.getHeight();	        
-//	        int sceneWidth = 0;
-//	        int sceneHeight = 0;
-//	        if (screenWidth <= 800 && screenHeight <= 600) {
-//	            sceneWidth = 600;
-//	            sceneHeight = 350;
-//	        } else if (screenWidth <= 1280 && screenHeight <= 768) {
-//	            sceneWidth = 800;
-//	            sceneHeight = 450;
-//	        } else if (screenWidth <= 1920 && screenHeight <= 1080) {
-//	            sceneWidth = 1000;
-//	            sceneHeight = 900;
-//	        }
+
 		    
-		    currentStage.setMinWidth(1200);
+		    currentStage.setMinWidth(1220);
 		    currentStage.setMinHeight(800);
 		    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 		    currentStage.setX((screenBounds.getWidth() - currentStage.getWidth()) / 2);

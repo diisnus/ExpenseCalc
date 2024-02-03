@@ -10,6 +10,7 @@ import ProductOverview.IdContainer;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -18,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class MainPageController  implements Initializable  {
 
@@ -63,6 +66,22 @@ public class MainPageController  implements Initializable  {
 	@FXML
 	private LineChart<Number, Number> mostPopularButtonChart;
 	
+    @FXML
+    private Button close;
+    
+    @FXML
+    private Button minimize;
+    
+    @FXML
+    private Pane titleBar;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+    
+    private double lastWidth;
+    private double lastHeight;
+    
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		bindButtonSizeToScene(favouritesButton);
@@ -74,9 +93,76 @@ public class MainPageController  implements Initializable  {
 		accessUserId();
 		LoaderClass load = LoaderClass.getInstance();
 		load.setBorderPaneMain(borderPaneMain);
+		
+        titleBar.setOnMousePressed(event -> {
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+            stage.setUserData(new double[]{stage.getX(), stage.getY()});
+        });
+
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) titleBar.getScene().getWindow();
+            double newX = event.getScreenX() - xOffset;
+            double newY = event.getScreenY() - yOffset;
+            stage.setX(newX);
+            stage.setY(newY);
+        });
+ 
+            titleBar.setOnMouseClicked(event -> {
+            	Stage stage = (Stage) titleBar.getScene().getWindow();
+                lastWidth = stage.getWidth();
+                lastHeight = stage.getHeight();
+                if (event.getClickCount() == 2) {
+                	if (stage.getWidth() > 1300) {
+                	//if (stage.isFullScreen()) {
+                        //stage.setFullScreen(false);
+                        stage.setWidth(1235);
+                        stage.setHeight(800);
+                    } else {
+                        //lastWidth = stage.getWidth();
+                        //lastHeight = stage.getHeight();
+                        //stage.setFullScreen(true);                         
+
+                        stage.setWidth(1800);
+                        stage.setHeight(1000);
+                        double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
+                        double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
+                        stage.setX(newX);
+                        stage.setY(newY);
+                        
+                    }
+                }
+            });
+
 	}
+	 
 
+	@FXML
+	public void closeClick() {
+		try {
+			Stage stage = (Stage) close.getScene().getWindow(); 
+			stage.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	@FXML
+    void minimizeClick() {
+    	try {
+        Stage stage = (Stage) minimize.getScene().getWindow();
 
+        stage.setIconified(true);
+    	 } catch (Exception e) {
+ 	        e.printStackTrace();
+ 	    }
+    }
+	@FXML
+	void handleClickAction() {
+		
+	}
+	
+	
 	public int accessUserId() {
 		Container container = Container.getInstance();
 		System.out.println(container.getId());

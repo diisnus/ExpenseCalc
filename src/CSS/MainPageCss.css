@@ -1,7 +1,7 @@
-
-.root {
-    -fx-background-color: black;
+#titleBar{
+		-fx-background-color:  #080A0C;
 }
+
 
  .chart-plot-background {
 	-fx-background-color: transparent;

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import Controllers.LoaderClass;
 import Controllers.MainPageController;
 import Controllers.PopUpWindow;
@@ -48,6 +49,7 @@ public class QuickActionsController extends MainPageController implements Initia
     	    Parent root = loader.load();
     	    Scene signUpScene = new Scene(root, 700, 400);
     	    Stage newStage = new Stage(); 
+    	    newStage.initStyle(StageStyle.UNDECORATED);  
     	    newStage.setScene(signUpScene);
     	    newStage.setResizable(false);
     	    newStage.show(); 

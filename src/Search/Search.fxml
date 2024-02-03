@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1080.0" style="-fx-background-color: #161921;" stylesheets="@../CSS/Search.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Search.SearchController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1080.0" style="-fx-background-color: #161921;" stylesheets="@../CSS/Search.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Search.SearchController">
 	<center>
 		<TableView fx:id="productTableView" maxHeight="709.0" maxWidth="2000.0" prefHeight="709.0" prefWidth="680.0" BorderPane.alignment="CENTER">
 			<columns>
@@ -29,19 +29,19 @@
 		<HBox prefHeight="713.0" prefWidth="95.0" BorderPane.alignment="CENTER" />
 	</right>
 	<left>
-		<HBox prefHeight="711.0" prefWidth="118.0" BorderPane.alignment="CENTER">
+		<HBox prefHeight="583.0" prefWidth="95.0" BorderPane.alignment="CENTER">
 			<children>
 				<Label prefHeight="18.0" prefWidth="164.0" style="-fx-background-color: red;" text="search by protein/brand..." textFill="#e1cfcf" />
 			</children>
 		</HBox>
 	</left>
 	<bottom>
-		<HBox prefHeight="65.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
+		<HBox prefHeight="45.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
 	</bottom>
 	<top>
 		<VBox fx:id="vboxTop" prefHeight="122.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
 			<children>
-				<HBox fx:id="hboxTop" alignment="CENTER" prefHeight="144.0" prefWidth="1080.0" spacing="30.0">
+				<HBox fx:id="hboxTop" alignment="CENTER" spacing="30.0">
 					<children>
                   <TextField fx:id="searchKeyword">
                      <HBox.margin>

@@ -10,12 +10,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../CSS/MainPageCss.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainPageController">
+<BorderPane fx:id="borderPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1235.0" stylesheets="@../CSS/MainPageCss.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainPageController">
 	<left>
-		<VBox alignment="CENTER" prefHeight="835.0" prefWidth="128.0" style="-fx-background-color: #101218;" BorderPane.alignment="CENTER">
+		<VBox alignment="CENTER" prefWidth="128.0" style="-fx-background-color: #101218;" BorderPane.alignment="CENTER">
 			<children>
 				<Button fx:id="quickActions" mnemonicParsing="false" onAction="#quickActionsClicked" prefHeight="50.0" prefWidth="55.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
 					<VBox.margin>
@@ -157,4 +158,18 @@
 			</children>
 		</GridPane>
 	</center>
+   <top>
+      <HBox fx:id="titleBar" alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="1235.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="minimize" mnemonicParsing="false" onAction="#minimizeClick" text="_">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin></Button>
+				<Button fx:id="close" mnemonicParsing="false" onAction="#closeClick" text="X">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin></Button>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>
