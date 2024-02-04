@@ -119,13 +119,17 @@ public class MainPageController  implements Initializable  {
                         //stage.setFullScreen(false);
                         stage.setWidth(1235);
                         stage.setHeight(800);
+                        double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
+                        double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
+                        stage.setX(newX);
+                        stage.setY(newY);
                     } else {
                         //lastWidth = stage.getWidth();
                         //lastHeight = stage.getHeight();
                         //stage.setFullScreen(true);                         
 
-                        stage.setWidth(1800);
-                        stage.setHeight(1000);
+                        stage.setWidth(1550);
+                        stage.setHeight(835);
                         double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
                         double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
                         stage.setX(newX);
