@@ -1,6 +1,5 @@
 package Controllers;
 
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +10,8 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 
 public class LogInController implements Initializable {
 	@FXML
@@ -32,19 +32,44 @@ public class LogInController implements Initializable {
 	@FXML
 	private Button forgotpassword;
 
-
+    @FXML
+    private Button close;
+    
+    @FXML
+    private Button minimize;
+    
+    @FXML
+    private HBox titleBar;
+	
+    @FXML
+    private AnchorPane anchorPane;
+    
 	private Connection connection;
 	private DBHandler handler;
 	private PreparedStatement pst;
 
+	private double xOffset = 0;
+	private double yOffset = 0;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		titleBar.setOnMousePressed(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+			stage.setUserData(new double[] { stage.getX(), stage.getY() });
+		});
 
+		titleBar.setOnMouseDragged(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			double newX = event.getScreenX() - xOffset;
+			double newY = event.getScreenY() - yOffset;
+			stage.setX(newX);
+			stage.setY(newY);
+		});
 		handler = new DBHandler();
 	}
 
-	
-	
 	public void DataBaseLoginGetInfo() {
 		String usernames = username.getText();
 		String passwords = password.getText();
@@ -64,14 +89,14 @@ public class LogInController implements Initializable {
 			}
 
 			if (count == 1) {
-				pst = connection.prepareStatement(selectid); 
+				pst = connection.prepareStatement(selectid);
 				pst.setString(1, usernames);
 				pst.setString(2, passwords);
 				ResultSet rs2 = pst.executeQuery();
 
 				if (rs2.next()) {
-					int currentUser_id = rs2.getInt("user_id"); 
-					//System.out.println(currentUser_id);				
+					int currentUser_id = rs2.getInt("user_id");
+					// System.out.println(currentUser_id);
 					Container container = Container.getInstance();
 					container.update(currentUser_id, usernames);
 					MainPageLoading();
@@ -89,45 +114,24 @@ public class LogInController implements Initializable {
 			}
 		}
 	}
-	
-	
-	
-	// resizable for different screens, future reference
-//	Screen screen = Screen.getPrimary();
-//    Rectangle2D bounds = screen.getBounds();        
-//    double screenWidth = bounds.getWidth();
-//    double screenHeight = bounds.getHeight();	        
-//    int sceneWidth = 0;
-//    int sceneHeight = 0;
-//    if (screenWidth <= 800 && screenHeight <= 600) {
-//        sceneWidth = 600;
-//        sceneHeight = 350;
-//    } else if (screenWidth <= 1280 && screenHeight <= 768) {
-//        sceneWidth = 800;
-//        sceneHeight = 450;
-//    } else if (screenWidth <= 1920 && screenHeight <= 1080) {
-//        sceneWidth = 1000;
-//        sceneHeight = 900;
-//    }
 
 	public void MainPageLoading() {
 		try {
-		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
-		    Parent root = loader.load();
-		    Scene signUpScene = new Scene(root, 1220, 800);
-		    Stage currentStage = (Stage) signup.getScene().getWindow();	
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
+			Parent root = loader.load();
+			Scene signUpScene = new Scene(root, 1235, 800);
+			Stage currentStage = (Stage) signup.getScene().getWindow();
 
-		    currentStage.setScene(signUpScene);
-		    currentStage.setResizable(true);
+			currentStage.setScene(signUpScene);
+			currentStage.setResizable(true);
 
-		    
-		    currentStage.setMinWidth(1220);
-		    currentStage.setMinHeight(800);
-		    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-		    currentStage.setX((screenBounds.getWidth() - currentStage.getWidth()) / 2);
-		    currentStage.setY((screenBounds.getHeight() - currentStage.getHeight()) / 2);
+			currentStage.setMinWidth(1235);
+			currentStage.setMinHeight(800);
+			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+			currentStage.setX((screenBounds.getWidth() - currentStage.getWidth()) / 2);
+			currentStage.setY((screenBounds.getHeight() - currentStage.getHeight()) / 2);
 		} catch (Exception e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
@@ -150,5 +154,26 @@ public class LogInController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	   @FXML
+	    void closeClick() {
+		   try {
+				Stage stage = (Stage) close.getScene().getWindow();
+				stage.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+
+	    @FXML
+	    void minimizeClick() {
+	    	try {
+				Stage stage = (Stage) minimize.getScene().getWindow();
+
+				stage.setIconified(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
 
 }

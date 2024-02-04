@@ -10,6 +10,8 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import DBConnection.DBHandler;
@@ -24,13 +26,28 @@ public class SignUpController implements Initializable {
 	@FXML
 	public PasswordField enterpassword;
 	@FXML
-	public Button login;
+	public Button logIn;
 	@FXML
-	public Button signup;
+	public Button signUp;
 
+	 @FXML
+	    private Button close;
+	    
+	    @FXML
+	    private Button minimize;
+	    
+	    @FXML
+	    private HBox titleBar;
+		
+	    @FXML
+	    private AnchorPane anchorPane;
+	
 	private Connection connection;
 	private DBHandler handler;
 	private PreparedStatement pst;
+	
+	private double xOffset = 0;
+	private double yOffset = 0;
 	
 	private static final String EMAIL_PATTERN =
 	        "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -39,27 +56,41 @@ public class SignUpController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		titleBar.setOnMousePressed(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+			stage.setUserData(new double[] { stage.getX(), stage.getY() });
+		});
 
+		titleBar.setOnMouseDragged(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			double newX = event.getScreenX() - xOffset;
+			double newY = event.getScreenY() - yOffset;
+			stage.setX(newX);
+			stage.setY(newY);
+		});
 		handler = new DBHandler();
 	}
 
 	public void MainPageLoading() {
 		try {
-		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
-		    Parent root = loader.load();
-		    Scene signUpScene = new Scene(root, 1200, 800);
-		    Stage currentStage = (Stage) signup.getScene().getWindow();
-		    currentStage.setScene(signUpScene);
-		    currentStage.setResizable(true);
-		    currentStage.setMinWidth(1200);
-		    currentStage.setMinHeight(800);
-		    Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-		    currentStage.setX((screenBounds.getWidth() - currentStage.getWidth()) / 2);
-		    currentStage.setY((screenBounds.getHeight() - currentStage.getHeight()) / 2);
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainPage.fxml"));
+			Parent root = loader.load();
+			Scene signUpScene = new Scene(root, 1235, 800);
+			Stage currentStage = (Stage) signUp.getScene().getWindow();
 
+			currentStage.setScene(signUpScene);
+			currentStage.setResizable(true);
+
+			currentStage.setMinWidth(1235);
+			currentStage.setMinHeight(800);
+			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+			currentStage.setX((screenBounds.getWidth() - currentStage.getWidth()) / 2);
+			currentStage.setY((screenBounds.getHeight() - currentStage.getHeight()) / 2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void DataBaseSignupInput() {
@@ -145,11 +176,33 @@ public class SignUpController implements Initializable {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LogIn.fxml"));
 			Parent signUpRoot = loader.load();
 			Scene signUpScene = new Scene(signUpRoot);
-			Stage currentStage = (Stage) signup.getScene().getWindow();
+			Stage currentStage = (Stage) signUp.getScene().getWindow();
 			currentStage.setScene(signUpScene);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	   @FXML
+	    void closeClick() {
+		   try {
+				Stage stage = (Stage) close.getScene().getWindow();
+				stage.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+
+	    @FXML
+	    void minimizeClick() {
+	    	try {
+				Stage stage = (Stage) minimize.getScene().getWindow();
+
+				stage.setIconified(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    }
+	
 
 }

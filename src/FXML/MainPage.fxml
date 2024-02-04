@@ -165,6 +165,14 @@
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin></Button>
+            <Button fx:id="fullScreen" mnemonicParsing="false" onAction="#fullScreenClick">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fx:id="fullscreenImageView" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Button>
 				<Button fx:id="close" mnemonicParsing="false" onAction="#closeClick" text="X">
                <HBox.margin>
                   <Insets right="20.0" />

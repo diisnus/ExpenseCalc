@@ -76,3 +76,34 @@
 }
 
 
+#close,
+#minimize,
+#fullScreen{
+	-fx-background-color: #1a1c1d;
+    -fx-font-weight: bold;
+    -fx-text-fill: #aca59a; 
+    -fx-font-family: serif;
+    -fx-font-size: 13px;
+    -fx-border-width: 1px;
+    -fx-border-color: #0d0f10;
+    -fx-border-radius:12px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+}
+
+#close:hover{
+	-fx-background-color: red;
+	-fx-cursor: hand;
+	-fx-text-fill: black; 	
+	-fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+#minimize:hover,
+#fullScreen:hover{
+	fx-background-color: #2c2e2f; 
+    -fx-border-width: 2px;
+    -fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    -fx-cursor: hand;
+}

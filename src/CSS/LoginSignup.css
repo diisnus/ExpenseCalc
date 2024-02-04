@@ -1,0 +1,75 @@
+#titleBar{
+	-fx-background-color: #272E3E;
+	
+}
+
+#anchorPane{
+		-fx-background-color: #2D3447;
+		-fx-border-color: #2196f3;
+		-fx-border-radius:6;
+		-fx-border-width:1;
+   		-fx-background-radius: 2px;
+}
+
+
+name,
+#password,
+#enterusername,
+#enterpassword,
+#enteremail{
+	-fx-background-color: #2D3447;
+	-fx-border-color: #c9cbd0;
+	-fx-border-radius:8;
+	-fx-text-fill: #d8e3db;
+}
+
+
+#signup,
+#logIn{
+	-fx-background-color: #343a4d;
+	-fx-border-color: #c9cbd0;
+	-fx-border-radius: 6;
+}
+#login,
+#signUp{
+	-fx-background-color: #2196f3;
+	-fx-border-radius:6;
+	-fx-border-color: #c9cbd0;
+	 -fx-background-radius:6px;
+	 -fx-background-insets: 0px 0px 0px 0px;
+}
+
+#close,
+#minimize{
+	-fx-background-color: #343a4d;
+    -fx-font-weight: bold;
+    -fx-text-fill: #aca59a; 
+    -fx-font-family: serif;
+    -fx-font-size: 13px;
+    -fx-border-width: 1px;
+    -fx-border-color: #0d0f10;
+    -fx-border-radius:6px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+}
+
+#close:hover{
+	-fx-background-color: red;
+	-fx-cursor: hand;
+	-fx-text-fill: black; 	
+	-fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+#minimize:hover,
+#login:hover,
+#signup:hover,
+#logIn:hover,
+#signUp:hover
+{
+	fx-background-color: #2c2e2f; 
+    -fx-border-width: 2px;
+    -fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    -fx-cursor: hand;
+}

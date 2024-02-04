@@ -17,6 +17,8 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -24,7 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class MainPageController  implements Initializable  {
+public class MainPageController implements Initializable {
 
 	@FXML
 	public GridPane gridPaneHome;
@@ -34,13 +36,13 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	public Button homeButton;
-	
+
 	@FXML
 	private Button searchButton;
-	
+
 	@FXML
 	private Button settingsButton;
-	
+
 	@FXML
 	public Button quickActions;
 
@@ -55,7 +57,7 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	public Button yourItemsButton;
-	
+
 	@FXML
 	public Button profileButton;
 
@@ -67,22 +69,27 @@ public class MainPageController  implements Initializable  {
 
 	@FXML
 	private LineChart<Number, Number> mostPopularButtonChart;
-	
-    @FXML
-    private Button close;
-    
-    @FXML
-    private Button minimize;
-    
-    @FXML
-    private Pane titleBar;
 
-    private double xOffset = 0;
-    private double yOffset = 0;
-    
-    private double lastWidth;
-    private double lastHeight;
-    
+	@FXML
+	private Button close;
+
+	@FXML
+	private Button minimize;
+
+	@FXML
+	private Pane titleBar;
+
+	@FXML
+	private Button fullScreen;
+
+	@FXML
+	private ImageView fullscreenImageView;
+
+	private double xOffset = 0;
+	private double yOffset = 0;
+
+	private double lastWidth;
+	private double lastHeight;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -95,128 +102,129 @@ public class MainPageController  implements Initializable  {
 		accessUserId();
 		LoaderClass load = LoaderClass.getInstance();
 		load.setBorderPaneMain(borderPaneMain);
-		
-        titleBar.setOnMousePressed(event -> {
-            Stage stage = (Stage) titleBar.getScene().getWindow();
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-            stage.setUserData(new double[]{stage.getX(), stage.getY()});
-        });
 
-        titleBar.setOnMouseDragged(event -> {
-            Stage stage = (Stage) titleBar.getScene().getWindow();
-            double newX = event.getScreenX() - xOffset;
-            double newY = event.getScreenY() - yOffset;
-            stage.setX(newX);
-            stage.setY(newY);
-        });
- 
-            titleBar.setOnMouseClicked(event -> {
-            	Stage stage = (Stage) titleBar.getScene().getWindow();
-                lastWidth = stage.getWidth();
-                lastHeight = stage.getHeight();
-                if (event.getClickCount() == 2) {
-                	if (stage.getWidth() > 1300) {
-                	//if (stage.isFullScreen()) {
-                        //stage.setFullScreen(false);
-                        stage.setWidth(1235);
-                        stage.setHeight(800);
-                        double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
-                        double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
-                        stage.setX(newX);
-                        stage.setY(newY);
-                    } else {
-                        //lastWidth = stage.getWidth();
-                        //lastHeight = stage.getHeight();
-                        //stage.setFullScreen(true);                         
+		titleBar.setOnMousePressed(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+			stage.setUserData(new double[] { stage.getX(), stage.getY() });
+		});
 
-                    	
-                    	//laptop fullscreen
-                        //stage.setWidth(1550);
-                        //stage.setHeight(835);
-                    	
-                    	//pc fullscreen
-                    	//stage.setWidth(1920);
-                    	//stage.setHeight(1040);
-                    	
-                        adjustStageSize(stage, 1220, 800); 
-                        double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
-                        double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
-                        stage.setX(newX);
-                        stage.setY(newY);
-                        
-                    }
-                }
-            });
-            
-            
+		titleBar.setOnMouseDragged(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			double newX = event.getScreenX() - xOffset;
+			double newY = event.getScreenY() - yOffset;
+			stage.setX(newX);
+			stage.setY(newY);
+		});
+
+		titleBar.setOnMouseClicked(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			lastWidth = stage.getWidth();
+			lastHeight = stage.getHeight();
+			if (event.getClickCount() == 2) {
+				if (stage.getWidth() > 1300) {
+					fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("maximize.png")));
+
+					stage.setWidth(1235);
+					stage.setHeight(800);
+					double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
+					double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
+					stage.setX(newX);
+					stage.setY(newY);
+				} else {
+					fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("minimize.png")));
+
+					adjustStageSize(stage, 1235, 800);
+					double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
+					double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
+					stage.setX(newX);
+					stage.setY(newY);
+
+				}
+			}
+		});
+		fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("maximize.png")));
 
 	}
-	 
+
 	public static void adjustStageSize(Stage stage, double baseWidth, double baseHeight) {
-        // Get all screens
-        List<Screen> screens = Screen.getScreens();
 
-        // Initialize min and max bounds
-        double minX = Double.MAX_VALUE;
-        double minY = Double.MAX_VALUE;
-        double maxX = Double.MIN_VALUE;
-        double maxY = Double.MIN_VALUE;
+		List<Screen> screens = Screen.getScreens();
 
-        for (Screen screen : screens) {
-            Rectangle2D bounds = screen.getVisualBounds();
-            minX = Math.min(minX, bounds.getMinX());
-            minY = Math.min(minY, bounds.getMinY());
-            maxX = Math.max(maxX, bounds.getMaxX());
-            maxY = Math.max(maxY, bounds.getMaxY());
-        }
+		double minX = Double.MAX_VALUE;
+		double minY = Double.MAX_VALUE;
+		double maxX = Double.MIN_VALUE;
+		double maxY = Double.MIN_VALUE;
 
-        double visualWidth = maxX - minX;
-        double visualHeight = maxY - minY;
+		for (Screen screen : screens) {
+			Rectangle2D bounds = screen.getVisualBounds();
+			minX = Math.min(minX, bounds.getMinX());
+			minY = Math.min(minY, bounds.getMinY());
+			maxX = Math.max(maxX, bounds.getMaxX());
+			maxY = Math.max(maxY, bounds.getMaxY());
+		}
 
-       // double scaleX = visualWidth / baseWidth;
-        //double scaleY = visualHeight / baseHeight;
-        //double scale = Math.min(scaleX, scaleY); // Use the smaller scale factor to ensure the stage fits on all screens
+		double visualWidth = maxX - minX;
+		double visualHeight = maxY - minY;
 
-        //double newWidth = baseWidth * scale;
-        //double newHeight = baseHeight * scale;
+		stage.setWidth(visualWidth);
+		stage.setHeight(visualHeight);
+	}
 
-        stage.setWidth(visualWidth);
-        stage.setHeight(visualHeight);
-    }
-	
-	
+	@FXML
+	void fullScreenClick() {
+		Stage stage = (Stage) titleBar.getScene().getWindow();
+		lastWidth = stage.getWidth();
+		lastHeight = stage.getHeight();
+
+		if (stage.getWidth() > 1300) {
+
+			fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("maximize.png")));
+			stage.setWidth(1235);
+			stage.setHeight(800);
+			double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
+			double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
+			stage.setX(newX);
+			stage.setY(newY);
+		} else {
+			fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("minimize.png")));
+			adjustStageSize(stage, 1235, 800);
+			double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
+			double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
+			stage.setX(newX);
+			stage.setY(newY);
+
+		}
+	}
+
 	@FXML
 	public void closeClick() {
 		try {
-			Stage stage = (Stage) close.getScene().getWindow(); 
+			Stage stage = (Stage) close.getScene().getWindow();
 			stage.close();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	@FXML
-    void minimizeClick() {
-    	try {
-        Stage stage = (Stage) minimize.getScene().getWindow();
 
-        stage.setIconified(true);
-    	 } catch (Exception e) {
- 	        e.printStackTrace();
- 	    }
-    }
 	@FXML
-	void handleClickAction() {
-		
+	void minimizeClick() {
+		try {
+			Stage stage = (Stage) minimize.getScene().getWindow();
+
+			stage.setIconified(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
-	
+
 	public int accessUserId() {
 		Container container = Container.getInstance();
 		System.out.println(container.getId());
 		return container.getId();
 	}
-	
+
 	@FXML
 	void favouritesButtonClick() {
 		LoaderClass load = LoaderClass.getInstance();
@@ -250,26 +258,25 @@ public class MainPageController  implements Initializable  {
 		load.loadFXML("/QuickActionsPack/QuickActions.fxml");
 
 	}
-	
+
 	@FXML
 	void searchButtonClicked() {
 		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/Search/Search.fxml");
 	}
-	
+
 	@FXML
 	void settingsButtonClicked() {
 		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/Settings/Settings.fxml");
 
 	}
-	
+
 	@FXML
 	void profileButtonClick() {
 		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/AccountManagement/AccountChanges.fxml");
 	}
-
 
 	private void loadCompareChartData() {
 		XYChart.Series first = new XYChart.Series<>();
@@ -343,6 +350,5 @@ public class MainPageController  implements Initializable  {
 		});
 
 	}
-
 
 }
