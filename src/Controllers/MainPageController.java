@@ -135,7 +135,7 @@ public class MainPageController implements Initializable {
 				} else {
 					fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("minimize.png")));
 
-					adjustStageSize(stage, 1235, 800);
+					adjustStageSize(stage);
 					double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
 					double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
 					stage.setX(newX);
@@ -148,7 +148,7 @@ public class MainPageController implements Initializable {
 
 	}
 
-	public static void adjustStageSize(Stage stage, double baseWidth, double baseHeight) {
+	public static void adjustStageSize(Stage stage) {
 
 		List<Screen> screens = Screen.getScreens();
 
@@ -189,7 +189,7 @@ public class MainPageController implements Initializable {
 			stage.setY(newY);
 		} else {
 			fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("minimize.png")));
-			adjustStageSize(stage, 1235, 800);
+			adjustStageSize(stage);
 			double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
 			double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
 			stage.setX(newX);
