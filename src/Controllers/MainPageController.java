@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import ProductOverview.IdContainer;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
@@ -128,8 +130,16 @@ public class MainPageController  implements Initializable  {
                         //lastHeight = stage.getHeight();
                         //stage.setFullScreen(true);                         
 
-                        stage.setWidth(1550);
-                        stage.setHeight(835);
+                    	
+                    	//laptop fullscreen
+                        //stage.setWidth(1550);
+                        //stage.setHeight(835);
+                    	
+                    	//pc fullscreen
+                    	//stage.setWidth(1920);
+                    	//stage.setHeight(1040);
+                    	
+                        adjustStageSize(stage, 1220, 800); 
                         double newX = (Screen.getPrimary().getVisualBounds().getWidth() - stage.getWidth()) / 2;
                         double newY = (Screen.getPrimary().getVisualBounds().getHeight() - stage.getHeight()) / 2;
                         stage.setX(newX);
@@ -138,10 +148,44 @@ public class MainPageController  implements Initializable  {
                     }
                 }
             });
+            
+            
 
 	}
 	 
+	public static void adjustStageSize(Stage stage, double baseWidth, double baseHeight) {
+        // Get all screens
+        List<Screen> screens = Screen.getScreens();
 
+        // Initialize min and max bounds
+        double minX = Double.MAX_VALUE;
+        double minY = Double.MAX_VALUE;
+        double maxX = Double.MIN_VALUE;
+        double maxY = Double.MIN_VALUE;
+
+        for (Screen screen : screens) {
+            Rectangle2D bounds = screen.getVisualBounds();
+            minX = Math.min(minX, bounds.getMinX());
+            minY = Math.min(minY, bounds.getMinY());
+            maxX = Math.max(maxX, bounds.getMaxX());
+            maxY = Math.max(maxY, bounds.getMaxY());
+        }
+
+        double visualWidth = maxX - minX;
+        double visualHeight = maxY - minY;
+
+       // double scaleX = visualWidth / baseWidth;
+        //double scaleY = visualHeight / baseHeight;
+        //double scale = Math.min(scaleX, scaleY); // Use the smaller scale factor to ensure the stage fits on all screens
+
+        //double newWidth = baseWidth * scale;
+        //double newHeight = baseHeight * scale;
+
+        stage.setWidth(visualWidth);
+        stage.setHeight(visualHeight);
+    }
+	
+	
 	@FXML
 	public void closeClick() {
 		try {
