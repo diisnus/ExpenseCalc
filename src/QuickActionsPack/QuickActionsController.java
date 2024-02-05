@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -34,6 +35,9 @@ public class QuickActionsController extends MainPageController implements Initia
     
     @FXML
     private Button logOut;
+    
+    @FXML
+    private GridPane gridPane;
 	
 	@FXML
 	void addItemClick() {
@@ -68,6 +72,7 @@ public class QuickActionsController extends MainPageController implements Initia
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+	    gridPane.setGridLinesVisible(true);		
 
 	}
 
