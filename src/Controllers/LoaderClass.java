@@ -13,6 +13,13 @@ import javafx.scene.layout.Pane;
 public class LoaderClass {
 	@FXML
 	private BorderPane borderPaneMain;
+	
+	@FXML
+	private GridPane gridPaneHome;
+
+	public void setGridPaneHome(GridPane gridPaneHome) {
+		this.gridPaneHome = gridPaneHome;
+	}
 
 	public BorderPane getBorderPaneMain() {
 		return borderPaneMain;
@@ -29,6 +36,10 @@ public class LoaderClass {
 			instance = new LoaderClass();
 		}
 		return instance;
+	}
+	
+	public void homeFXML() {
+		borderPaneMain.setCenter(gridPaneHome);
 	}
 	public void loadFXML(String fxmlFile) {
 		try {

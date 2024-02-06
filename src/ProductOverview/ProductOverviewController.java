@@ -22,12 +22,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -41,6 +39,15 @@ import java.text.ParseException;
 
 public class ProductOverviewController implements Initializable {
 
+    @FXML
+    private Button acceptWhitelistButton;
+	
+	@FXML
+	private Button requestWhitelistButton;
+
+	@FXML
+	private Button deleteProductButotn;
+
 	@FXML
 	private Button addPrice;
 
@@ -50,9 +57,9 @@ public class ProductOverviewController implements Initializable {
 	@FXML
 	private Button isStarredButton;
 
-    @FXML
-    private Button editButton;
-	
+	@FXML
+	private Button editButton;
+
 	@FXML
 	private Label name;
 
@@ -99,6 +106,9 @@ public class ProductOverviewController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		handler = new DBHandler();
+		connectDB = handler.getConnection();
+
 		tableView.setEditable(false);
 		macroColumn.setResizable(false);
 		valueColumn.setResizable(false);
@@ -113,8 +123,24 @@ public class ProductOverviewController implements Initializable {
 
 		IdContainer productIdContainer = IdContainer.getInstance();
 		int productid = productIdContainer.getId();
-		handler = new DBHandler();
-		connectDB = handler.getConnection();
+
+		Container container = Container.getInstance();
+		int currentUserID = container.getId();
+
+		// if user is admin check
+		int is_admin = 0;
+		String adminCheck = "SELECT is_admin FROM users WHERE user_id = ?";
+		try {
+			PreparedStatement adminCheckStatementStatement = connectDB.prepareStatement(adminCheck);
+			adminCheckStatementStatement.setInt(1, currentUserID);
+			ResultSet queryOutputIsAdmin = adminCheckStatementStatement.executeQuery();
+			while (queryOutputIsAdmin.next()) {
+				is_admin = queryOutputIsAdmin.getInt("is_admin");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		String selectMacros = "SELECT * FROM macros WHERE product_id = ?";
 		// PieChart and macro table inputs
 		try {
@@ -215,24 +241,54 @@ public class ProductOverviewController implements Initializable {
 		}
 
 		// product info statement
-		String selectInformation = "SELECT product_name, product_brand, description, priced_by, created_by_user FROM groceryproducts WHERE product_id = ?";
+		String selectInformation = "SELECT product_name, product_brand, description, priced_by, created_by_user, user_id, is_whitelisted, req_whitelist FROM groceryproducts WHERE product_id = ?";
 		try {
 			PreparedStatement selectInfoStatement = connectDB.prepareStatement(selectInformation);
 			selectInfoStatement.setInt(1, productid);
 			ResultSet queryOutputInfo = selectInfoStatement.executeQuery();
 			while (queryOutputInfo.next()) {
+				int user_idThatCreated = queryOutputInfo.getInt("user_id");
+				if (currentUserID == user_idThatCreated || is_admin == 1) {
+					deleteProductButotn.setVisible(true);
+					editButton.setVisible(true);
+				} else {
+					deleteProductButotn.setVisible(false);
+					editButton.setVisible(false);
+				}
+				int itemIsWhitelisted = queryOutputInfo.getInt("is_whitelisted");
+				int itemIsRequestedToWhitelist = queryOutputInfo.getInt("req_whitelist");
+				if (currentUserID == user_idThatCreated && itemIsWhitelisted == 0 && itemIsRequestedToWhitelist == 0) {
+					requestWhitelistButton.setVisible(true);
+				} else {
+					requestWhitelistButton.setVisible(false);
+				}
+				
+				if(is_admin ==1 && itemIsRequestedToWhitelist == 1 && itemIsWhitelisted == 0) {
+					acceptWhitelistButton.setVisible(true);
+				}
+				else {
+					acceptWhitelistButton.setVisible(false);
+				}
 				String pr_name = queryOutputInfo.getString("product_name");
 				String pr_brand = queryOutputInfo.getString("product_brand");
 				String pr_descr = queryOutputInfo.getString("description");
 				String pr_pricedby = queryOutputInfo.getString("priced_by");
 				int createdbyuser = queryOutputInfo.getInt("created_by_user");
 				name.setText("The name of the item you are currently looking at is: " + pr_name + ".");
+				name.setWrapText(true);
+
 				brand.setText("It's brand is: " + pr_brand + ".");
+				brand.setWrapText(true);
+
 				description.setText("The product is described as: " + pr_descr + ".");
 				description.setWrapText(true);
+				
 				currencyUsed.setText("The currency for the product displayed is: " + userPrefCurrency + ".");
+				currencyUsed.setWrapText(true);
+
 				pricedBy.setText("The product is priced " + pr_pricedby + ".");
-				;
+				pricedBy.setWrapText(true);
+
 
 			}
 
@@ -240,8 +296,6 @@ public class ProductOverviewController implements Initializable {
 
 		}
 
-		Container container = Container.getInstance();
-		int currentUserID = container.getId();
 		imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
 		// check for present rows
 		try {
@@ -350,13 +404,97 @@ public class ProductOverviewController implements Initializable {
 		}
 	}
 
+	@FXML
+	void deleteProductButotnClick(ActionEvent event) {
+		String deleteFromPrices = "DELETE FROM prices WHERE product_id = ?";
+		String deleteFromMacros = "DELETE FROM macros WHERE product_id = ?";
+		String deleteFromGroceryProducts = "DELETE FROM groceryproducts WHERE product_id = ?";
+
+		IdContainer productIdContainer = IdContainer.getInstance();
+		int productid = productIdContainer.getId();
+
+		try {
+			PreparedStatement deleteFromPricesStatement = connectDB.prepareStatement(deleteFromPrices);
+			deleteFromPricesStatement.setInt(1, productid);
+			deleteFromPricesStatement.executeUpdate();
+
+			PreparedStatement deleteFromMacrosStatement = connectDB.prepareStatement(deleteFromMacros);
+			deleteFromMacrosStatement.setInt(1, productid);
+			deleteFromMacrosStatement.executeUpdate();
+
+			PreparedStatement deleteFromGroceryProductsStatement = connectDB
+					.prepareStatement(deleteFromGroceryProducts);
+			deleteFromGroceryProductsStatement.setInt(1, productid);
+			deleteFromGroceryProductsStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		LoaderClass load = LoaderClass.getInstance();
+		load.homeFXML();
+
+		PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/DeletedSuccessfully.fxml");
+
+	}
+
+	@FXML
+	void requestWhitelistButtonClick(ActionEvent event) {
+		IdContainer productIdContainer = IdContainer.getInstance();
+		int productid = productIdContainer.getId();
+
+		Container container = Container.getInstance();
+		int currentUserID = container.getId();
+		String updateReqWhitelistToOne = "UPDATE groceryproducts SET req_whitelist = 1 WHERE product_id = ? AND user_id = ?";
+
+		try {
+			PreparedStatement updateReqWhitelistToOneStatement = connectDB.prepareStatement(updateReqWhitelistToOne);
+			updateReqWhitelistToOneStatement.setInt(1, productid);
+			updateReqWhitelistToOneStatement.setInt(2, currentUserID);
+			updateReqWhitelistToOneStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/ProductOverview/ProductOverview.fxml");
+
+		PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/WhitelistRequestedSuccessfully.fxml");
+
+	}
+	
+	
     @FXML
-    void editButtonClick(ActionEvent event) {
+    void acceptWhitelistButtonClick(ActionEvent event) {
+    	IdContainer productIdContainer = IdContainer.getInstance();
+		int productid = productIdContainer.getId();
+
+		String updateReqWhitelistToOne = "UPDATE groceryproducts SET is_whitelisted = 1, req_whitelist = 0 WHERE product_id = ?";
+
+		try {
+			PreparedStatement updateReqWhitelistToOneStatement = connectDB.prepareStatement(updateReqWhitelistToOne);
+			updateReqWhitelistToOneStatement.setInt(1, productid);
+			updateReqWhitelistToOneStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/ProductOverview/ProductOverview.fxml");
+
+		PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/WhitelistedSuccessfully.fxml");
+
+	}
     	
+    
+
+	@FXML
+	void editButtonClick(ActionEvent event) {
+
 		PopUpWindow.showCustomDialog("", "/ProductOverview/EditProductInfo.fxml");
 
-    }
-	
+	}
+
 	private static final Map<String, Double> conversionRates;
 
 	static {

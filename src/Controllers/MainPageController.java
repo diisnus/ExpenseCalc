@@ -100,9 +100,12 @@ public class MainPageController implements Initializable {
 		loadFavChartData();
 		loadCompareChartData();
 		accessUserId();
+		
 		LoaderClass load = LoaderClass.getInstance();
 		load.setBorderPaneMain(borderPaneMain);
+		load.setGridPaneHome(gridPaneHome);
 
+		
 		titleBar.setOnMousePressed(event -> {
 			Stage stage = (Stage) titleBar.getScene().getWindow();
 			xOffset = event.getSceneX();
@@ -249,7 +252,8 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	void homeButtonClicked() {
-		borderPaneMain.setCenter(gridPaneHome);
+		LoaderClass load = LoaderClass.getInstance();
+		load.homeFXML();
 	}
 
 	@FXML

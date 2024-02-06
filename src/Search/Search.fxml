@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -28,11 +29,7 @@
 		<HBox prefHeight="713.0" prefWidth="95.0" BorderPane.alignment="CENTER" />
 	</right>
 	<left>
-		<HBox prefHeight="583.0" prefWidth="95.0" BorderPane.alignment="CENTER">
-			<children>
-				<Label prefHeight="18.0" prefWidth="164.0" style="-fx-background-color: red;" text="search by protein/brand..." textFill="#e1cfcf" />
-			</children>
-		</HBox>
+		<HBox prefHeight="583.0" prefWidth="95.0" BorderPane.alignment="CENTER" />
 	</left>
 	<bottom>
 		<HBox prefHeight="45.0" prefWidth="1080.0" BorderPane.alignment="CENTER" />
@@ -44,8 +41,22 @@
 					<children>
                   <TextField fx:id="searchKeyword" alignment="CENTER" prefHeight="27.0" prefWidth="300.0" promptText="Double click the wanted item.">
                      <HBox.margin>
-                        <Insets top="50.0" />
+                        <Insets left="230.0" top="50.0" />
                      </HBox.margin></TextField>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="89.0" prefWidth="194.0">
+                     <children>
+                        <Label fx:id="labelSearch" text="Search By:">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ChoiceBox fx:id="searchByChoiceBox" prefWidth="150.0">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </ChoiceBox>
+                     </children>
+                  </VBox>
 					</children>
 				</HBox>
 			</children>

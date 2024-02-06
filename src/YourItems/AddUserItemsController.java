@@ -164,8 +164,8 @@ public class AddUserItemsController implements Initializable {
 				insertStatement.setString(3, itembrand);
 				insertStatement.setString(4, itemdescr);
 				insertStatement.setString(5, choiceper);
-				insertStatement.setInt(6, 1); // whitelisted = 1
-				insertStatement.setInt(7, 0); // created by user = 1
+				insertStatement.setInt(6, 0); // whitelisted = 1
+				insertStatement.setInt(7, 1); // created by user = 1
 
 				int rowsAffected = insertStatement.executeUpdate();
 				if (rowsAffected > 0) {

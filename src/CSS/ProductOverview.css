@@ -5,7 +5,7 @@
 
 #anchorPane {
 	-fx-background-color:  #161921;
-		-fx-border-width: 1.5px;
+	-fx-border-width: 1.5px;
 	-fx-border-color: #0d0f10;
 }
 
@@ -148,8 +148,11 @@
 }
 
 
-#editButton{
-			 -fx-background-color: #1a1c1d;
+#editButton,
+#deleteProductButotn,
+#requestWhitelistButton,
+#acceptWhitelistButton{
+	-fx-background-color: #1a1c1d;
     -fx-font-weight: bold;
     -fx-text-fill: #aca59a; 
     -fx-font-family: serif;
@@ -162,7 +165,7 @@
 }
 
 #close{
-				 -fx-background-color: #1a1c1d;
+	-fx-background-color: #1a1c1d;
     -fx-font-weight: bold;
     -fx-text-fill: #aca59a; 
     -fx-font-family: serif;

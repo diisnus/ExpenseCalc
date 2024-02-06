@@ -71,7 +71,12 @@ public class SearchController implements Initializable {
 	private TextField searchKeyword;
 
 	@FXML
-	private Button searchButton;
+	private Label labelSearch;
+
+	@FXML
+	private ChoiceBox<String> searchByChoiceBox;
+
+	private String[] typesOfSearch = { "By Information", "By Protein", "By Calories" };
 
 	ObservableList<productSearchModel> productSearchModelObservableList = FXCollections.observableArrayList();
 
@@ -83,6 +88,8 @@ public class SearchController implements Initializable {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 		productTableView.setEditable(false);
+		searchByChoiceBox.getItems().addAll(typesOfSearch);
+
 		productTableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 			double tableWidth = newWidth.doubleValue();
 			double columnWidth = tableWidth / 6.0;
@@ -118,12 +125,39 @@ public class SearchController implements Initializable {
 
 			return cell;
 		});
+		Container container = Container.getInstance();
+		int currentUserID = container.getId();
 
-		String productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts WHERE is_whitelisted = 1";
-
+		// if user is admin check
+		int is_admin = 0;
+		String adminCheck = "SELECT is_admin FROM users WHERE user_id = ?";
 		try {
-			Statement statement = connectDB.createStatement();
-			ResultSet queryOutput = statement.executeQuery(productViewQuery);
+			PreparedStatement adminCheckStatementStatement = connectDB.prepareStatement(adminCheck);
+			adminCheckStatementStatement.setInt(1, currentUserID);
+			ResultSet queryOutputIsAdmin = adminCheckStatementStatement.executeQuery();
+			while (queryOutputIsAdmin.next()) {
+				is_admin = queryOutputIsAdmin.getInt("is_admin");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String productViewQuery = "";
+		if (is_admin == 1) {
+			productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts";
+		} else {
+			productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts WHERE is_whitelisted = 1 OR user_id = ?";
+		}
+		try {
+			ResultSet queryOutput = null;
+
+			if (is_admin == 1) {
+				PreparedStatement statement = connectDB.prepareStatement(productViewQuery);
+				queryOutput = statement.executeQuery();
+			} else {
+				PreparedStatement statement = connectDB.prepareStatement(productViewQuery);
+				statement.setInt(1, currentUserID); // Set the value for the parameter user_id
+				queryOutput = statement.executeQuery();
+			}
 
 			while (queryOutput.next()) {
 				int queryProductID = queryOutput.getInt("product_id");
@@ -157,20 +191,37 @@ public class SearchController implements Initializable {
 					b -> true);
 			searchKeyword.textProperty().addListener((observable, oldValue, newValue) -> {
 				filteredData.setPredicate(productSearchModel -> {
-					if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+					if (newValue == null || newValue.isBlank()) {
 						return true;
 					}
-					String keywordSearch = newValue.toLowerCase();
+					String keywordSearch = newValue.toLowerCase().trim();
 
-					if (productSearchModel.getName().toLowerCase().indexOf(keywordSearch) > -1) {
-						return true;
-					} else if (productSearchModel.getDescription().toLowerCase().indexOf(keywordSearch) > -1) {
-						return true;
-					} else if (productSearchModel.getBrand().toLowerCase().indexOf(keywordSearch) > -1) {
-						return true;
+					String searchBy = searchByChoiceBox.getValue();
+					if (searchBy == null || searchBy.isEmpty() || searchBy.isBlank()) {
+
+						return productSearchModel.getName().toLowerCase().contains(keywordSearch)
+								|| productSearchModel.getDescription().toLowerCase().contains(keywordSearch)
+								|| String.valueOf(productSearchModel.getBrand()).toLowerCase().contains(keywordSearch);
 					} else {
-						return false;
+						if (searchBy.equals("By Information")) {
+
+							return productSearchModel.getName().toLowerCase().contains(keywordSearch)
+									|| productSearchModel.getDescription().toLowerCase().contains(keywordSearch)
+									|| String.valueOf(productSearchModel.getBrand()).toLowerCase()
+											.contains(keywordSearch);
+
+						} else if (searchBy.equals("By Protein")) {
+
+							return Double.toString(productSearchModel.getProtein()).toLowerCase()
+									.contains(keywordSearch);
+
+						} else if (searchBy.equals("By Calories")) {
+
+							return Integer.toString(productSearchModel.getCalories_per_100()).toLowerCase()
+									.contains(keywordSearch);
+						}
 					}
+					return false;
 				});
 			});
 

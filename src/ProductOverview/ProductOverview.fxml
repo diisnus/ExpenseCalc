@@ -21,7 +21,7 @@
    <top>
       <GridPane prefHeight="79.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -58,6 +58,42 @@
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../Res/more-icons/edit-pencil.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="deleteProductButotn" mnemonicParsing="false" onAction="#deleteProductButotnClick" text="Delete Product">
+               <GridPane.margin>
+                  <Insets left="20.0" top="15.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="requestWhitelistButton" mnemonicParsing="false" onAction="#requestWhitelistButtonClick" text="Request Whitelist" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/whitelist.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="acceptWhitelistButton" mnemonicParsing="false" onAction="#acceptWhitelistButtonClick" text="Accept Whitelist" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets top="15.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/tick.png" />
                      </image>
                   </ImageView>
                </graphic>
