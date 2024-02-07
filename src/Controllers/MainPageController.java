@@ -4,9 +4,14 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import DBConnection.DBHandler;
 import ProductOverview.IdContainer;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -95,8 +100,13 @@ public class MainPageController implements Initializable {
 	private double lastWidth;
 	private double lastHeight;
 
+	private Connection connectDB;
+	private DBHandler handler;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		handler = new DBHandler();
+		connectDB = handler.getConnection();
 		bindButtonSizeToScene(favouritesButton);
 		bindButtonSizeToScene(mostPopularButton);
 		bindButtonSizeToScene(yourItemsButton);
@@ -153,6 +163,32 @@ public class MainPageController implements Initializable {
 		});
 		fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("maximize.png")));
 
+		Container container = Container.getInstance();
+		int currentUserID = container.getId();
+
+		// if user is admin check
+		int is_admin = 0;
+		String adminCheck = "SELECT is_admin FROM users WHERE user_id = ?";
+		try {
+			PreparedStatement adminCheckStatementStatement = connectDB.prepareStatement(adminCheck);
+			adminCheckStatementStatement.setInt(1, currentUserID);
+			ResultSet queryOutputIsAdmin = adminCheckStatementStatement.executeQuery();
+			while (queryOutputIsAdmin.next()) {
+				is_admin = queryOutputIsAdmin.getInt("is_admin");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(is_admin ==1) {
+			adminTablesButton.setVisible(true);
+		}
+		else {
+			adminTablesButton.setVisible(false);
+		}
+
+		
+		
 	}
 
 	public static void adjustStageSize(Stage stage) {
