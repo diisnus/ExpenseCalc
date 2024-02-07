@@ -20,11 +20,8 @@
 			<children>
 				<Button fx:id="quickActions" mnemonicParsing="false" onAction="#quickActionsClicked" prefHeight="50.0" prefWidth="55.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
 					<VBox.margin>
-						<Insets bottom="200.0" />
+						<Insets bottom="50.0" />
 					</VBox.margin>
-					<padding>
-						<Insets bottom="20.0" />
-					</padding>
 					<graphic>
 						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
 							<image>
@@ -33,6 +30,18 @@
 						</ImageView>
 					</graphic>
 				</Button>
+            <Button fx:id="adminTablesButton" mnemonicParsing="false" onAction="#adminTablesButtonClick">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../Res/more-icons/admin_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
 				<Button fx:id="homeButton" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#homeButtonClicked" prefHeight="50.0" prefWidth="50.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
 					<VBox.margin>
 						<Insets bottom="30.0" />
@@ -78,7 +87,7 @@
 						</ImageView>
 					</graphic>
 					<VBox.margin>
-						<Insets bottom="200.0" />
+						<Insets bottom="240.0" />
 					</VBox.margin>
 				</Button>
 			</children>

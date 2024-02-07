@@ -51,6 +51,18 @@
     -fx-padding: 10.0 0.0 0.0 0.0; 
 }
 
+#adminTablesButton{
+    -fx-background-color: transparent;
+    -fx-content-display: bottom;
+    -fx-graphic-text-gap: 0.0em; 
+    -fx-text-alignment: center;
+    -fx-font-size: 3.0em; 
+    -fx-padding: 10.0 0.0 0.0 0.0; 
+    -fx-font-weight: bold;
+    -fx-text-fill: lightblue; 
+    -fx-padding: 10.0 0.0 0.0 0.0; 
+}
+
 #yourItemsButton {
     -fx-background-color: transparent;
     -fx-content-display: bottom;
@@ -61,6 +73,12 @@
     -fx-font-weight: bold;
     -fx-text-fill: lightblue; 
     -fx-padding: 10.0 0.0 0.0 0.0; 
+}
+
+#adminTablesButton:hover {
+	-fx-background-color: #28242c;
+	-fx-text-fill: transparent;
+	-fx-cursor: hand;
 }
 
 .custom-button:hover {

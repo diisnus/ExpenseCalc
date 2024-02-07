@@ -79,6 +79,10 @@ public class MainPageController implements Initializable {
 	@FXML
 	private Pane titleBar;
 
+	
+    @FXML
+    private Button adminTablesButton;
+    
 	@FXML
 	private Button fullScreen;
 
@@ -244,6 +248,11 @@ public class MainPageController implements Initializable {
 
 	}
 
+    @FXML
+    void adminTablesButtonClick() {
+
+    }
+	
 	@FXML
 	void yourItemsButtonClick() {
 		LoaderClass load = LoaderClass.getInstance();
