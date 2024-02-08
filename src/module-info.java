@@ -24,4 +24,6 @@ module ExpenseCalc {
 	exports Settings; 
 	opens AccountManagement to javafx.fxml;
 	exports AccountManagement; 
+	opens AdminTables to javafx.fxml;
+	exports AdminTables; 
 }

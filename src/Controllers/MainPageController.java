@@ -286,7 +286,8 @@ public class MainPageController implements Initializable {
 
     @FXML
     void adminTablesButtonClick() {
-
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/AdminTables/AdminTables.fxml");
     }
 	
 	@FXML

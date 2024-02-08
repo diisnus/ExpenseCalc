@@ -20,7 +20,7 @@
 			<children>
 				<Button fx:id="quickActions" mnemonicParsing="false" onAction="#quickActionsClicked" prefHeight="50.0" prefWidth="55.0" styleClass="custom-button" stylesheets="@../CSS/MainPageCss.css">
 					<VBox.margin>
-						<Insets bottom="80.0" />
+						<Insets bottom="80.0" top="25.0" />
 					</VBox.margin>
 					<graphic>
 						<ImageView fitHeight="50.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
@@ -87,7 +87,7 @@
 						</ImageView>
 					</graphic>
 					<VBox.margin>
-						<Insets bottom="240.0" />
+						<Insets bottom="210.0" />
 					</VBox.margin>
 				</Button>
 			</children>

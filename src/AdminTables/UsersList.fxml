@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="822.0" stylesheets="@../CSS/UserList.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminTables.UsersListController">
+   <children>
+      <Button fx:id="close" layoutX="376.0" layoutY="457.0" mnemonicParsing="false" onAction="#closeClick" prefHeight="35.0" prefWidth="70.0" text="Close" />
+      <TableView fx:id="tableView" layoutX="61.0" layoutY="39.0" prefHeight="400.0" prefWidth="700.0">
+         <columns>
+            <TableColumn fx:id="usernameColumn" prefWidth="157.0" text="Username" />
+            <TableColumn fx:id="emailColumn" prefWidth="230.0" text="Email" />
+            <TableColumn fx:id="adminColumn" prefWidth="63.0" text="Admin" />
+            <TableColumn fx:id="makeAdminColumn" prefWidth="157.0" />
+            <TableColumn fx:id="deleteColumn" prefWidth="91.0" text="Delete" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

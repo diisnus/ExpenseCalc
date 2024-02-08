@@ -1,4 +1,4 @@
-package QuickActionsPack;
+package AdminTables;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -10,8 +10,8 @@ import java.util.ResourceBundle;
 
 import Controllers.LoaderClass;
 import DBConnection.DBHandler;
-import ProductOverview.DataEdit;
 import ProductOverview.IdContainer;
+import QuickActionsPack.RecentlyAddedInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +25,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class RecentlyAddedController implements Initializable {
+public class RequestedWhitelistItemsController implements Initializable{
+
 	private Connection connectDB;
 	private DBHandler handler;
 	@FXML
@@ -67,8 +68,8 @@ public class RecentlyAddedController implements Initializable {
 		tableView.setEditable(false);
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
-
-		String selectProducts = "SELECT product_id, product_name, product_brand FROM groceryproducts WHERE is_whitelisted = 1 ORDER BY product_id DESC LIMIT 10;";
+		int products[];
+		String selectProducts = "SELECT product_id, product_name, product_brand FROM groceryproducts WHERE req_whitelist = 1";
 		String selectMacros = "SELECT calories_per_100g, protein FROM macros WHERE product_id = ?";
 		try {
 			PreparedStatement selectInfoStatement = connectDB.prepareStatement(selectProducts);
@@ -98,7 +99,7 @@ public class RecentlyAddedController implements Initializable {
 			 proteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
 			 
 			    tableView.setFixedCellSize(33);
-			    int maxRows = 10;
+			    int maxRows = 30;
 			    int numRows = Math.min(recentlyAddedInfoList.size(), maxRows);
 
 			    double preferredHeight = 10 * 33 + 30;
