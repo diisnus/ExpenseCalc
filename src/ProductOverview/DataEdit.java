@@ -9,7 +9,15 @@ public class DataEdit {
         this.macroValue = macroValue;
     }
 
-    public String getMacroName() {
+    public void setMacroName(String macroName) {
+		this.macroName = macroName;
+	}
+
+	public void setMacroValue(String macroValue) {
+		this.macroValue = macroValue;
+	}
+
+	public String getMacroName() {
         return macroName;
     }
 

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import AdminTables.UserListInfo;
+import Controllers.PopUpWindow;
 import DBConnection.DBHandler;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +16,10 @@ import javafx.scene.control.TableView;
 
 public class EditButtonCell extends TableCell<DataEdit, Void> {
 	private final Button makeAdminButton;
-    private final Connection connection;
+    private final TableView<DataEdit> tableView;
 
-    public EditButtonCell(Connection connection, ArrayList dataEditList) {
-    	this.connection = connection;
+    public EditButtonCell( ArrayList dataEditList, TableView<DataEdit> tableView) {
+    	 this.tableView = tableView;
         this.makeAdminButton = new Button("Edit");
         this.makeAdminButton.setOnAction(event -> {
         	selectedItemEdit();
@@ -29,152 +30,199 @@ public class EditButtonCell extends TableCell<DataEdit, Void> {
     private void selectedItemEdit() {
     	DataEdit selectedItem = getTableView().getItems().get(getIndex());
         String selectedRowName = selectedItem.getMacroName();
-        String selectedRowvalue = selectedItem.getMacroValue();
         
 
     	if(selectedRowName.equals("Name")) {
-            System.out.println("Name");
             changeName();
 
     	} else if(selectedRowName.equals("Brand")) {
-            System.out.println("Brand");
             changeBrand();
 
     	} else if(selectedRowName.equals("Description")) {
-            System.out.println("Description");
             changeDescription();
 
        	} else if(selectedRowName.equals("Priced By")) {
-            System.out.println("Priced By");
             changePricedBy();
 
        	} else if(selectedRowName.equals("Calories")) {
-            System.out.println("Calories");
             changeCalories();
 
        	} else if(selectedRowName.equals("Protein")) {
-            System.out.println("Name");
             changeProtein();
 
        	} else if(selectedRowName.equals("Carbs")) {
-            System.out.println("Carbs");
             changeCarbs();
 
        	} else if(selectedRowName.equals("Sugar")) {
-            System.out.println("Sugar");
             changeSugar();
 
        	} else if(selectedRowName.equals("Fiber")) {
-            System.out.println("Fiber");
             changeFiber();
 
        	} else if(selectedRowName.equals("Fat")) {
-            System.out.println("Fat");
             changeFat();
 
        	} else if(selectedRowName.equals("Saturated Fat")) {
-            System.out.println("Saturated");
             changeSaturatedFat();
 
        	} else if(selectedRowName.equals("Salt")) {
-            System.out.println("Salt");
             changeSalt();
 
        	} 
     	
     }
-
+    private void updateCellValue(String newValue) {
+        int rowIndex = getIndex();
+        if (rowIndex >= 0 && rowIndex < tableView.getItems().size()) {
+            DataEdit item = tableView.getItems().get(rowIndex);
+            item.setMacroValue(newValue);
+            tableView.refresh();
+        }
+    }
 	private void changeName() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();	
+		String changeNameStatement = "UPDATE groceryproducts SET product_name = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("String");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
 		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
+
+
 	}
 	
 	private void changeBrand() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE groceryproducts SET product_brand = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("String");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 	
 	private void changeDescription() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE groceryproducts SET description = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("String");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 	
 	private void changePricedBy() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE groceryproducts SET priced_by = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("PricedBy");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);	
 	}
 	
 	private void changeCalories() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE macros SET calories_per_100g = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Int");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 	
 	private void changeProtein() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();
+		String changeNameStatement = "UPDATE macros SET protein = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Double");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 		
 	}
 	
 	private void changeSugar() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE macros SET sugar = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Double");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 	
 	private void changeFiber() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE macros SET fiber = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Double");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 	
 	private void changeFat() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE macros SET fat = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Double");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 	
 	private void changeCarbs() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE macros SET  carbohydrates  = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Double");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 
 	private void changeSaturatedFat() {
-		IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();		
+		String changeNameStatement = "UPDATE macros SET saturated_fat = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Double");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 	
     private void changeSalt() {
-    	IdContainer productIdContainer = IdContainer.getInstance();
-		int productid = productIdContainer.getId();
-    	
+		String changeNameStatement = "UPDATE macros SET salt = ? WHERE product_id = ?";
+		ChangeProductInformation changeProductInformation = ChangeProductInformation.getInstance();
+		changeProductInformation.setStatement(changeNameStatement);
+		changeProductInformation.setType("Double");
+		PopUpWindow.showCustomDialog("", "/ProductOverview/EditDifferentStringInfo.fxml");
+		
+		String newValueForTable = changeProductInformation.getNewValue();
+        updateCellValue(newValueForTable);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	@Override
+    @Override
     protected void updateItem(Void item, boolean empty) {
-        super.updateItem(item, empty);
-        if (empty) {
-            setGraphic(null);
-        } else {
-            setGraphic(makeAdminButton);
-        }
+    	super.updateItem(item, empty);
+    	if (empty) {
+    		setGraphic(null);
+    	} else {
+    		setGraphic(makeAdminButton);
+    	}
     }
+
+
 }

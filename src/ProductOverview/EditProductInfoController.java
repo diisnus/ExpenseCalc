@@ -69,6 +69,8 @@ public class EditProductInfoController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/ProductOverview/ProductOverview.fxml");
 	}
 	private double xOffset = 0;
 	private double yOffset = 0;
@@ -174,7 +176,7 @@ public class EditProductInfoController implements Initializable {
 
 		    nameColumn.setCellValueFactory(new PropertyValueFactory<>("macroName"));
 		    valueColumn.setCellValueFactory(new PropertyValueFactory<>("macroValue"));
-	        editColumn.setCellFactory(column -> new EditButtonCell(connectDB,dataEditList));
+	        editColumn.setCellFactory(column -> new EditButtonCell(dataEditList, editTable));
 
 		    
 		    editTable.setFixedCellSize(33);

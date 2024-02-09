@@ -433,7 +433,7 @@ public class ProductOverviewController implements Initializable {
 
 		LoaderClass load = LoaderClass.getInstance();
 		load.homeFXML();
-
+		
 		PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/DeletedSuccessfully.fxml");
 
 	}
