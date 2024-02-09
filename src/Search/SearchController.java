@@ -184,6 +184,7 @@ public class SearchController implements Initializable {
 			productDescriptionTableColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 			productKcalTableColumn.setCellValueFactory(new PropertyValueFactory<>("calories_per_100"));
 			productProteinTableColum.setCellValueFactory(new PropertyValueFactory<>("protein"));
+		    System.out.println(productSearchModelObservableList.size());
 
 			productTableView.setItems(productSearchModelObservableList);
 

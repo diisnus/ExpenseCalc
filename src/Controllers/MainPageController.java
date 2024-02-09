@@ -97,9 +97,6 @@ public class MainPageController implements Initializable {
 	private double xOffset = 0;
 	private double yOffset = 0;
 
-	private double lastWidth;
-	private double lastHeight;
-
 	private Connection connectDB;
 	private DBHandler handler;
 
@@ -137,8 +134,6 @@ public class MainPageController implements Initializable {
 
 		titleBar.setOnMouseClicked(event -> {
 			Stage stage = (Stage) titleBar.getScene().getWindow();
-			lastWidth = stage.getWidth();
-			lastHeight = stage.getHeight();
 			if (event.getClickCount() == 2) {
 				if (stage.getWidth() > 1300) {
 					fullscreenImageView.setImage(new Image(getClass().getResourceAsStream("maximize.png")));
@@ -218,8 +213,7 @@ public class MainPageController implements Initializable {
 	@FXML
 	void fullScreenClick() {
 		Stage stage = (Stage) titleBar.getScene().getWindow();
-		lastWidth = stage.getWidth();
-		lastHeight = stage.getHeight();
+
 
 		if (stage.getWidth() > 1300) {
 

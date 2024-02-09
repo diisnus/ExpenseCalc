@@ -68,7 +68,6 @@ public class RequestedWhitelistItemsController implements Initializable{
 		tableView.setEditable(false);
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
-		int products[];
 		String selectProducts = "SELECT product_id, product_name, product_brand FROM groceryproducts WHERE req_whitelist = 1";
 		String selectMacros = "SELECT calories_per_100g, protein FROM macros WHERE product_id = ?";
 		try {

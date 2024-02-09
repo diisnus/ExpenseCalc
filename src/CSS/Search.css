@@ -3,6 +3,10 @@
 
 }
 
+#titleBar{
+			-fx-background-color:  #080A0C;	
+}
+
 #searchKeyword {
 	-fx-background-color: transparent; 
     -fx-text-fill: #ffffff; 

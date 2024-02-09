@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import AdminTables.MakeAdminButtonCell;
 import Controllers.LoaderClass;
 import DBConnection.DBHandler;
 import javafx.collections.FXCollections;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -33,6 +35,14 @@ public class EditProductInfoController implements Initializable {
 	@FXML
 	private AnchorPane anchorPane;
 
+
+    @FXML
+    private HBox titleBar;
+	
+    @FXML
+    private Button closeWindow;
+
+    
 	@FXML
 	private Button close;
 
@@ -47,6 +57,9 @@ public class EditProductInfoController implements Initializable {
 
 	@FXML
 	private TableColumn<DataEdit, String> valueColumn;
+	
+    @FXML
+    private TableColumn<DataEdit, Void> editColumn;
 
 	@FXML
 	void closeClick(ActionEvent event) {
@@ -57,11 +70,27 @@ public class EditProductInfoController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	private double xOffset = 0;
+	private double yOffset = 0;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		editTable.setEditable(false);
 
+		titleBar.setOnMousePressed(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+			stage.setUserData(new double[] { stage.getX(), stage.getY() });
+		});
+
+		titleBar.setOnMouseDragged(event -> {
+			Stage stage = (Stage) titleBar.getScene().getWindow();
+			double newX = event.getScreenX() - xOffset;
+			double newY = event.getScreenY() - yOffset;
+			stage.setX(newX);
+			stage.setY(newY);
+		});
+		
 		IdContainer productIdContainer = IdContainer.getInstance();
 		int productid = productIdContainer.getId();
 
@@ -145,7 +174,9 @@ public class EditProductInfoController implements Initializable {
 
 		    nameColumn.setCellValueFactory(new PropertyValueFactory<>("macroName"));
 		    valueColumn.setCellValueFactory(new PropertyValueFactory<>("macroValue"));
+	        editColumn.setCellFactory(column -> new EditButtonCell(connectDB,dataEditList));
 
+		    
 		    editTable.setFixedCellSize(33);
 		    int maxRows = 12;
 		    int numRows = Math.min(dataEditList.size(), maxRows);
