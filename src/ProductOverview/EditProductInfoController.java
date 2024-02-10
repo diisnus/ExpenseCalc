@@ -176,7 +176,7 @@ public class EditProductInfoController implements Initializable {
 
 		    nameColumn.setCellValueFactory(new PropertyValueFactory<>("macroName"));
 		    valueColumn.setCellValueFactory(new PropertyValueFactory<>("macroValue"));
-	        editColumn.setCellFactory(column -> new EditButtonCell(dataEditList, editTable));
+	        editColumn.setCellFactory(column -> new EditButtonCell(editTable));
 
 		    
 		    editTable.setFixedCellSize(33);
@@ -190,18 +190,6 @@ public class EditProductInfoController implements Initializable {
 		    System.out.println(list.size());
 		    editTable.setItems(list);
 
-		    editTable.setOnMouseClicked(event -> {
-		        if (event.getClickCount() == 2) { 
-		            
-		            DataEdit selectedItem = editTable.getSelectionModel().getSelectedItem();
-		            
-		            if (selectedItem != null) {
-		                System.out.println("Double-clicked on: " + selectedItem.getMacroName() + " - " + selectedItem.getMacroValue());
-		                //LoaderClass load = LoaderClass.getInstance();
-						//load.loadFXML("/Search/Search.fxml");
-		            }
-		        }
-		    });
 		    
 		} catch (SQLException e) {
 		    e.printStackTrace();
