@@ -151,7 +151,8 @@
 #editButton,
 #deleteProductButotn,
 #requestWhitelistButton,
-#acceptWhitelistButton{
+#acceptWhitelistButton,
+#removeWhitelistButton{
 	-fx-background-color: #1a1c1d;
     -fx-font-weight: bold;
     -fx-text-fill: #aca59a; 

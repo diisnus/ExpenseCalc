@@ -102,7 +102,7 @@
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../Res/more-icons/tick.png" />
+                        <Image url="@../../Res/more-icons/exit.png" />
                      </image>
                   </ImageView>
                </graphic>
