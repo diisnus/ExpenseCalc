@@ -39,8 +39,13 @@ import java.text.ParseException;
 
 public class ProductOverviewController implements Initializable {
 
+	
+	
     @FXML
     private Button acceptWhitelistButton;
+	
+	@FXML
+    private Button removeWhitelistButton;
 	
 	@FXML
 	private Button requestWhitelistButton;
@@ -262,6 +267,11 @@ public class ProductOverviewController implements Initializable {
 				} else {
 					requestWhitelistButton.setVisible(false);
 				}
+				if(is_admin ==1 && itemIsWhitelisted == 1) {
+					removeWhitelistButton.setVisible(true);
+				}else {
+					removeWhitelistButton.setVisible(false);
+				}		
 				
 				if(is_admin ==1 && itemIsRequestedToWhitelist == 1 && itemIsWhitelisted == 0) {
 					acceptWhitelistButton.setVisible(true);
@@ -485,6 +495,28 @@ public class ProductOverviewController implements Initializable {
 		PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/WhitelistedSuccessfully.fxml");
 
 	}
+    
+    @FXML
+    void removeWhitelistButtonClick() {
+    	IdContainer productIdContainer = IdContainer.getInstance();
+		int productid = productIdContainer.getId();
+
+		String updateReqWhitelistToOne = "UPDATE groceryproducts SET is_whitelisted = 0, req_whitelist = 0 WHERE product_id = ?";
+
+		try {
+			PreparedStatement updateReqWhitelistToOneStatement = connectDB.prepareStatement(updateReqWhitelistToOne);
+			updateReqWhitelistToOneStatement.setInt(1, productid);
+			updateReqWhitelistToOneStatement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/ProductOverview/ProductOverview.fxml");
+
+		PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/WhitelistedSuccessfully.fxml");
+
+    }
     	
     
 
