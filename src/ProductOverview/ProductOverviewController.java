@@ -98,6 +98,20 @@ public class ProductOverviewController implements Initializable {
 	@FXML
 	private TableColumn<MacroData, String> valueColumn;
 
+    @FXML
+    private TableView<ItemInfoContainer> tableView2;
+
+	@FXML
+	private TableColumn<ItemInfoContainer, String> informationColumn;
+
+	@FXML
+	private TableColumn<ItemInfoContainer, String> nameOfFieldColumn;
+	
+	//nameOfFieldColumn.setCellValueFactory(new PropertyValueFactory<>("nameValue"));
+	//informationColumn.setCellValueFactory(new PropertyValueFactory<>("valValue"));
+    
+    
+	
 	@FXML
 	void addPriceClick(ActionEvent event) {
 		PopUpWindow.showCustomDialog("", "/ProductOverview/UpdatePrice.fxml");
@@ -251,6 +265,8 @@ public class ProductOverviewController implements Initializable {
 			PreparedStatement selectInfoStatement = connectDB.prepareStatement(selectInformation);
 			selectInfoStatement.setInt(1, productid);
 			ResultSet queryOutputInfo = selectInfoStatement.executeQuery();
+			ArrayList<ItemInfoContainer> infoDataList = new ArrayList<>();
+
 			while (queryOutputInfo.next()) {
 				int user_idThatCreated = queryOutputInfo.getInt("user_id");
 				if (currentUserID == user_idThatCreated || is_admin == 1) {
@@ -284,23 +300,29 @@ public class ProductOverviewController implements Initializable {
 				String pr_descr = queryOutputInfo.getString("description");
 				String pr_pricedby = queryOutputInfo.getString("priced_by");
 				int createdbyuser = queryOutputInfo.getInt("created_by_user");
-				name.setText("The name of the item you are currently looking at is: " + pr_name + ".");
-				name.setWrapText(true);
-
-				brand.setText("It's brand is: " + pr_brand + ".");
-				brand.setWrapText(true);
-
-				description.setText("The product is described as: " + pr_descr + ".");
-				description.setWrapText(true);
 				
-				currencyUsed.setText("The currency for the product displayed is: " + userPrefCurrency + ".");
-				currencyUsed.setWrapText(true);
 
-				pricedBy.setText("The product is priced " + pr_pricedby + ".");
-				pricedBy.setWrapText(true);
-
+				nameOfFieldColumn.setCellValueFactory(new PropertyValueFactory<>("nameValue"));
+				informationColumn.setCellValueFactory(new PropertyValueFactory<>("valValue"));
+				infoDataList.add(new ItemInfoContainer("Name:", pr_name));
+				infoDataList.add(new ItemInfoContainer("Brand:", pr_brand));
+				infoDataList.add(new ItemInfoContainer("Description:", pr_descr));
+				infoDataList.add(new ItemInfoContainer("Priced By:", pr_pricedby));
+				infoDataList.add(new ItemInfoContainer("Currency:", userPrefCurrency));
+				
 
 			}
+			tableView2.setFixedCellSize(55);
+			tableView2.prefHeightProperty()
+					.bind(Bindings.size(tableView2.getItems()).multiply(tableView2.getFixedCellSize()).add(55));
+
+			tableView2.setMaxHeight(8 * tableView2.getFixedCellSize() + 50);
+
+			int maxRows = 5;
+			int numRows = Math.min(infoDataList.size(), maxRows);
+			tableView2.setItems(FXCollections.observableArrayList(infoDataList.subList(0, numRows)));
+			
+			
 
 		} catch (SQLException e) {
 

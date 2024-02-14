@@ -14,7 +14,7 @@
 	-fx-font-size: 40.0px;
 }
 .chart-series-line { 
-    -fx-stroke: red; /* Change 'red' to any color you want */
+    -fx-stroke: red;
 }
 .chart-legend {
 	-fx-background-color: transparent;
