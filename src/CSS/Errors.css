@@ -1,0 +1,18 @@
+#back:hover,
+#close:hover{
+fx-background-color: #2c2e2f; 
+    -fx-border-width: 2px;
+    -fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    -fx-cursor: hand;
+}
+
+
+
+#back{
+	-fx-background-color: #2196f3;
+	-fx-border-radius:6;
+	-fx-border-color: #c9cbd0;
+	 -fx-background-radius:6px;
+	 -fx-background-insets: 0px 0px 0px 0px;
+}

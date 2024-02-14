@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" style="-fx-background-color: #2D3447; -fx-background-radius: 2; -fx-padding: 8; -fx-border-width: 0.5; -fx-border-radius: 6; -fx-border-color: #2196f3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ErrorMessageLoginSignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" style="-fx-background-color: #2D3447; -fx-background-radius: 2; -fx-padding: 8; -fx-border-width: 0.5; -fx-border-radius: 6; -fx-border-color: #2196f3;" stylesheets="@../CSS/Errors.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ErrorMessageLoginSignUpController">
    <children>
       <Label alignment="CENTER" layoutX="112.0" layoutY="50.0" prefHeight="25.0" prefWidth="280.0" style="-fx-text-alignment: center;" text="Whitelisted successfully." textFill="#c9cbd0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>
-      <Button id="button" fx:id="back" layoutX="211.0" layoutY="89.0" mnemonicParsing="false" onAction="#backClicked" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #2196f3; -fx-border-color: #c9cbd0; -fx-border-radius: 6;" text="Back" textFill="#c9cbd0">
+      <Button fx:id="back" layoutX="211.0" layoutY="89.0" mnemonicParsing="false" onAction="#backClicked" prefHeight="31.0" prefWidth="82.0" text="Back" textFill="#c9cbd0">
          <font>
             <Font size="14.0" />
          </font></Button>

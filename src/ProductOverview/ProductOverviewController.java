@@ -17,6 +17,7 @@ import Controllers.Container;
 import Controllers.LoaderClass;
 import Controllers.PopUpWindow;
 import DBConnection.DBHandler;
+import Search.productSearchModel;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -26,13 +27,18 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
+
 import java.text.SimpleDateFormat;
 
 import java.text.ParseException;
@@ -66,21 +72,6 @@ public class ProductOverviewController implements Initializable {
 	private Button editButton;
 
 	@FXML
-	private Label name;
-
-	@FXML
-	private Label brand;
-
-	@FXML
-	private Label currencyUsed;
-
-	@FXML
-	private Label description;
-
-	@FXML
-	private Label pricedBy;
-
-	@FXML
 	private AreaChart<String, Number> areaChartPrices;
 
 	@FXML
@@ -107,10 +98,7 @@ public class ProductOverviewController implements Initializable {
 	@FXML
 	private TableColumn<ItemInfoContainer, String> nameOfFieldColumn;
 	
-	//nameOfFieldColumn.setCellValueFactory(new PropertyValueFactory<>("nameValue"));
-	//informationColumn.setCellValueFactory(new PropertyValueFactory<>("valValue"));
-    
-    
+	
 	
 	@FXML
 	void addPriceClick(ActionEvent event) {
@@ -127,10 +115,16 @@ public class ProductOverviewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
-
+		
+		tableView2.setEditable(false);
 		tableView.setEditable(false);
+		
 		macroColumn.setResizable(false);
 		valueColumn.setResizable(false);
+		
+		informationColumn.setResizable(false);
+		nameOfFieldColumn.setResizable(false);
+		
 		tableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 			double tableWidth = newWidth.doubleValue();
 			double columnWidth = tableWidth / 2.0;
@@ -139,7 +133,43 @@ public class ProductOverviewController implements Initializable {
 			valueColumn.setPrefWidth(columnWidth);
 
 		});
+		
+		tableView2.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+			double tableWidth = newWidth.doubleValue();
+			double columnWidth = tableWidth / 4.0;
 
+			informationColumn.setPrefWidth(columnWidth*3);
+			nameOfFieldColumn.setPrefWidth(columnWidth);
+
+		});
+
+		
+		informationColumn.setCellFactory(tc -> {
+		    TableCell<ItemInfoContainer, String> cell = new TableCell<>();
+		    Text text = new Text();
+		    cell.setGraphic(text);
+		    cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+		    text.setStyle("-fx-fill: rgb(215, 231, 234);"); 
+
+		    text.wrappingWidthProperty().bind(informationColumn.widthProperty());
+
+		    cell.setOnMouseEntered(event -> {
+		        String cellText = cell.getItem();
+		        if (cellText != null && !cellText.isEmpty()) {
+		            Tooltip tooltip = new Tooltip(cellText);
+		            Tooltip.install(text, tooltip);
+		        }
+		    });
+
+		    cell.setOnMouseExited(event -> Tooltip.uninstall(text, null));
+
+		    text.textProperty().bind(cell.itemProperty());
+
+		    return cell;
+		});
+		
+		
+		
 		IdContainer productIdContainer = IdContainer.getInstance();
 		int productid = productIdContainer.getId();
 
@@ -323,7 +353,6 @@ public class ProductOverviewController implements Initializable {
 			tableView2.setItems(FXCollections.observableArrayList(infoDataList.subList(0, numRows)));
 			
 			
-
 		} catch (SQLException e) {
 
 		}

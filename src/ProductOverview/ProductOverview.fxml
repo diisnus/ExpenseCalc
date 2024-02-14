@@ -135,8 +135,11 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
                <GridPane.margin>
-                  <Insets bottom="20.0" right="20.0" />
+                  <Insets bottom="20.0" right="20.0" top="10.0" />
                </GridPane.margin>
+               <padding>
+                  <Insets bottom="-10.0" />
+               </padding>
             </AreaChart>
             <TableView fx:id="tableView" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
               <columns>
@@ -147,7 +150,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </GridPane.margin>
             </TableView>
-            <TableView fx:id="tableView2" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <TableView fx:id="tableView2" GridPane.columnIndex="1">
               <columns>
                 <TableColumn fx:id="nameOfFieldColumn" prefWidth="143.73333740234375" text="Name" />
                 <TableColumn fx:id="informationColumn" prefWidth="355.0" text="Value" />
