@@ -127,7 +127,7 @@
                   <Insets />
                </GridPane.margin>
             </PieChart>
-            <AreaChart fx:id="areaChartPrices" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <AreaChart fx:id="areaChartPrices" title="Prices" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -138,7 +138,7 @@
                   <Insets bottom="20.0" right="20.0" top="10.0" />
                </GridPane.margin>
                <padding>
-                  <Insets bottom="-10.0" />
+                  <Insets bottom="-20.0" />
                </padding>
             </AreaChart>
             <TableView fx:id="tableView" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1">

@@ -26,4 +26,6 @@ module ExpenseCalc {
 	exports AccountManagement; 
 	opens AdminTables to javafx.fxml;
 	exports AdminTables; 
+	opens HboxViewsForItems to javafx.fxml;
+	exports HboxViewsForItems; 
 }

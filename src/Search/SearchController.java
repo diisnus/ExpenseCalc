@@ -85,6 +85,8 @@ public class SearchController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle resource) {
+		System.out.println("before");
+
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 		productTableView.setEditable(false);

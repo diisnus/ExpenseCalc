@@ -181,5 +181,38 @@
 
 .chart-area-symbol { 
 	-fx-shape: "";
-	
+	-fx-background-color: transparent;
 }
+
+.chart-title {
+	-fx-text-fill: lightblue;
+	-fx-font-weight: bold;
+	-fx-effect: dropshadow(gaussian, gray, 2.0, 0.5, 0.0, 0.0);
+	-fx-font-size: 20.0px;
+}
+
+/* CSS to change the color of text in an AreaChart to lightblue */
+.chart-area .chart-plot-background {
+    -fx-background-color: lightblue;
+}
+
+.chart-area .axis {
+    -fx-tick-label-fill: lightblue;
+    -fx-text-fill: lightblue;
+}
+
+.chart-area .axis:label {
+    -fx-text-fill: lightblue;
+}
+
+
+/* CSS to change the color of text in a PieChart to lightblue */
+.chart-pie-label {
+    -fx-fill: lightblue;
+    -fx-font-weight: bold;
+    
+}
+
+
+
+

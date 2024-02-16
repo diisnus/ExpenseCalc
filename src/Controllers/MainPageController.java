@@ -100,6 +100,9 @@ public class MainPageController implements Initializable {
 	private Connection connectDB;
 	private DBHandler handler;
 
+	LoaderClass load = LoaderClass.getInstance();
+
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new DBHandler();
@@ -112,7 +115,7 @@ public class MainPageController implements Initializable {
 		loadCompareChartData();
 		accessUserId();
 		
-		LoaderClass load = LoaderClass.getInstance();
+	
 		load.setBorderPaneMain(borderPaneMain);
 		load.setGridPaneHome(gridPaneHome);
 
@@ -305,7 +308,6 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	void searchButtonClicked() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/Search/Search.fxml");
 	}
 
