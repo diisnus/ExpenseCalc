@@ -191,7 +191,6 @@
 	-fx-font-size: 20.0px;
 }
 
-/* CSS to change the color of text in an AreaChart to lightblue */
 .chart-area .chart-plot-background {
     -fx-background-color: lightblue;
 }
@@ -205,8 +204,12 @@
     -fx-text-fill: lightblue;
 }
 
+.chart-legend > .label {
+    -fx-text-fill: lightblue;
+    -fx-font-weight: bold;
+    
+}
 
-/* CSS to change the color of text in a PieChart to lightblue */
 .chart-pie-label {
     -fx-fill: lightblue;
     -fx-font-weight: bold;

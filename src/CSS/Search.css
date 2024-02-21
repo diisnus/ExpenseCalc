@@ -189,3 +189,16 @@
     -fx-cursor: hand;
 
 }
+
+.button{
+	 -fx-background-color: #1a1c1d;
+    -fx-font-weight: bold;
+    -fx-text-fill: #aca59a; 
+    -fx-font-family: serif;
+    -fx-font-size: 15px;
+    -fx-border-width: 2px;
+    -fx-border-color: #242838;
+    -fx-border-radius:12px;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 0px 0px 0px 0px;
+}

@@ -113,11 +113,9 @@ public class FavouritesController implements Initializable {
 	    }
 		
 		getProductInformationAndPopulateVBoxes(starredProductIds, informationContainerListFavourites, FavouritesVbox);
-		getProductInformationAndPopulateVBoxes(suggestedProductIds, informationContainerListSuggestions,
-				RandomThatYouMightLIkeVbox);
+		getProductInformationAndPopulateVBoxes(suggestedProductIds, informationContainerListSuggestions, RandomThatYouMightLIkeVbox);
 	}
 
-	
 	
 	private void getProductInformationAndPopulateVBoxes(List<Integer> productIds,
 			ArrayList<InformationContainer> infoContainerList, VBox vbox) {
