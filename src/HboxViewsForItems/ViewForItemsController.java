@@ -101,7 +101,6 @@ public class ViewForItemsController extends HBox implements Initializable {
             tableView.setPrefHeight(preferredHeight);
             ObservableList<InformationForViewTable> list = FXCollections
                     .observableArrayList(infroList.subList(0, numRows));
-            System.out.println(list.size());
             tableView.setItems(list);
         } catch (SQLException e) {
             e.printStackTrace();

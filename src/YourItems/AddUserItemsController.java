@@ -152,7 +152,7 @@ public class AddUserItemsController implements Initializable {
 		} else {
 
 			connection = handler.getConnection();
-			String insert = "INSERT INTO groceryproducts(user_id, product_name, product_brand, description, priced_by, is_whitelisted, created_by_user) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String insert = "INSERT INTO groceryproducts(user_id, product_name, product_brand, description, priced_by, is_whitelisted, created_by_user, req_whitelist) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			String insertMacros = "INSERT INTO macros(product_id, calories_per_100g, protein, carbohydrates, sugar, fiber, fat, saturated_fat, salt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
 
@@ -166,6 +166,7 @@ public class AddUserItemsController implements Initializable {
 				insertStatement.setString(5, choiceper);
 				insertStatement.setInt(6, 0); // whitelisted = 1
 				insertStatement.setInt(7, 1); // created by user = 1
+				insertStatement.setInt(8, 0); // req whitelist by user = 1
 
 				int rowsAffected = insertStatement.executeUpdate();
 				if (rowsAffected > 0) {

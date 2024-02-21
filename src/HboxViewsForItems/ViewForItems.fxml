@@ -10,7 +10,7 @@
 	<children>
 		<PieChart fx:id="macroPieChart" maxWidth="200.0" minHeight="100.0">
 			<HBox.margin>
-				<Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
+				<Insets bottom="20.0" left="10.0" right="35.0" top="20.0" />
 			</HBox.margin>
 		</PieChart>
 		<TableView fx:id="tableView">

@@ -7,13 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import Controllers.Container;
+import Controllers.LoaderClass;
 import DBConnection.DBHandler;
 import HboxViewsForItems.InformationContainer;
 import HboxViewsForItems.ViewForItemsController;
+import ProductOverview.IdContainer;
 import ProductOverview.MacroData;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,23 +53,26 @@ public class FavouritesController implements Initializable {
 	private Connection connectDB;
 	private DBHandler handler;
 
+	private List<Integer> allwhitelistedProductIds = new ArrayList<>();
+
 	private List<Integer> starredProductIds = new ArrayList<>();
-	ArrayList<InformationContainer> informationContainerList = new ArrayList<>();
+	private List<Integer> suggestedProductIds = new ArrayList<>();
+
+	ArrayList<InformationContainer> informationContainerListFavourites = new ArrayList<>();
+	ArrayList<InformationContainer> informationContainerListSuggestions = new ArrayList<>();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 
-		FavouritesVbox.setFillWidth(true);
-		//FavouritesVbox.prefWidthProperty().bind(scrollPaneFavourites.prefWidthProperty());
-//		scrollPaneFavourites.prefWidthProperty().addListener((obs, oldValue, newValue) -> {
-//			FavouritesVbox.setMinWidth(newValue.doubleValue());
-//		    FavouritesVbox.setMaxWidth(newValue.doubleValue());
-//		});
-		
+		FavouritesVbox.prefWidthProperty().bind(scrollPaneFavourites.widthProperty());
+		RandomThatYouMightLIkeVbox.prefWidthProperty().bind(scrollPaneRandomThatYouMightLIke.widthProperty());
+
 		Container container = Container.getInstance();
 		int currentUserID = container.getId();
+
+		// accessing ids for favourites
 
 		String selectStarredItemsIds = "SELECT product_id FROM starred WHERE user_id = ? AND is_starred = 1";
 		try {
@@ -80,51 +86,50 @@ public class FavouritesController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	    
+	    // access all whitelisted ids
+		String selectTheNumberOfAllRows = "SELECT product_id FROM groceryproducts WHERE is_whitelisted = 1";
+		try {
+			PreparedStatement statementselectTheNumberOfAllRows = connectDB.prepareStatement(selectTheNumberOfAllRows);
+			ResultSet resultSetstatementselectTheNumberOfAllRows = statementselectTheNumberOfAllRows.executeQuery();
 
-		for (int i = 0; i < starredProductIds.size(); i++) {
-			int productId = starredProductIds.get(i);
-			String selectMacrosForStarredItems = "SELECT calories_per_100g, protein, carbohydrates, sugar, fiber, fat, saturated_fat, salt FROM "
-					+ "macros WHERE product_id = ?";
-			// accessing macros
+			while (resultSetstatementselectTheNumberOfAllRows.next()) {
+				int productId = resultSetstatementselectTheNumberOfAllRows.getInt("product_id");
+				allwhitelistedProductIds.add(productId);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		Collections.shuffle(allwhitelistedProductIds);
+
+	    if (allwhitelistedProductIds.size() < 10) {
+	        suggestedProductIds.addAll(allwhitelistedProductIds);
+	        return;
+	    }
+	    for (int i = 0; i < 10; i++) {
+	        suggestedProductIds.add(5);
+	    }
+		
+		getProductInformationAndPopulateVBoxes(starredProductIds, informationContainerListFavourites, FavouritesVbox);
+		getProductInformationAndPopulateVBoxes(suggestedProductIds, informationContainerListSuggestions,
+				RandomThatYouMightLIkeVbox);
+	}
+
+	
+	
+	private void getProductInformationAndPopulateVBoxes(List<Integer> productIds,
+			ArrayList<InformationContainer> infoContainerList, VBox vbox) {
+		for (int productId : productIds) {
 			try {
-				PreparedStatement selectMacrosForStarredItemsStatement = connectDB
-						.prepareStatement(selectMacrosForStarredItems);
-				selectMacrosForStarredItemsStatement.setInt(1, productId);
-				ResultSet queryOutputMacrosForStarredItems = selectMacrosForStarredItemsStatement.executeQuery();
-				int calories = 0;
-				double protein = 0, carbs = 0, sugar = 0, fiber = 0, fat = 0, sat_fat = 0, salt = 0;
-				while (queryOutputMacrosForStarredItems.next()) {
-					calories = queryOutputMacrosForStarredItems.getInt("calories_per_100g");
-					protein = queryOutputMacrosForStarredItems.getDouble("protein");
-					carbs = queryOutputMacrosForStarredItems.getDouble("carbohydrates");
-					sugar = queryOutputMacrosForStarredItems.getDouble("sugar");
-					fiber = queryOutputMacrosForStarredItems.getDouble("fiber");
-					fat = queryOutputMacrosForStarredItems.getDouble("fat");
-					sat_fat = queryOutputMacrosForStarredItems.getDouble("saturated_fat");
-					salt = queryOutputMacrosForStarredItems.getDouble("salt");
-
-				}
-				String selectNameForStarredItems = "SELECT product_name, product_brand FROM groceryproducts WHERE product_id = ?";
-
-				PreparedStatement selectNameForStarredItemsStatement = connectDB
-						.prepareStatement(selectNameForStarredItems);
-				selectNameForStarredItemsStatement.setInt(1, productId);
-				ResultSet queryOutputNameForStarredItems = selectNameForStarredItemsStatement.executeQuery();
-				while (queryOutputNameForStarredItems.next()) {
-					String name = queryOutputNameForStarredItems.getString("product_name");
-					String brand = queryOutputNameForStarredItems.getString("product_brand");
-
-					informationContainerList.add(new InformationContainer(name, brand, calories, protein, carbs, sugar,
-							fiber, fat, sat_fat, salt, productId));
-
-				}
-
+				InformationContainer infoContainer = getProductInformation(productId);
+				infoContainerList.add(infoContainer);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-        FavouritesVbox.setAlignment(Pos.CENTER);
-		for (InformationContainer container1 : informationContainerList) {
+		for (InformationContainer container1 : infoContainerList) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/HboxViewsForItems/ViewForItems.fxml"));
 			try {
 				HBox productHBox = loader.load();
@@ -134,14 +139,67 @@ public class FavouritesController implements Initializable {
 				productHBox.setAlignment(Pos.CENTER);
 				productHBox.setOnMouseClicked(event -> {
 					if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+						int productId = container1.getProduct_id();
+						IdContainer idcontainer = IdContainer.getInstance();
+						idcontainer.setId(productId);
+
+						String updatePopularity = "UPDATE groceryproducts SET popularity = popularity + 1 WHERE product_id = ?";
+						try {
+							PreparedStatement updatePopularityStatement = connectDB.prepareStatement(updatePopularity);
+							updatePopularityStatement.setInt(1, productId);
+							updatePopularityStatement.executeUpdate();
+
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+
+						LoaderClass load = LoaderClass.getInstance();
+						load.loadFXML("/ProductOverview/ProductOverview.fxml");
 						System.out.print(container1.getProduct_id());
 					}
 				});
-				FavouritesVbox.getChildren().add(productHBox);
+				vbox.getChildren().add(productHBox);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
+	private InformationContainer getProductInformation(int productId) throws SQLException {
+		InformationContainer container = null;
+
+		// get macros
+		String selectMacros = "SELECT calories_per_100g, protein, carbohydrates, sugar, fiber, fat, saturated_fat, salt FROM macros WHERE product_id = ?";
+		PreparedStatement selectMacrosStmt = connectDB.prepareStatement(selectMacros);
+		selectMacrosStmt.setInt(1, productId);
+		ResultSet macrosResult = selectMacrosStmt.executeQuery();
+		int calories = 0;
+		double protein = 0, carbs = 0, sugar = 0, fiber = 0, fat = 0, sat_fat = 0, salt = 0;
+		while (macrosResult.next()) {
+			calories = macrosResult.getInt("calories_per_100g");
+			protein = macrosResult.getDouble("protein");
+			carbs = macrosResult.getDouble("carbohydrates");
+			sugar = macrosResult.getDouble("sugar");
+			fiber = macrosResult.getDouble("fiber");
+			fat = macrosResult.getDouble("fat");
+			sat_fat = macrosResult.getDouble("saturated_fat");
+			salt = macrosResult.getDouble("salt");
+
+		}
+
+		// get name and brand
+		String selectName = "SELECT product_name, product_brand FROM groceryproducts WHERE product_id = ?";
+		PreparedStatement selectNameStmt = connectDB.prepareStatement(selectName);
+		selectNameStmt.setInt(1, productId);
+		ResultSet nameResult = selectNameStmt.executeQuery();
+
+		if (nameResult.next()) {
+			String name = nameResult.getString("product_name");
+			String brand = nameResult.getString("product_brand");
+			container = new InformationContainer(name, brand, calories, protein, carbs, sugar, fiber, fat, sat_fat,
+					salt, productId);
+		}
+
+		return container;
+	}
 }

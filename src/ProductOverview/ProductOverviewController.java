@@ -346,7 +346,7 @@ public class ProductOverviewController implements Initializable {
 			tableView2.prefHeightProperty()
 					.bind(Bindings.size(tableView2.getItems()).multiply(tableView2.getFixedCellSize()).add(55));
 
-			tableView2.setMaxHeight(8 * tableView2.getFixedCellSize() + 50);
+			tableView2.setMaxHeight(5 * tableView2.getFixedCellSize() + 30);
 
 			int maxRows = 5;
 			int numRows = Math.min(infoDataList.size(), maxRows);
