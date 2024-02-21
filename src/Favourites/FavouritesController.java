@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -57,6 +58,13 @@ public class FavouritesController implements Initializable {
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 
+		FavouritesVbox.setFillWidth(true);
+		//FavouritesVbox.prefWidthProperty().bind(scrollPaneFavourites.prefWidthProperty());
+//		scrollPaneFavourites.prefWidthProperty().addListener((obs, oldValue, newValue) -> {
+//			FavouritesVbox.setMinWidth(newValue.doubleValue());
+//		    FavouritesVbox.setMaxWidth(newValue.doubleValue());
+//		});
+		
 		Container container = Container.getInstance();
 		int currentUserID = container.getId();
 
@@ -72,7 +80,6 @@ public class FavouritesController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 
 		for (int i = 0; i < starredProductIds.size(); i++) {
 			int productId = starredProductIds.get(i);
@@ -98,7 +105,6 @@ public class FavouritesController implements Initializable {
 
 				}
 				String selectNameForStarredItems = "SELECT product_name, product_brand FROM groceryproducts WHERE product_id = ?";
-				// accessing brand and name
 
 				PreparedStatement selectNameForStarredItemsStatement = connectDB
 						.prepareStatement(selectNameForStarredItems);
@@ -107,7 +113,6 @@ public class FavouritesController implements Initializable {
 				while (queryOutputNameForStarredItems.next()) {
 					String name = queryOutputNameForStarredItems.getString("product_name");
 					String brand = queryOutputNameForStarredItems.getString("product_brand");
-					//System.out.println(name);
 
 					informationContainerList.add(new InformationContainer(name, brand, calories, protein, carbs, sugar,
 							fiber, fat, sat_fat, salt, productId));
@@ -117,22 +122,26 @@ public class FavouritesController implements Initializable {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}    
+		}
+        FavouritesVbox.setAlignment(Pos.CENTER);
+		for (InformationContainer container1 : informationContainerList) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/HboxViewsForItems/ViewForItems.fxml"));
+			try {
+				HBox productHBox = loader.load();
+				ViewForItemsController controller = loader.getController();
 
-		 for (InformationContainer container1 : informationContainerList) {
-		        FXMLLoader loader = new FXMLLoader(getClass().getResource("/HboxViewsForItems/ViewForItems.fxml"));
-		        try {
-		            HBox productHBox = loader.load();
-		            ViewForItemsController controller = loader.getController();
-
-		            controller.setData(container1);
-		            productHBox.setAlignment(Pos.CENTER);
-
-		            FavouritesVbox.getChildren().add(productHBox);
-		        } catch (IOException e) {
-		            e.printStackTrace();
-		        }
-		    }
+				controller.setData(container1);
+				productHBox.setAlignment(Pos.CENTER);
+				productHBox.setOnMouseClicked(event -> {
+					if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+						System.out.print(container1.getProduct_id());
+					}
+				});
+				FavouritesVbox.getChildren().add(productHBox);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

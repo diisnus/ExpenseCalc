@@ -19,17 +19,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ScrollPane fx:id="scrollPaneFavourites" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER">
+            <ScrollPane fx:id="scrollPaneFavourites" prefHeight="200.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <GridPane.margin>
-                  <Insets bottom="20.0" left="80.0" right="80.0" top="20.0" />
+                  <Insets bottom="20.0" left="80.0" right="40.0" top="20.0" />
                </GridPane.margin>
                <content>
-                  <VBox fx:id="FavouritesVbox" alignment="CENTER" />
+                  <VBox fx:id="FavouritesVbox" alignment="CENTER" spacing="10.0" style="-fx-background-color: yellow;" />
                </content>
             </ScrollPane>
-            <ScrollPane fx:id="scrollPaneRandomThatYouMightLIke" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <ScrollPane fx:id="scrollPaneRandomThatYouMightLIke" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
                <GridPane.margin>
-                  <Insets bottom="20.0" left="80.0" right="80.0" top="20.0" />
+                  <Insets bottom="20.0" left="40.0" right="80.0" top="20.0" />
                </GridPane.margin>
                <content>
                   <VBox fx:id="RandomThatYouMightLIkeVbox" alignment="CENTER" />

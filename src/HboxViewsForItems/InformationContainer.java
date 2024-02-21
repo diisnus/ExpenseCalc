@@ -3,6 +3,13 @@ package HboxViewsForItems;
 public class InformationContainer {
 	String name, brand;
 	int calories, product_id;
+	public int getProduct_id() {
+		return product_id;
+	}
+
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
 	double protein, carbs, sugar, fiber, fat, saturated_fat, salt;
 	
 	
