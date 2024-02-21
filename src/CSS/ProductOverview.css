@@ -202,6 +202,7 @@
 
 .chart-area .axis:label {
     -fx-text-fill: lightblue;
+    
 }
 
 .chart-legend > .label {
