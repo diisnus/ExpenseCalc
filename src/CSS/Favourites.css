@@ -7,9 +7,22 @@
 #scrollPaneFavourites,
 #scrollPaneRandomThatYouMightLIke,
 #FavouritesVbox,
-#RandomThatYouMightLIkeVbox {
+#RandomThatYouMightLIkeVbox,
+#scrollPaneLeastPopular,
+#scrollPaneMostPopular,
+#vboxLeastPopular,
+#vboxMostPopular {
 	-fx-background-color: #161921;
 
+}
+
+
+#FavouritesVbox:hover,
+#RandomThatYouMightLIkeVbox:hover,
+#vboxLeastPopular:hover,
+#vboxMostPopular:hover{
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
+    -fx-cursor: hand;
 }
 
 
@@ -20,11 +33,11 @@
 
 .scroll-bar {
 	-fx-background-color: #161921;
-	-fx-border-width: 2px;
+	-fx-border-width: 2.0px;
 	-fx-border-color: #242838;
-	-fx-border-radius: 12px;
-	-fx-background-radius: 15px;
-	-fx-background-insets: 0px 0px 0px 0px;
+	-fx-border-radius: 12.0px;
+	-fx-background-radius: 15.0px;
+	-fx-background-insets: 0.0px 0.0px 0.0px 0.0px;
 }
 
 
@@ -32,17 +45,17 @@
 	-fx-background-color: transparent;
 	-fx-background-insets: 0.0;
 	-fx-padding: 0.0;
-	-fx-border-width: 2px;
+	-fx-border-width: 2.0px;
 	-fx-border-color: #242838;
-	-fx-border-radius: 12px;
-	-fx-background-radius: 15px;
-	-fx-background-insets: 0px 0px 0px 0px;
+	-fx-border-radius: 12.0px;
+	-fx-background-radius: 15.0px;
+	-fx-background-insets: 0.0px 0.0px 0.0px 0.0px;
 }
 
 .label {
 	-fx-font-weight: bold;
 	-fx-text-fill: lightblue;
 	-fx-font-family: serif;
-	-fx-font-size: 30px;
+	-fx-font-size: 30.0px;
 
 }

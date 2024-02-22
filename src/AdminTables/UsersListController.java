@@ -57,6 +57,14 @@ public class UsersListController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	    tableView.setEditable(false);
+	    
+	    usernameColumn.setResizable(false);
+	    emailColumn.setResizable(false);
+	    adminColumn.setResizable(false);
+	    deleteColumn.setResizable(false);
+	    makeAdminColumn.setResizable(false);
+	    
+	    
 	    handler = new DBHandler();
 	    connectDB = handler.getConnection();
 	    usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));

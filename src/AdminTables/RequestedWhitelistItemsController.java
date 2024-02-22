@@ -66,6 +66,11 @@ public class RequestedWhitelistItemsController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tableView.setEditable(false);
+		nameColumn.setResizable(false);
+		brandColumn.setResizable(false);
+		proteinColumn.setResizable(false);
+		caloriesColumn.setResizable(false);
+		
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 		String selectProducts = "SELECT product_id, product_name, product_brand FROM groceryproducts WHERE req_whitelist = 1";

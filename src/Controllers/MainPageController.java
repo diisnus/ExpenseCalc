@@ -273,7 +273,8 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	void mostPopularButtonClick() {
-
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/MostPopular/MostPopular.fxml");
 	}
 
 	@FXML

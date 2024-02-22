@@ -77,7 +77,11 @@ public class EditProductInfoController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		editTable.setEditable(false);
+		nameColumn.setResizable(false);
+		valueColumn.setResizable(false);
+		editColumn.setResizable(false);
 
+		
 		titleBar.setOnMousePressed(event -> {
 			Stage stage = (Stage) titleBar.getScene().getWindow();
 			xOffset = event.getSceneX();

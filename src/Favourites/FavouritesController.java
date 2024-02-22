@@ -63,6 +63,8 @@ public class FavouritesController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 
@@ -109,15 +111,15 @@ public class FavouritesController implements Initializable {
 	        return;
 	    }
 	    for (int i = 0; i < 10; i++) {
-	        suggestedProductIds.add(5);
+	        suggestedProductIds.add(allwhitelistedProductIds.get(i));
 	    }
 		
-		getProductInformationAndPopulateVBoxes(starredProductIds, informationContainerListFavourites, FavouritesVbox);
+	    getProductInformationAndPopulateVBoxes(starredProductIds, informationContainerListFavourites, FavouritesVbox);
 		getProductInformationAndPopulateVBoxes(suggestedProductIds, informationContainerListSuggestions, RandomThatYouMightLIkeVbox);
 	}
 
 	
-	private void getProductInformationAndPopulateVBoxes(List<Integer> productIds,
+	public void getProductInformationAndPopulateVBoxes(List<Integer> productIds,
 			ArrayList<InformationContainer> infoContainerList, VBox vbox) {
 		for (int productId : productIds) {
 			try {
@@ -136,7 +138,8 @@ public class FavouritesController implements Initializable {
 				controller.setData(container1);
 				productHBox.setAlignment(Pos.CENTER);
 				productHBox.setOnMouseClicked(event -> {
-					if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2) {
+					//&& event.getClickCount() == 2 - za double click
+					if (event.getButton().equals(MouseButton.PRIMARY) ) {
 						int productId = container1.getProduct_id();
 						IdContainer idcontainer = IdContainer.getInstance();
 						idcontainer.setId(productId);
@@ -163,7 +166,7 @@ public class FavouritesController implements Initializable {
 		}
 	}
 
-	private InformationContainer getProductInformation(int productId) throws SQLException {
+	public InformationContainer getProductInformation(int productId) throws SQLException {
 		InformationContainer container = null;
 
 		// get macros
@@ -195,7 +198,7 @@ public class FavouritesController implements Initializable {
 			String name = nameResult.getString("product_name");
 			String brand = nameResult.getString("product_brand");
 			container = new InformationContainer(name, brand, calories, protein, carbs, sugar, fiber, fat, sat_fat,
-					salt, productId);
+					salt, productId, 0);
 		}
 
 		return container;

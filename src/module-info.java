@@ -28,4 +28,6 @@ module ExpenseCalc {
 	exports AdminTables; 
 	opens HboxViewsForItems to javafx.fxml;
 	exports HboxViewsForItems; 
+	opens MostPopular to javafx.fxml;
+	exports MostPopular; 
 }

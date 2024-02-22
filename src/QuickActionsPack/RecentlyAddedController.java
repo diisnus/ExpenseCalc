@@ -65,6 +65,12 @@ public class RecentlyAddedController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		tableView.setEditable(false);
+		nameColumn.setResizable(false);
+		brandColumn.setResizable(false);
+		proteinColumn.setResizable(false);
+		caloriesColumn.setResizable(false);
+
+		
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 

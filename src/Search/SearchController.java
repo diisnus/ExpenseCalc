@@ -89,6 +89,7 @@ public class SearchController implements Initializable {
 
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
+		
 		productTableView.setEditable(false);
 		searchByChoiceBox.getItems().addAll(typesOfSearch);
 
