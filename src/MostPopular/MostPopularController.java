@@ -93,7 +93,11 @@ public class MostPopularController implements Initializable {
 		
 	    getProductInformationAndPopulateVBoxes(mostPopularIds, informationContainerListMostPopular, vboxMostPopular);
 	    getProductInformationAndPopulateVBoxes(leastPopularIds, informationContainerListLeastPopular, vboxLeastPopular);
-
+	    try {
+			connectDB.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -168,18 +172,18 @@ public class MostPopularController implements Initializable {
 		}
 
 		// get name and brand
-		String selectName = "SELECT product_name, product_brand FROM groceryproducts WHERE product_id = ?";
+		String selectName = "SELECT product_name, product_brand, popularity FROM groceryproducts WHERE product_id = ?";
 		PreparedStatement selectNameStmt = connectDB.prepareStatement(selectName);
 		selectNameStmt.setInt(1, productId);
 		ResultSet nameResult = selectNameStmt.executeQuery();
 
 		if (nameResult.next()) {
+			int popularity = nameResult.getInt("popularity");
 			String name = nameResult.getString("product_name");
 			String brand = nameResult.getString("product_brand");
 			container = new InformationContainer(name, brand, calories, protein, carbs, sugar, fiber, fat, sat_fat,
-					salt, productId, 1);
+					salt, productId, popularity, 1);
 		}
-
 		return container;
 	}
 }

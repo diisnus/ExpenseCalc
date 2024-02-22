@@ -4,14 +4,23 @@
 }
 
 
+#scrollPaneFavourites .viewport,
+#scrollPaneRandomThatYouMightLIke .viewport,
+#scrollPaneLeastPopular .viewport,
+#scrollPaneMostPopular .viewport
+{
+    -fx-background-color:  #161921;
+}
+
 #scrollPaneFavourites,
 #scrollPaneRandomThatYouMightLIke,
+#scrollPaneLeastPopular,
+#scrollPaneMostPopular ,
 #FavouritesVbox,
 #RandomThatYouMightLIkeVbox,
-#scrollPaneLeastPopular,
-#scrollPaneMostPopular,
 #vboxLeastPopular,
-#vboxMostPopular {
+#vboxMostPopular 
+{
 	-fx-background-color: #161921;
 
 }

@@ -4,13 +4,14 @@ public class InformationContainer {
 	// type is only relevant for changing one row, depending on the class that calls
 	// this cclass
 	int type;
+	int popularity;
 	String name, brand;
 	int calories, product_id;
 
 	double protein, carbs, sugar, fiber, fat, saturated_fat, salt;
 
 	public InformationContainer(String name, String brand, int calories, double protein, double carbs, double sugar,
-			double fiber, double fat, double saturated_fat, double salt, int product_id, int type) {
+			double fiber, double fat, double saturated_fat, double salt, int product_id, int popularity, int type) {
 		super();
 		this.name = name;
 		this.brand = brand;
@@ -24,8 +25,17 @@ public class InformationContainer {
 		this.salt = salt;
 		this.product_id = product_id;
 		this.type = type;
+		this.popularity = popularity;
 	}
 
+	public int getPopularity() {
+		return popularity;
+	}
+
+	public void setPopularity(int popularity) {
+		this.popularity = popularity;
+	}
+	
 	public int getProduct_id() {
 		return product_id;
 	}
