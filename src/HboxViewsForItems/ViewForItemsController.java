@@ -105,6 +105,7 @@ public class ViewForItemsController extends HBox implements Initializable {
 			//String pr_popularity = String.valueOf(queryOutputInfo.getInt("popularity"));
 
 
+			
 			infroList.add(new InformationForViewTable("Name", pr_name));
 			infroList.add(new InformationForViewTable("Brand", pr_brand));
 			infroList.add(new InformationForViewTable("Calories", caloriesString));
