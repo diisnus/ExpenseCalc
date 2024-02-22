@@ -98,7 +98,9 @@ public class UsersListController implements Initializable {
 			System.out.println(userList.size());
 
 			tableView.setItems(userList);
-
+			
+			statement.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,6 +109,12 @@ public class UsersListController implements Initializable {
 	@FXML
 	void closeClick(ActionEvent event) {
 		try {
+			try {
+				connectDB.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Stage stage = (Stage) close.getScene().getWindow();
 			stage.close();
 		} catch (Exception e) {

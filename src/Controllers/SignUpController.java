@@ -44,7 +44,6 @@ public class SignUpController implements Initializable {
 	
 	private Connection connection;
 	private DBHandler handler;
-	private PreparedStatement pst;
 	
 	private double xOffset = 0;
 	private double yOffset = 0;

@@ -73,6 +73,7 @@ public class MostPopularController implements Initializable {
 				int productId = queryOutputMostPopular.getInt("product_id");
 				mostPopularIds.add(productId);
 			}
+			mostPopularItemsIdsStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -87,17 +88,14 @@ public class MostPopularController implements Initializable {
 				int productId = queryOutputLeastPopular.getInt("product_id");
 				leastPopularIds.add(productId);
 			}
+			leastPopularItemsIdsStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 	    getProductInformationAndPopulateVBoxes(mostPopularIds, informationContainerListMostPopular, vboxMostPopular);
 	    getProductInformationAndPopulateVBoxes(leastPopularIds, informationContainerListLeastPopular, vboxLeastPopular);
-	    try {
-			connectDB.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
 		
 	}
 
@@ -131,7 +129,7 @@ public class MostPopularController implements Initializable {
 							PreparedStatement updatePopularityStatement = connectDB.prepareStatement(updatePopularity);
 							updatePopularityStatement.setInt(1, productId);
 							updatePopularityStatement.executeUpdate();
-
+							updatePopularityStatement.close();
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
@@ -139,6 +137,11 @@ public class MostPopularController implements Initializable {
 						LoaderClass load = LoaderClass.getInstance();
 						load.loadFXML("/ProductOverview/ProductOverview.fxml");
 						System.out.print(container1.getProduct_id());
+						try {
+							connectDB.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
 					}
 				});
 				vbox.getChildren().add(productHBox);
@@ -184,6 +187,9 @@ public class MostPopularController implements Initializable {
 			container = new InformationContainer(name, brand, calories, protein, carbs, sugar, fiber, fat, sat_fat,
 					salt, productId, popularity, 1);
 		}
+		selectMacrosStmt.close();
+		selectNameStmt.close();
 		return container;
+
 	}
 }

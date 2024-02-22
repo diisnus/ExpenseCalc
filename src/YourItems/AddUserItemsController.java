@@ -219,6 +219,7 @@ public class AddUserItemsController implements Initializable {
 					System.out.println("Data inserted successfully");
 				} else {
 				}
+				insertStarredStatement.close();
 				connection.close();
 			}catch(SQLException e) {
 				

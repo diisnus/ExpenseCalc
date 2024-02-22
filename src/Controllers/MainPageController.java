@@ -84,10 +84,9 @@ public class MainPageController implements Initializable {
 	@FXML
 	private Pane titleBar;
 
-	
-    @FXML
-    private Button adminTablesButton;
-    
+	@FXML
+	private Button adminTablesButton;
+
 	@FXML
 	private Button fullScreen;
 
@@ -102,7 +101,6 @@ public class MainPageController implements Initializable {
 
 	LoaderClass load = LoaderClass.getInstance();
 
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		handler = new DBHandler();
@@ -113,13 +111,10 @@ public class MainPageController implements Initializable {
 		bindButtonSizeToScene(priceComparisonsButton);
 		loadFavChartData();
 		loadCompareChartData();
-		accessUserId();
-		
-	
+
 		load.setBorderPaneMain(borderPaneMain);
 		load.setGridPaneHome(gridPaneHome);
 
-		
 		titleBar.setOnMousePressed(event -> {
 			Stage stage = (Stage) titleBar.getScene().getWindow();
 			xOffset = event.getSceneX();
@@ -174,19 +169,17 @@ public class MainPageController implements Initializable {
 			while (queryOutputIsAdmin.next()) {
 				is_admin = queryOutputIsAdmin.getInt("is_admin");
 			}
+			adminCheckStatementStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		if(is_admin ==1) {
+
+		if (is_admin == 1) {
 			adminTablesButton.setVisible(true);
-		}
-		else {
+		} else {
 			adminTablesButton.setVisible(false);
 		}
 
-		
-		
 	}
 
 	public static void adjustStageSize(Stage stage) {
@@ -216,7 +209,6 @@ public class MainPageController implements Initializable {
 	@FXML
 	void fullScreenClick() {
 		Stage stage = (Stage) titleBar.getScene().getWindow();
-
 
 		if (stage.getWidth() > 1300) {
 
@@ -259,22 +251,16 @@ public class MainPageController implements Initializable {
 		}
 	}
 
-	public int accessUserId() {
-		Container container = Container.getInstance();
-		System.out.println(container.getId());
-		return container.getId();
-	}
-
 	@FXML
 	void favouritesButtonClick() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/Favourites/Favourites.fxml");
+		connectionClose();
 	}
 
 	@FXML
 	void mostPopularButtonClick() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/MostPopular/MostPopular.fxml");
+		connectionClose();
 	}
 
 	@FXML
@@ -282,29 +268,28 @@ public class MainPageController implements Initializable {
 
 	}
 
-    @FXML
-    void adminTablesButtonClick() {
-		LoaderClass load = LoaderClass.getInstance();
+	@FXML
+	void adminTablesButtonClick() {
 		load.loadFXML("/AdminTables/AdminTables.fxml");
-    }
-	
+		connectionClose();
+	}
+
 	@FXML
 	void yourItemsButtonClick() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/YourItems/YourItems.fxml");
+		connectionClose();
 	}
 
 	@FXML
 	void homeButtonClicked() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.homeFXML();
+		connectionClose();
 	}
 
 	@FXML
 	void quickActionsClicked() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/QuickActionsPack/QuickActions.fxml");
-
+		connectionClose();
 	}
 
 	@FXML
@@ -314,15 +299,22 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	void settingsButtonClicked() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/Settings/Settings.fxml");
-
+		connectionClose();
 	}
 
 	@FXML
 	void profileButtonClick() {
-		LoaderClass load = LoaderClass.getInstance();
 		load.loadFXML("/AccountManagement/AccountChanges.fxml");
+		connectionClose();
+	}
+
+	void connectionClose() {
+		try {
+			connectDB.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void loadCompareChartData() {

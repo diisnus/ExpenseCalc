@@ -64,8 +64,14 @@ public class EditProductInfoController implements Initializable {
 	@FXML
 	void closeClick(ActionEvent event) {
 		try {
+			try {
+				connectDB.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			Stage stage = (Stage) close.getScene().getWindow();
 			stage.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -174,6 +180,7 @@ public class EditProductInfoController implements Initializable {
 			        dataEditList.add(new DataEdit("Salt", salt));
 
 			    }
+			    selectCombinedStatement.close();
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
@@ -193,8 +200,8 @@ public class EditProductInfoController implements Initializable {
 		    ObservableList<DataEdit> list = FXCollections.observableArrayList(dataEditList.subList(0, numRows));
 		    System.out.println(list.size());
 		    editTable.setItems(list);
-
 		    
+		    selectInfoStatement.close();
 		} catch (SQLException e) {
 		    e.printStackTrace();
 		}

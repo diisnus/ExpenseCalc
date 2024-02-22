@@ -63,7 +63,10 @@ public class PasswordChangeController implements Initializable {
 				updatePassword.setString(1, newpassword);
 				updatePassword.setInt(2, userid);
 				int rowsAffected = updatePassword.executeUpdate();
+				connectDB.close();
+				updatePassword.close();
 			}
+			selectedPassword.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -131,6 +131,7 @@ public class EditDifferentStringInfoController implements Initializable {
 			if (rowsAffected > 0) {
 				Stage stage = (Stage) close.getScene().getWindow();
 				stage.close();
+				
 			}
 
 		} catch (SQLException e) {

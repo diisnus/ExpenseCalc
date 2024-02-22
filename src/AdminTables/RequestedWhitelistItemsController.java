@@ -95,7 +95,7 @@ public class RequestedWhitelistItemsController implements Initializable{
 				    double protein = queryOutputInfo2.getDouble("protein");
 				    recentlyAddedInfoList.add(new RecentlyAddedInfo(name, brand, calories, productid, protein));
 				}
-
+		        selectMacrosStatement.close();
 			}
 			 nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 			 brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
@@ -129,7 +129,8 @@ public class RequestedWhitelistItemsController implements Initializable{
 						}
 		            }
 		        });
-			 
+		     selectInfoStatement.close();
+			 connectDB.close();
 		} catch (SQLException e) {
 
 		}

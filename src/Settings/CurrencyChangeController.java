@@ -66,6 +66,11 @@ public class CurrencyChangeController implements Initializable {
 	@FXML
 	void closeClick(ActionEvent event) {
 		try {
+			try {
+				connectDB.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			Stage stage = (Stage) close.getScene().getWindow();
 			stage.close();
 		} catch (Exception e) {
@@ -86,7 +91,7 @@ public class CurrencyChangeController implements Initializable {
 			updateCurrentCurrency.setString(1, newcurrency);
 			updateCurrentCurrency.setInt(2, userid);
 			updateCurrentCurrency.executeUpdate();
-
+			updateCurrentCurrency.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

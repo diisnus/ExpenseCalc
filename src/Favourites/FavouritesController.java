@@ -84,6 +84,7 @@ public class FavouritesController implements Initializable {
 				int productId = queryOutputStarredItems.getInt("product_id");
 				starredProductIds.add(productId);
 			}
+			getStarredItemsIdsStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -98,7 +99,7 @@ public class FavouritesController implements Initializable {
 				int productId = resultSetstatementselectTheNumberOfAllRows.getInt("product_id");
 				allwhitelistedProductIds.add(productId);
 			}
-
+			statementselectTheNumberOfAllRows.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -116,11 +117,7 @@ public class FavouritesController implements Initializable {
 		getProductInformationAndPopulateVBoxes(starredProductIds, informationContainerListFavourites, FavouritesVbox);
 		getProductInformationAndPopulateVBoxes(suggestedProductIds, informationContainerListSuggestions, RandomThatYouMightLIkeVbox);
 
-		try {
-			connectDB.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	
 	}
 
 	public void getProductInformationAndPopulateVBoxes(List<Integer> productIds,
@@ -161,9 +158,14 @@ public class FavouritesController implements Initializable {
 						LoaderClass load = LoaderClass.getInstance();
 						load.loadFXML("/ProductOverview/ProductOverview.fxml");
 						System.out.print(container1.getProduct_id());
+						try {
+							connectDB.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
 					}
 				});
-				vbox.getChildren().add(productHBox);
+				vbox.getChildren().add(productHBox);				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -204,7 +206,8 @@ public class FavouritesController implements Initializable {
 			container = new InformationContainer(name, brand, calories, protein, carbs, sugar, fiber, fat, sat_fat,
 					salt, productId, 0, 0);
 		}
-
+		selectMacrosStmt.close();
+		selectNameStmt.close();
 		return container;
 	}
 }

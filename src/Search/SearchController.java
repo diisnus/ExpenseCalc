@@ -141,6 +141,7 @@ public class SearchController implements Initializable {
 			while (queryOutputIsAdmin.next()) {
 				is_admin = queryOutputIsAdmin.getInt("is_admin");
 			}
+			adminCheckStatementStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -158,10 +159,9 @@ public class SearchController implements Initializable {
 				queryOutput = statement.executeQuery();
 			} else {
 				PreparedStatement statement = connectDB.prepareStatement(productViewQuery);
-				statement.setInt(1, currentUserID); // Set the value for the parameter user_id
+				statement.setInt(1, currentUserID); 
 				queryOutput = statement.executeQuery();
 			}
-
 			while (queryOutput.next()) {
 				int queryProductID = queryOutput.getInt("product_id");
 				String queryProductName = queryOutput.getString("product_name");
@@ -247,7 +247,12 @@ public class SearchController implements Initializable {
 							PreparedStatement updatePopularityStatement = connectDB.prepareStatement(updatePopularity);
 							updatePopularityStatement.setInt(1, productId);
 							updatePopularityStatement.executeUpdate();
-
+							updatePopularityStatement.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+						try {
+							connectDB.close();
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
@@ -257,7 +262,7 @@ public class SearchController implements Initializable {
 				});
 				return row;
 			});
-
+			
 		} catch (SQLException e) {
 			Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, e);
 			e.printStackTrace();

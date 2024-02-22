@@ -82,7 +82,9 @@ public class UsernameChangeController implements Initializable {
 				Stage stage = (Stage) close.getScene().getWindow();
 				stage.close();
 			}
-
+			
+			connectDB.close();
+			selectUsernameStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -105,6 +107,7 @@ public class UsernameChangeController implements Initializable {
 	            currentUsername.setText("Your current username is: " + username + ".");
 	            
 	        }
+	        selectedUsername.close();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

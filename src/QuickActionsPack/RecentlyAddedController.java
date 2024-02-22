@@ -70,7 +70,6 @@ public class RecentlyAddedController implements Initializable {
 		proteinColumn.setResizable(false);
 		caloriesColumn.setResizable(false);
 
-		
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
 
@@ -80,57 +79,76 @@ public class RecentlyAddedController implements Initializable {
 			PreparedStatement selectInfoStatement = connectDB.prepareStatement(selectProducts);
 			ResultSet queryOutputInfo = selectInfoStatement.executeQuery();
 			ArrayList<RecentlyAddedInfo> recentlyAddedInfoList = new ArrayList<>();
-
 			while (queryOutputInfo.next()) {
 				int productid = queryOutputInfo.getInt("product_id");
 				String name = queryOutputInfo.getString("product_name");
 				String brand = queryOutputInfo.getString("product_brand");
 
-				
 				PreparedStatement selectMacrosStatement = connectDB.prepareStatement(selectMacros);
 				selectMacrosStatement.setInt(1, productid);
-				ResultSet queryOutputInfo2 = selectMacrosStatement.executeQuery(); 
+				ResultSet queryOutputInfo2 = selectMacrosStatement.executeQuery();
 
 				while (queryOutputInfo2.next()) {
-				    int calories = queryOutputInfo2.getInt("calories_per_100g");
-				    double protein = queryOutputInfo2.getDouble("protein");
-				    recentlyAddedInfoList.add(new RecentlyAddedInfo(name, brand, calories, productid, protein));
+					int calories = queryOutputInfo2.getInt("calories_per_100g");
+					double protein = queryOutputInfo2.getDouble("protein");
+					recentlyAddedInfoList.add(new RecentlyAddedInfo(name, brand, calories, productid, protein));
 				}
-
+				selectMacrosStatement.close();
 			}
-			 nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-			 brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
-			 caloriesColumn.setCellValueFactory(new PropertyValueFactory<>("calories"));
-			 proteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
-			 
-			    tableView.setFixedCellSize(33);
-			    int maxRows = 10;
-			    int numRows = Math.min(recentlyAddedInfoList.size(), maxRows);
+			nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+			brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+			caloriesColumn.setCellValueFactory(new PropertyValueFactory<>("calories"));
+			proteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
 
-			    double preferredHeight = 10 * 33 + 30;
+			tableView.setFixedCellSize(33);
+			int maxRows = 10;
+			int numRows = Math.min(recentlyAddedInfoList.size(), maxRows);
 
-			    tableView.setPrefHeight(preferredHeight);
-			    ObservableList<RecentlyAddedInfo> list = FXCollections.observableArrayList(recentlyAddedInfoList.subList(0, numRows));
-			    System.out.println(list.size());
-			    tableView.setItems(list);
-			 
-		        tableView.setOnMouseClicked(event -> {
-		            if (event.getClickCount() == 2) {
-		                RecentlyAddedInfo selectedItem = tableView.getSelectionModel().getSelectedItem();
-		                int productId = selectedItem.getProductid();
-		                IdContainer idcontainer = IdContainer.getInstance();
-						idcontainer.setId(productId);
-						LoaderClass load = LoaderClass.getInstance();
-						load.loadFXML("/ProductOverview/ProductOverview.fxml");
+			double preferredHeight = 10 * 33 + 30;
+
+			tableView.setPrefHeight(preferredHeight);
+			ObservableList<RecentlyAddedInfo> list = FXCollections
+					.observableArrayList(recentlyAddedInfoList.subList(0, numRows));
+			System.out.println(list.size());
+			tableView.setItems(list);
+
+			tableView.setOnMouseClicked(event -> {				
+				if (event.getClickCount() == 2) {
+					
+					RecentlyAddedInfo selectedItem = tableView.getSelectionModel().getSelectedItem();
+					int productId = selectedItem.getProductid();
+					
+					IdContainer idcontainer = IdContainer.getInstance();
+					idcontainer.setId(productId);
+					
+					String updatePopularity = "UPDATE groceryproducts SET popularity = popularity + 1 WHERE product_id = ?";
+					try {
+						
+						PreparedStatement updatePopularityStatement = connectDB.prepareStatement(updatePopularity);
+						updatePopularityStatement.setInt(1, productId);
+						updatePopularityStatement.executeUpdate();
+						updatePopularityStatement.close();
+						
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					
+					LoaderClass load = LoaderClass.getInstance();
+					load.loadFXML("/ProductOverview/ProductOverview.fxml");
+					try {
 						try {
-							Stage stage = (Stage) close.getScene().getWindow();
-							stage.close();
-						} catch (Exception e) {
+							connectDB.close();
+						} catch (SQLException e) {
 							e.printStackTrace();
 						}
-		            }
-		        });
-			 
+						Stage stage = (Stage) close.getScene().getWindow();
+						stage.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			selectInfoStatement.close();
 		} catch (SQLException e) {
 
 		}

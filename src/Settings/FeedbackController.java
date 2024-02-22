@@ -46,6 +46,11 @@ public class FeedbackController implements Initializable {
 	@FXML
 	void closeClick(ActionEvent event) {
 		try {
+			try {
+				connectDB.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			Stage stage = (Stage) close.getScene().getWindow();
 			stage.close();
 		} catch (Exception e) {
@@ -81,8 +86,13 @@ public class FeedbackController implements Initializable {
 			if (rowsAffected > 0) {
 				Stage stage = (Stage) typeOfFeedBack.getScene().getWindow();
 				stage.close();
+				insertFeedbackStatement.close();
 			}
-
+			try {
+				connectDB.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

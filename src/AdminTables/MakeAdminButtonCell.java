@@ -22,6 +22,8 @@ public class MakeAdminButtonCell extends TableCell<UserListInfo, Void> {
             toggleAdminStatus(item.getUserid(), newAdminStatus);
             item.setIs_admin(newAdminStatus);
             getTableView().refresh();
+        	
+
         });
     }
 
@@ -32,11 +34,11 @@ public class MakeAdminButtonCell extends TableCell<UserListInfo, Void> {
             statement.setInt(1, newAdminStatus);
             statement.setInt(2, userId);
             statement.executeUpdate();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        
-    }
+        } 
+	}
 
     @Override
     protected void updateItem(Void item, boolean empty) {

@@ -186,6 +186,7 @@ public class ProductOverviewController implements Initializable {
 			while (queryOutputIsAdmin.next()) {
 				is_admin = queryOutputIsAdmin.getInt("is_admin");
 			}
+			adminCheckStatementStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -238,7 +239,7 @@ public class ProductOverviewController implements Initializable {
 			int numRows = Math.min(macroDataList.size(), maxRows);
 			tableView.setItems(FXCollections.observableArrayList(macroDataList.subList(0, numRows)));
 			pieChartMacros.setData(FXCollections.observableArrayList(pieChartDataList));
-
+			selectMacrosStatement.close();
 		} catch (SQLException e) {
 
 		}
@@ -258,11 +259,12 @@ public class ProductOverviewController implements Initializable {
 			while (queryOutputInfoPref.next()) {
 				userPrefCurrency = queryOutputInfoPref.getString("pref_currency");
 			}
-
+	
 			// prices select
 			PreparedStatement selectPriceStatement = connectDB.prepareStatement(selectPrices);
 			selectPriceStatement.setInt(1, productid);
 			ResultSet queryOutputInfo = selectPriceStatement.executeQuery();
+			
 
 			// inserts in areachart
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -285,6 +287,9 @@ public class ProductOverviewController implements Initializable {
 				series.getData().add(new XYChart.Data<>(formattedDate, entry.getValue()));
 			}
 			areaChartPrices.getData().add(series);
+			
+			selectUserPrefStatement.close();
+			selectPriceStatement.close();
 		} catch (SQLException | ParseException e) {
 
 		}
@@ -352,7 +357,7 @@ public class ProductOverviewController implements Initializable {
 			int numRows = Math.min(infoDataList.size(), maxRows);
 			tableView2.setItems(FXCollections.observableArrayList(infoDataList.subList(0, numRows)));
 			
-			
+			selectInfoStatement.close();
 		} catch (SQLException e) {
 
 		}
@@ -401,7 +406,6 @@ public class ProductOverviewController implements Initializable {
 					e.printStackTrace();
 				}
 			}
-
 			resultSet.close();
 			selectStatement.close();
 		} catch (SQLException e) {
@@ -434,6 +438,7 @@ public class ProductOverviewController implements Initializable {
 			} else {
 				imageViewStarred.setImage(new Image(getClass().getResourceAsStream("not_starred.png")));
 			}
+			selectStarredStatement.close();
 		} catch (SQLException e) {
 
 		}
@@ -446,7 +451,8 @@ public class ProductOverviewController implements Initializable {
 				selectStarredToUnstarredStatement.setInt(1, productid);
 				selectStarredToUnstarredStatement.setInt(2, currentUserID);
 				selectStarredToUnstarredStatement.executeUpdate();
-				;
+				
+				selectStarredToUnstarredStatement.close();
 			} catch (SQLException e) {
 
 			}
@@ -458,7 +464,7 @@ public class ProductOverviewController implements Initializable {
 				selectUnstarredToStarredStatement.setInt(1, productid);
 				selectUnstarredToStarredStatement.setInt(2, currentUserID);
 				selectUnstarredToStarredStatement.executeUpdate();
-				;
+				selectUnstarredToStarredStatement.close();
 			} catch (SQLException e) {
 
 			}
@@ -488,6 +494,10 @@ public class ProductOverviewController implements Initializable {
 			deleteFromGroceryProductsStatement.setInt(1, productid);
 			deleteFromGroceryProductsStatement.executeUpdate();
 
+			deleteFromPricesStatement.close();
+			deleteFromMacrosStatement.close();
+			deleteFromGroceryProductsStatement.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -514,6 +524,7 @@ public class ProductOverviewController implements Initializable {
 			updateReqWhitelistToOneStatement.setInt(2, currentUserID);
 			updateReqWhitelistToOneStatement.executeUpdate();
 
+			updateReqWhitelistToOneStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -536,7 +547,8 @@ public class ProductOverviewController implements Initializable {
 			PreparedStatement updateReqWhitelistToOneStatement = connectDB.prepareStatement(updateReqWhitelistToOne);
 			updateReqWhitelistToOneStatement.setInt(1, productid);
 			updateReqWhitelistToOneStatement.executeUpdate();
-
+			
+			updateReqWhitelistToOneStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -558,7 +570,7 @@ public class ProductOverviewController implements Initializable {
 			PreparedStatement updateReqWhitelistToOneStatement = connectDB.prepareStatement(updateReqWhitelistToOne);
 			updateReqWhitelistToOneStatement.setInt(1, productid);
 			updateReqWhitelistToOneStatement.executeUpdate();
-
+			updateReqWhitelistToOneStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

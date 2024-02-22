@@ -84,7 +84,10 @@ public class EmailChangeController implements Initializable{
     	        updateEmailStatement.setString(1, newemail);
     	        updateEmailStatement.setInt(2, userId);
     	        updateEmailStatement.executeUpdate();
-
+    	        
+				connectDB.close();
+				updateEmailStatement.close();
+				selectEmailStatement.close();
     	    } catch (SQLException e) {
     	        e.printStackTrace();
     	    }
@@ -122,6 +125,7 @@ public class EmailChangeController implements Initializable{
 	            String email = rs.getString("email");
 	            yourEmail.setText("Your current email is: " + email + ".");
 	        }
+	        selectedEmail.close();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
