@@ -1,3 +1,4 @@
+
 #borderPane {
 	-fx-background-color: #161921;
 
@@ -7,19 +8,27 @@
 #scrollPaneFavourites .viewport,
 #scrollPaneRandomThatYouMightLIke .viewport,
 #scrollPaneLeastPopular .viewport,
-#scrollPaneMostPopular .viewport
+#scrollPaneMostPopular .viewport,
+#scrollPaneYourItems .viewport
 {
     -fx-background-color:  #161921;
+    -fx-border-width: 2.0px;
+	-fx-border-color: #242838;
+	-fx-border-radius: 12.0px;
+	-fx-background-radius: 15.0px;
+	-fx-background-insets: 0.0px 0.0px 0.0px 0.0px;
 }
 
 #scrollPaneFavourites,
 #scrollPaneRandomThatYouMightLIke,
 #scrollPaneLeastPopular,
 #scrollPaneMostPopular ,
+#scrollPaneYourItems,
 #FavouritesVbox,
 #RandomThatYouMightLIkeVbox,
 #vboxLeastPopular,
-#vboxMostPopular 
+#vboxMostPopular,
+#vboxYourItems 
 {
 	-fx-background-color: #161921;
 
@@ -29,7 +38,8 @@
 #FavouritesVbox:hover,
 #RandomThatYouMightLIkeVbox:hover,
 #vboxLeastPopular:hover,
-#vboxMostPopular:hover{
+#vboxMostPopular:hover,
+#vboxYourItems :hover{
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);
     -fx-cursor: hand;
 }

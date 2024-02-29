@@ -1,15 +1,6 @@
 package ProductOverview;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import AdminTables.UserListInfo;
 import Controllers.PopUpWindow;
-import DBConnection.DBHandler;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;

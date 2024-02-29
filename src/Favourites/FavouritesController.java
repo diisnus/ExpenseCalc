@@ -17,12 +17,10 @@ import DBConnection.DBHandler;
 import HboxViewsForItems.InformationContainer;
 import HboxViewsForItems.ViewForItemsController;
 import ProductOverview.IdContainer;
-import ProductOverview.MacroData;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
@@ -103,7 +101,7 @@ public class FavouritesController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		//random one selected
 		Collections.shuffle(allwhitelistedProductIds);
 
 		if (allwhitelistedProductIds.size() < 10) {
@@ -210,4 +208,5 @@ public class FavouritesController implements Initializable {
 		selectNameStmt.close();
 		return container;
 	}
+	
 }
