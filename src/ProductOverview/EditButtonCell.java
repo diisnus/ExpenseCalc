@@ -18,6 +18,7 @@ public class EditButtonCell extends TableCell<DataEdit, Void> {
 		});
 	}
 
+	
 	private void selectedItemEdit() {
 		DataEdit selectedItem = getTableView().getItems().get(getIndex());
 		String selectedRowName = selectedItem.getMacroName();
