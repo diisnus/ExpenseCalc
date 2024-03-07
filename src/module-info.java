@@ -30,4 +30,6 @@ module ExpenseCalc {
 	exports HboxViewsForItems; 
 	opens MostPopular to javafx.fxml;
 	exports MostPopular; 
+	opens Compare to javafx.fxml;
+	exports Compare; 
 }

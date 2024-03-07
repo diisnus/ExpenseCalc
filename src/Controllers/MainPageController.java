@@ -265,7 +265,8 @@ public class MainPageController implements Initializable {
 
 	@FXML
 	void priceComparisonsButtonClick() {
-
+		load.loadFXML("/Compare/CompareSelect.fxml");
+		connectionClose();
 	}
 
 	@FXML

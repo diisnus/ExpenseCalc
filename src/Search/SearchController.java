@@ -85,7 +85,7 @@ public class SearchController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle resource) {
-		System.out.println("before");
+		
 
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
@@ -145,6 +145,8 @@ public class SearchController implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		//input into table
 		String productViewQuery = "";
 		if (is_admin == 1) {
 			productViewQuery = "SELECT product_id, product_name, product_brand, description FROM groceryproducts";
