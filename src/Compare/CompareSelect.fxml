@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Compare.CompareSelectController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1080.0" stylesheets="@../CSS/CompareMainPart.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Compare.CompareSelectController">
    <center>
       <GridPane fx:id="gridPaneMain" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -69,12 +68,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Double click to select">
+            <Label fx:id="labelTop1" text="Double click to select">
                <GridPane.margin>
                   <Insets top="15.0" />
                </GridPane.margin>
             </Label>
-            <Label text="Double click to deselect" GridPane.columnIndex="1">
+            <Label fx:id="labelTop2" text="Double click to deselect" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets top="15.0" />
                </GridPane.margin>

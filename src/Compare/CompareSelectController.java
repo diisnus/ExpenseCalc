@@ -5,22 +5,30 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import Controllers.Container;
+import Controllers.LoaderClass;
+import Controllers.PopUpWindow;
 import DBConnection.DBHandler;
+import ProductOverview.IdContainer;
 import Search.productSearchModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-public class CompareSelectController implements Initializable{
+public class CompareSelectController implements Initializable {
 
 	@FXML
 	private BorderPane borderPane;
@@ -30,6 +38,15 @@ public class CompareSelectController implements Initializable{
 
 	@FXML
 	private GridPane gridPaneSide;
+
+	@FXML
+	private Label labelTop1;
+
+	@FXML
+	private Label labelTop2;
+	
+    @FXML
+    private Label labelMid2;
 
 	@FXML
 	private TableView<TableInformationContainer> tableViewSelectFrom;
@@ -48,55 +65,62 @@ public class CompareSelectController implements Initializable{
 
 	@FXML
 	private TableColumn<TableInformationContainer, Double> toSelectSugarColumn;
+
 	// ------------------------------------------------------------//
 	@FXML
-	private TableView<?> tableViewSelected;
+	private TableView<TableInformationContainer> tableViewSelected;
 
 	@FXML
-	private TableColumn<?, ?> selectedBrandColumn;
+	private TableColumn<TableInformationContainer, String> selectedBrandColumn;
 
 	@FXML
-	private TableColumn<?, ?> selectedCaloriesColumn;
+	private TableColumn<TableInformationContainer, Integer> selectedCaloriesColumn;
 
 	@FXML
-	private TableColumn<?, ?> selectedNameColumn;
+	private TableColumn<TableInformationContainer, String> selectedNameColumn;
 
 	@FXML
-	private TableColumn<?, ?> selectedProteinColumn;
+	private TableColumn<TableInformationContainer, Double> selectedProteinColumn;
 
 	@FXML
-	private TableColumn<?, ?> selectedSugarsColumn;
+	private TableColumn<TableInformationContainer, Double> selectedSugarsColumn;
 
+	// ------------------------------------------------------------//
 
 	private Connection connectDB;
 	private DBHandler handler;
-	
-	ObservableList<TableInformationContainer> tableInformationContainerObservableList = FXCollections.observableArrayList();
 
-	
+	// to select
+	ObservableList<TableInformationContainer> tableInformationContainerToSelectObservableList = FXCollections
+			.observableArrayList();
+	// selected
+	ObservableList<TableInformationContainer> tableInformationContainerSelectEDObservableList = FXCollections
+			.observableArrayList();
+
+	private List<Integer> selectedProductIds = new ArrayList<>();
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		handler = new DBHandler();
 		connectDB = handler.getConnection();
-		
+
 		tableViewSelectFrom.setEditable(false);
-		
+
 		toSelectBrandColumn.setResizable(false);
 		toSelectCaloriesColumn.setResizable(false);
 		toSelectNameColumn.setResizable(false);
 		toSelectProteinColumn.setResizable(false);
 		toSelectSugarColumn.setResizable(false);
-		
+
 		tableViewSelected.setEditable(false);
-		
+
 		selectedBrandColumn.setResizable(false);
 		selectedCaloriesColumn.setResizable(false);
 		selectedNameColumn.setResizable(false);
 		selectedProteinColumn.setResizable(false);
 		selectedSugarsColumn.setResizable(false);
-		
-		
+
 		tableViewSelectFrom.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 			double tableWidth = newWidth.doubleValue();
 			double columnWidth = tableWidth / 5.0;
@@ -107,7 +131,7 @@ public class CompareSelectController implements Initializable{
 			toSelectProteinColumn.setPrefWidth(columnWidth);
 			toSelectSugarColumn.setPrefWidth(columnWidth);
 		});
-		
+
 		tableViewSelected.widthProperty().addListener((obs, oldWidth, newWidth) -> {
 			double tableWidth = newWidth.doubleValue();
 			double columnWidth = tableWidth / 5.0;
@@ -118,11 +142,10 @@ public class CompareSelectController implements Initializable{
 			selectedProteinColumn.setPrefWidth(columnWidth);
 			selectedSugarsColumn.setPrefWidth(columnWidth);
 		});
-		
-		
+
 		Container container = Container.getInstance();
 		int currentUserID = container.getId();
-		
+
 		int is_admin = 0;
 		String adminCheck = "SELECT is_admin FROM users WHERE user_id = ?";
 		try {
@@ -136,8 +159,8 @@ public class CompareSelectController implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		//input data into to select from table
+
+		// input data into to select from table
 		String productViewQuery = "";
 		if (is_admin == 1) {
 			productViewQuery = "SELECT product_id, product_name, product_brand FROM groceryproducts";
@@ -145,7 +168,7 @@ public class CompareSelectController implements Initializable{
 			productViewQuery = "SELECT product_id, product_name, product_brand FROM groceryproducts WHERE is_whitelisted = 1 OR user_id = ?";
 		}
 		try {
-			
+
 			ResultSet queryOutput = null;
 
 			if (is_admin == 1) {
@@ -153,7 +176,7 @@ public class CompareSelectController implements Initializable{
 				queryOutput = statement.executeQuery();
 			} else {
 				PreparedStatement statement = connectDB.prepareStatement(productViewQuery);
-				statement.setInt(1, currentUserID); 
+				statement.setInt(1, currentUserID);
 				queryOutput = statement.executeQuery();
 			}
 			while (queryOutput.next()) {
@@ -170,9 +193,9 @@ public class CompareSelectController implements Initializable{
 						double queryProductProtein = queryOutputMacros.getDouble("protein");
 						double queryProductSugar = queryOutputMacros.getDouble("sugar");
 
-						tableInformationContainerObservableList
-								.add(new TableInformationContainer(queryProductID, queryProductCalories_per_100, queryProductProtein,
-										queryProductSugar, queryProductName, queryProductBrand));
+						tableInformationContainerToSelectObservableList
+								.add(new TableInformationContainer(queryProductID, queryProductCalories_per_100,
+										queryProductProtein, queryProductSugar, queryProductName, queryProductBrand));
 					}
 				}
 			}
@@ -182,14 +205,97 @@ public class CompareSelectController implements Initializable{
 			toSelectSugarColumn.setCellValueFactory(new PropertyValueFactory<>("sugar"));
 			toSelectCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("calories"));
 			toSelectProteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
-		    System.out.println(tableInformationContainerObservableList.size());
+			// System.out.println(tableInformationContainerToSelectObservableList.size());
 
-		    tableViewSelectFrom.setItems(tableInformationContainerObservableList);
-			
-		}catch(SQLException e) {
+			tableViewSelectFrom.setItems(tableInformationContainerToSelectObservableList);
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
+		selectedNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		selectedBrandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+		selectedSugarsColumn.setCellValueFactory(new PropertyValueFactory<>("sugar"));
+		selectedCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("calories"));
+		selectedProteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
+
+		// Sort both tables by name
+		Comparator<TableInformationContainer> compareByName = (o1, o2) -> o1.getName()
+				.compareToIgnoreCase(o2.getName());
+		tableInformationContainerToSelectObservableList.sort(compareByName);
+
+		tableViewSelectFrom.setRowFactory(tv -> {
+			TableRow<TableInformationContainer> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && !row.isEmpty()) {
+
+					TableInformationContainer rowdata = row.getItem();
+
+					if (tableInformationContainerSelectEDObservableList.size() < 6) {
+						// transfer item to selected table
+						tableInformationContainerSelectEDObservableList.add(rowdata);
+						tableInformationContainerToSelectObservableList.remove(rowdata);
+
+						// sort
+						Comparator<TableInformationContainer> compareBYName = (o1, o2) -> o1.getName()
+								.compareToIgnoreCase(o2.getName());
+						tableInformationContainerToSelectObservableList.sort(compareBYName);
+						tableInformationContainerSelectEDObservableList.sort(compareBYName);
+
+						tableViewSelectFrom.setItems(tableInformationContainerToSelectObservableList);
+						tableViewSelected.setItems(tableInformationContainerSelectEDObservableList);
+
+						int productId = rowdata.getProduct_id();
+						selectedProductIds.add(productId);
+
+					} else {
+						PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorMaximumItemsSelectedReached.fxml");
+
+					}
+
+				}
+			});
+			return row;
+		});
+
+		// ------------------------------------------------------------//
+
+		tableViewSelected.setRowFactory(tv -> {
+			TableRow<TableInformationContainer> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && !row.isEmpty()) {
+
+					TableInformationContainer rowdata = row.getItem();
+
+					// transfger item to toselect table
+					tableInformationContainerToSelectObservableList.add(rowdata);
+					tableInformationContainerSelectEDObservableList.remove(rowdata);
+
+					// sort
+					Comparator<TableInformationContainer> compareBYName = (o1, o2) -> o1.getName()
+							.compareToIgnoreCase(o2.getName());
+					tableInformationContainerToSelectObservableList.sort(compareBYName);
+					tableInformationContainerSelectEDObservableList.sort(compareBYName);
+
+					tableViewSelectFrom.setItems(tableInformationContainerToSelectObservableList);
+					tableViewSelected.setItems(tableInformationContainerSelectEDObservableList);
+					//System.out.println(selectedProductIds);
+
+					try {
+						int productId = rowdata.getProduct_id();
+						if (selectedProductIds.contains(productId)) {
+							int index = selectedProductIds.indexOf(productId);
+							selectedProductIds.remove(index);
+						}
+					} catch (Exception e) {
+
+					}
+					//System.out.println(selectedProductIds);
+
+				}
+			});
+			return row;
+		});
 	}
 
 }
