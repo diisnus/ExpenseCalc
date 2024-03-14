@@ -237,8 +237,8 @@ public class ProductOverviewController implements Initializable {
 
 			int maxRows = 8;
 			int numRows = Math.min(macroDataList.size(), maxRows);
-			tableView.setItems(FXCollections.observableArrayList(macroDataList.subList(0, numRows)));
 			pieChartMacros.setData(FXCollections.observableArrayList(pieChartDataList));
+			tableView.setItems(FXCollections.observableArrayList(macroDataList.subList(0, numRows)));
 			selectMacrosStatement.close();
 		} catch (SQLException e) {
 

@@ -21,13 +21,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class CompareSelectController implements Initializable {
 
@@ -147,6 +151,31 @@ public class CompareSelectController implements Initializable {
 			selectedSugarsColumn.setPrefWidth(columnWidth);
 		});
 
+		toSelectNameColumn.setCellFactory(tc -> {
+			TableCell<TableInformationContainer, String> cell = new TableCell<>();
+			Text text = new Text();
+			cell.setGraphic(text);
+			cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+			text.setStyle("-fx-fill: rgb(215, 231, 234);");
+
+			text.wrappingWidthProperty().bind(toSelectNameColumn.widthProperty());
+
+			cell.setOnMouseEntered(event -> {
+				String cellText = cell.getItem();
+				if (cellText != null && !cellText.isEmpty()) {
+					Tooltip tooltip = new Tooltip(cellText);
+					Tooltip.install(text, tooltip);
+
+				}
+			});
+
+			cell.setOnMouseExited(event -> Tooltip.uninstall(text, null));
+
+			text.textProperty().bind(cell.itemProperty());
+
+			return cell;
+		});
+		
 		Container container = Container.getInstance();
 		int currentUserID = container.getId();
 
@@ -234,7 +263,8 @@ public class CompareSelectController implements Initializable {
 
 					TableInformationContainer rowdata = row.getItem();
 
-					if (tableInformationContainerSelectEDObservableList.size() < 6) {
+					//maximum itemi selectnati
+					if (tableInformationContainerSelectEDObservableList.size() < 8) {
 						// transfer item to selected table
 						tableInformationContainerSelectEDObservableList.add(rowdata);
 						tableInformationContainerToSelectObservableList.remove(rowdata);
