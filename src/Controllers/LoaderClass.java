@@ -47,22 +47,6 @@ public class LoaderClass {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
 			Pane newPane = loader.load();
 
-//			if (newPane instanceof GridPane) {
-//				FXMLLoader gridPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-//				GridPane newGridPane = gridPaneLoader.load();
-//				borderPaneMain.setCenter(newGridPane);
-//			} else if (newPane instanceof AnchorPane) {
-//				FXMLLoader anchorPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-//				AnchorPane newAnchorPane = anchorPaneLoader.load();
-//				borderPaneMain.setCenter(newAnchorPane);
-//			} else if (newPane instanceof BorderPane) {
-//				FXMLLoader borderPaneLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-//				BorderPane newBorderPane = borderPaneLoader.load();
-//				borderPaneMain.setCenter(newBorderPane);
-//			} else {
-//				borderPaneMain.setCenter(newPane);
-//			}
-
 			borderPaneMain.setCenter(newPane);
 			Node centerNode = borderPaneMain.getCenter();
 

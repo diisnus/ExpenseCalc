@@ -164,6 +164,7 @@ public class SearchController implements Initializable {
 				statement.setInt(1, currentUserID); 
 				queryOutput = statement.executeQuery();
 			}
+			
 			while (queryOutput.next()) {
 				int queryProductID = queryOutput.getInt("product_id");
 				String queryProductName = queryOutput.getString("product_name");
@@ -180,6 +181,7 @@ public class SearchController implements Initializable {
 						productSearchModelObservableList
 								.add(new productSearchModel(queryProductID, queryProductBrand, queryProductName,
 										queryProductDescription, queryProductCalories_per_100, queryProductProtein));
+						pstMacros.close();
 					}
 				}
 			}

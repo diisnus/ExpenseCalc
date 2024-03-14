@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -40,13 +41,16 @@ public class CompareSelectController implements Initializable {
 	private GridPane gridPaneSide;
 
 	@FXML
+	private Button CompareButton;
+
+	@FXML
 	private Label labelTop1;
 
 	@FXML
 	private Label labelTop2;
-	
-    @FXML
-    private Label labelMid2;
+
+	@FXML
+	private Label labelMid2;
 
 	@FXML
 	private TableView<TableInformationContainer> tableViewSelectFrom;
@@ -205,7 +209,6 @@ public class CompareSelectController implements Initializable {
 			toSelectSugarColumn.setCellValueFactory(new PropertyValueFactory<>("sugar"));
 			toSelectCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("calories"));
 			toSelectProteinColumn.setCellValueFactory(new PropertyValueFactory<>("protein"));
-			// System.out.println(tableInformationContainerToSelectObservableList.size());
 
 			tableViewSelectFrom.setItems(tableInformationContainerToSelectObservableList);
 
@@ -279,7 +282,7 @@ public class CompareSelectController implements Initializable {
 
 					tableViewSelectFrom.setItems(tableInformationContainerToSelectObservableList);
 					tableViewSelected.setItems(tableInformationContainerSelectEDObservableList);
-					//System.out.println(selectedProductIds);
+					// System.out.println(selectedProductIds);
 
 					try {
 						int productId = rowdata.getProduct_id();
@@ -290,7 +293,7 @@ public class CompareSelectController implements Initializable {
 					} catch (Exception e) {
 
 					}
-					//System.out.println(selectedProductIds);
+					// System.out.println(selectedProductIds);
 
 				}
 			});
@@ -298,4 +301,16 @@ public class CompareSelectController implements Initializable {
 		});
 	}
 
+	@FXML
+	void CompareButtonClick() {
+		AllInformationForItemsContainer informationSet = AllInformationForItemsContainer.getInstance();
+		informationSet.setSelectedToCompareIDs(selectedProductIds);
+		try {
+			connectDB.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		LoaderClass load = LoaderClass.getInstance();
+		load.loadFXML("/Compare/CompareMain.fxml");
+	}
 }

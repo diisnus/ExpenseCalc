@@ -1,8 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1080.0" stylesheets="@../CSS/CompareMainPart.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Compare.CompareMainController">
+	<center>
+		<GridPane fx:id="gridPane" BorderPane.alignment="CENTER">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
+					<columns>
+						<TableColumn fx:id="NameColumn" prefWidth="75.0" text="Name" />
+						<TableColumn fx:id="BrandColumn" prefWidth="75.0" text="Brand" />
+						<TableColumn fx:id="DescriptionColumn" prefWidth="75.0" text="Description" />
+						<TableColumn fx:id="PopularityColumn" prefWidth="75.0" text="Popularity" />
+						<TableColumn fx:id="PricedByColumn" prefWidth="75.0" text="PricedBy" />
+						<TableColumn fx:id="CaloriesColumn" prefWidth="75.0" text="Calories" />
+						<TableColumn fx:id="ProteinColumn" prefWidth="75.0" text="Protein" />
+						<TableColumn fx:id="CarbsColumn" prefWidth="75.0" text="Carbs" />
+						<TableColumn fx:id="SugarColumn" prefWidth="75.0" text="Sugar" />
+						<TableColumn fx:id="FiberColumn" prefWidth="75.0" text="Fiber" />
+						<TableColumn fx:id="FatColumn" prefWidth="75.0" text="Fat" />
+						<TableColumn fx:id="satFatColumn" prefWidth="75.0" text="Sat Fat" />
+						<TableColumn fx:id="saltColumn" prefWidth="75.0" text="Salt" />
+					</columns>
+					<GridPane.margin>
+						<Insets bottom="7.0" left="15.0" right="15.0" top="15.0" />
+					</GridPane.margin>
+				</TableView>
+				<AreaChart fx:id="AreaChartComparePrices" GridPane.rowIndex="1">
+					<xAxis>
+						<CategoryAxis side="BOTTOM" />
+					</xAxis>
+					<yAxis>
+						<NumberAxis side="LEFT" />
+					</yAxis>
+					<GridPane.margin>
+						<Insets bottom="10.0" left="10.0" right="10.0" top="8.0" />
+					</GridPane.margin>
+				</AreaChart>
+			</children>
+		</GridPane>
+	</center>
+</BorderPane>

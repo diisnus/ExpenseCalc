@@ -98,7 +98,30 @@
 #labelMid2
 {
 	-fx-font-weight: bold;
-    -fx-text-fill: rgb(179, 205, 234);
+    -fx-text-fill: rgb(179.0, 205.0, 234.0);
     -fx-font-family: serif;
     -fx-font-size: 19.0px;
+}
+
+
+#CompareButton{
+		 -fx-background-color: #1a1c1d;
+    -fx-font-weight: bold;
+    -fx-text-fill: #aca59a; 
+    -fx-font-family: serif;
+    -fx-font-size: 15.0px;
+    -fx-border-width: 2.0px;
+    -fx-border-color: #242838;
+    -fx-border-radius:12.0px;
+    -fx-background-radius: 15.0px;
+    -fx-background-insets: 0.0px 0.0px 0.0px 0.0px;
+    }
+    
+.button:hover {
+    -fx-background-color: #2c2e2f; 
+    -fx-border-width: 2.0px;
+    -fx-border-color: #171a1b; 
+    -fx-effect: innershadow(gaussian, rgba(0.0,0.0,0.0,0.4), 10.0, 0.0, 0.0, 0.0);
+    -fx-cursor: hand;
+    
 }
