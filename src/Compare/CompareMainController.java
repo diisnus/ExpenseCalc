@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import Controllers.Container;
 import DBConnection.DBHandler;
@@ -25,6 +26,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Control;
 import javafx.scene.control.TableCell;
@@ -117,7 +119,6 @@ public class CompareMainController implements Initializable {
 
 	ArrayList<String> colors = new ArrayList<String>() {
 		{
-			add("Orange");
 			add("Yellow");
 			add("Green");
 			add("Light Blue");
@@ -125,6 +126,7 @@ public class CompareMainController implements Initializable {
 			add("Purple");
 			add("Pink");
 			add("Gray");
+			add("Colour");
 		}
 	};
 
@@ -341,10 +343,51 @@ public class CompareMainController implements Initializable {
 			}
 		}
 
-		// TODO trqbwa da se oprawi towa s datite, da sa hronologichni i da overlapwat
+		String userPrefCurrency = "BGN";
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-		String userPrefCurrency = null;
+		TreeMap<Date, Map<String, Double>> aggregatedData = new TreeMap<>();
 
+		for (int i = 0; i < selectedProductIds.size(); i++) {
+		    int productID = selectedProductIds.get(i);
+
+		    // Area chart input
+		    String selectPrices = "SELECT  purchase_date FROM prices WHERE product_id = ?";
+		    try {
+		        // prices select
+		        PreparedStatement selectPriceStatement = connectDB.prepareStatement(selectPrices);
+		        selectPriceStatement.setInt(1, productID);
+		        ResultSet queryOutputInfo = selectPriceStatement.executeQuery();
+
+		        while (queryOutputInfo.next()) {
+		            String purchase_date = queryOutputInfo.getString("purchase_date");
+
+		            Date purchaseDate = dateFormat.parse(purchase_date);
+		            // Aggregate data for each date
+		            if (!aggregatedData.containsKey(purchaseDate)) {
+		                aggregatedData.put(purchaseDate, new HashMap<>());
+		            }
+		            aggregatedData.get(purchaseDate).put(selectedProductNames.get(i), (double) 0);
+		        }
+
+		        selectPriceStatement.close();
+
+		    } catch (SQLException | ParseException e) {
+		        // Handle exceptions
+		    }
+		}
+
+		// Plot aggregated data
+		XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+		for (var entry : aggregatedData.entrySet()) {
+		    String formattedDate = dateFormat.format(entry.getKey());
+		    double totalAmount = entry.getValue().values().stream().mapToDouble(Double::doubleValue).sum();
+		    series1.getData().add(new XYChart.Data<>(formattedDate, totalAmount));
+		}
+		AreaChartComparePrices.getData().add(series1);
+
+		
+	
 		int productID;
 		for (int i = 0; i < selectedProductIds.size(); i++) {
 
@@ -369,7 +412,6 @@ public class CompareMainController implements Initializable {
 				ResultSet queryOutputInfo = selectPriceStatement.executeQuery();
 
 				// inserts in areachart
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				XYChart.Series<String, Number> series = new XYChart.Series<>();
 				series.setName(selectedProductNames.get(i));
 				TreeMap<Date, Double> chronologicalData = new TreeMap<>();

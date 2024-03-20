@@ -334,6 +334,7 @@ public class CompareSelectController implements Initializable {
 	@FXML
 	void CompareButtonClick() {
 		AllInformationForItemsContainer informationSet = AllInformationForItemsContainer.getInstance();
+
 		informationSet.setSelectedToCompareIDs(selectedProductIds);
 		try {
 			connectDB.close();
