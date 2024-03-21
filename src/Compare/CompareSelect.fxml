@@ -66,7 +66,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="labelMid2" text="Label" />
+                        <Label fx:id="labelMid2" text="Select the items you want to compare" />
                         <Button fx:id="CompareButton" mnemonicParsing="false" onAction="#CompareButtonClick" text="Compare" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
@@ -74,7 +74,15 @@
                                     <Image url="@../../Res/more-icons/compareImage.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                           <GridPane.margin>
+                              <Insets top="30.0" />
+                           </GridPane.margin></Button>
+                        <Label fx:id="labelMid3" text="and click the button below.">
+                           <GridPane.margin>
+                              <Insets top="60.0" />
+                           </GridPane.margin>
+                        </Label>
                      </children>
                   </GridPane>
                </children>

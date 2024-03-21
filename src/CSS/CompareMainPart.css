@@ -94,13 +94,22 @@
 }
 
 #labelTop1,
-#labelTop2,
-#labelMid2
+#labelTop2
 {
 	-fx-font-weight: bold;
     -fx-text-fill: rgb(179.0, 205.0, 234.0);
     -fx-font-family: serif;
     -fx-font-size: 19.0px;
+}
+
+
+#labelMid2,
+#labelMid3
+{
+	-fx-font-weight: bold;
+    -fx-text-fill: rgb(179.0, 205.0, 234.0);
+    -fx-font-family: serif;
+    -fx-font-size: 24.0px;
 }
 
 

@@ -126,7 +126,7 @@ public class CompareMainController implements Initializable {
 			add("Purple");
 			add("Pink");
 			add("Gray");
-			add("Colour");
+			add("Orange");
 		}
 	};
 

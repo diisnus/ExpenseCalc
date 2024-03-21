@@ -193,7 +193,10 @@ public class AddUserItemsController implements Initializable {
 					}
 					generatedKeys.close();
 					System.out.println("Data inserted successfully");
+					LoaderClass load = LoaderClass.getInstance();
+					load.homeFXML();
 					PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/InsertedSuccessfully.fxml");
+					
 				} else {
 					System.out.println("Insertion failed");
 				}

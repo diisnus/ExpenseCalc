@@ -56,6 +56,9 @@ public class CompareSelectController implements Initializable {
 	@FXML
 	private Label labelMid2;
 
+    @FXML
+    private Label labelMid3;
+	
 	@FXML
 	private TableView<TableInformationContainer> tableViewSelectFrom;
 
@@ -175,7 +178,7 @@ public class CompareSelectController implements Initializable {
 
 			return cell;
 		});
-		
+
 		Container container = Container.getInstance();
 		int currentUserID = container.getId();
 
@@ -263,7 +266,7 @@ public class CompareSelectController implements Initializable {
 
 					TableInformationContainer rowdata = row.getItem();
 
-					//maximum itemi selectnati
+					// maximum itemi selectnati
 					if (tableInformationContainerSelectEDObservableList.size() < 8) {
 						// transfer item to selected table
 						tableInformationContainerSelectEDObservableList.add(rowdata);
@@ -333,15 +336,21 @@ public class CompareSelectController implements Initializable {
 
 	@FXML
 	void CompareButtonClick() {
-		AllInformationForItemsContainer informationSet = AllInformationForItemsContainer.getInstance();
+		if (selectedProductIds.isEmpty()) {
+			PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorNoSelectedItems.fxml");
 
-		informationSet.setSelectedToCompareIDs(selectedProductIds);
-		try {
-			connectDB.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} else {
+			AllInformationForItemsContainer informationSet = AllInformationForItemsContainer.getInstance();
+
+			informationSet.setSelectedToCompareIDs(selectedProductIds);
+			try {
+				connectDB.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			LoaderClass load = LoaderClass.getInstance();
+			load.loadFXML("/Compare/CompareMain.fxml");
+
 		}
-		LoaderClass load = LoaderClass.getInstance();
-		load.loadFXML("/Compare/CompareMain.fxml");
 	}
 }

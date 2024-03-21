@@ -68,6 +68,9 @@ public class UpdatePriceController implements Initializable {
 
 	@FXML
 	void insertButtonClicked(ActionEvent event) {
+		if(currency.getValue() == null) {
+			PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorPriceAndDateInput.fxml");
+		}
 		if (dateCalendar.getValue() != null) {
 		} else {
 			PopUpWindow.showCustomDialog("", "/ErrorsAndPopups/ErrorPriceAndDateInput.fxml");
