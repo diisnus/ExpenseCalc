@@ -93,6 +93,7 @@ public class MainPageController implements Initializable {
 	@FXML
 	private ImageView fullscreenImageView;
 
+	
 	private double xOffset = 0;
 	private double yOffset = 0;
 
