@@ -24,7 +24,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button fx:id="profileCurrencyChange" mnemonicParsing="false" onAction="#profileCurrencyChangeClick" text="Currency change" GridPane.halignment="CENTER">
@@ -51,15 +50,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="themeChange" mnemonicParsing="false" onAction="#themeChangeClick" text="Theme" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Res/more-icons/theme.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button fx:id="feedback" mnemonicParsing="false" onAction="#feedbackClick" text="Feedbadk" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <Button fx:id="feedback" mnemonicParsing="false" onAction="#feedbackClick" text="Feedbadk" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -79,14 +70,7 @@
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin></Label>
-            <Label text="Click this button to change the theme of the app." GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin></Label>
-            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="403.0" text="Click this button to give direct feedback about the app " GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label maxWidth="-Infinity" prefHeight="20.0" prefWidth="403.0" text="Click this button to give direct feedback about the app " GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin></Label>
@@ -95,7 +79,7 @@
                   <Insets left="10.0" top="35.0" />
                </GridPane.margin>
             </Label>
-            <Label maxWidth="-Infinity" prefWidth="320.0" text="and the app's core functionalities." GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label maxWidth="-Infinity" prefWidth="320.0" text="and the app's core functionalities." GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="10.0" top="35.0" />
                </GridPane.margin>
