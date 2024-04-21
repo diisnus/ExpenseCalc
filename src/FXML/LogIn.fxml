@@ -65,11 +65,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="forgotpassword" layoutX="260.0" layoutY="363.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="185.0" style="-fx-background-color: #2D3447;" text="Forgot Your Password?" textFill="#c9cbd0" underline="true">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
       <HBox fx:id="titleBar" alignment="CENTER_RIGHT" layoutX="1.0" layoutY="1.0" prefHeight="30.0" prefWidth="698.0">
          <children>
             <Button fx:id="minimize" mnemonicParsing="false" onAction="#minimizeClick" text="_">
